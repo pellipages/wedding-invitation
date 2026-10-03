@@ -1,0 +1,47 @@
+.hero-section {
+    position: relative;
+
+    width: 100%;
+
+    background: #f6f0e3;
+
+    overflow: hidden;
+
+    line-height: 0;
+
+    transform-origin: center;
+
+    will-change:
+        opacity,
+        transform,
+        filter;
+}
+
+
+.hero-invitation {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    margin: 0;
+
+    padding: 0;
+
+    object-fit: contain;
+}
+
+
+@media (max-width: 480px) {
+
+    .hero-section {
+        width: 100%;
+    }
+
+
+    .hero-invitation {
+        width: 100%;
+        height: auto;
+    }
+
+}

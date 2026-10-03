@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>Harika & Prem</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Italianno&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/opening.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/couple.css">
+    <link rel="stylesheet" href="css/date.css">
+</head>
+
+
+<body class="intro-active">
+
+    <!-- OPENING VIDEO -->
+
+    <section id="opening" class="opening">
+
+        <video
+            id="introVideo"
+            class="intro-video"
+            autoplay
+            muted
+            playsinline
+            webkit-playsinline
+            preload="auto"
+        >
+            <source
+                src="assets/opening.mp4"
+                type="video/mp4"
+            >
+        </video>
+
+        <button
+            id="skipIntro"
+            class="skip-intro"
+            type="button"
+        >
+            Skip Intro →
+        </button>
+
+    </section>
+
+
+    <!-- WEBSITE -->
+
+    <main id="website">
+
+        <div id="hero-container"></div>
+
+        <div id="couple-container"></div>
+
+        <div id="date-container"></div>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="js/opening.js"></script>
+    <script src="js/hero.js"></script>
+    <script src="js/date.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

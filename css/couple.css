@@ -1,0 +1,205 @@
+.couple-section {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100vh;
+    min-height: 100svh;
+
+    padding:
+        65px
+        20px
+        70px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    background-image:
+        linear-gradient(
+            rgba(248,244,235,0.88),
+            rgba(248,244,235,0.88)
+        ),
+        url("../assets/paper-bg.png");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+.couple-decoration {
+    margin-bottom: 5px;
+
+    font-size: 25px;
+
+    color: #a57a2f;
+}
+
+
+.couple-small-title {
+    margin-bottom: 4px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    color: #a18772;
+}
+
+
+.couple-title {
+    margin-bottom: 25px;
+
+    font-family:
+        "Italianno",
+        cursive;
+
+    font-size: 52px;
+
+    font-weight: 400;
+
+    color: #721a20;
+}
+
+
+/* PHOTO */
+
+.couple-photo-frame {
+    position: relative;
+
+    width: min(
+        72vw,
+        280px
+    );
+
+    aspect-ratio: 4 / 5;
+
+    margin-bottom: 22px;
+
+    padding: 6px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(167,126,55,0.65);
+
+    border-radius:
+        150px
+        150px
+        14px
+        14px;
+
+    background: #eee3ce;
+
+    box-shadow:
+        0 15px 35px
+        rgba(75,40,25,0.12);
+}
+
+
+.couple-photo {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius:
+        145px
+        145px
+        10px
+        10px;
+}
+
+
+/* NAMES */
+
+.couple-names {
+    font-family:
+        "Italianno",
+        cursive;
+
+    font-size: 43px;
+
+    font-weight: 400;
+
+    color: #74191f;
+}
+
+
+.couple-line {
+    width: 55px;
+    height: 1px;
+
+    margin:
+        7px auto
+        12px;
+
+    background: #b28a3d;
+}
+
+
+.couple-message {
+    width: 100%;
+
+    max-width: 290px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    color: #654d42;
+}
+
+
+.couple-love {
+    margin-top: 15px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 13px;
+
+    font-style: italic;
+
+    color: #99765f;
+}
+
+
+@media (max-width: 480px) {
+
+    .couple-section {
+        padding:
+            55px
+            18px
+            65px;
+    }
+
+
+    .couple-title {
+        font-size: 48px;
+    }
+
+
+    .couple-photo-frame {
+        width: 235px;
+    }
+
+}

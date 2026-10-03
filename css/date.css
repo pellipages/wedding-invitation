@@ -1,0 +1,669 @@
+.date-section {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100vh;
+    min-height: 100svh;
+
+    overflow: hidden;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding:
+        55px
+        15px
+        80px;
+
+    background-image:
+        linear-gradient(
+            rgba(248,244,235,0.90),
+            rgba(248,244,235,0.90)
+        ),
+        url("../assets/paper-bg.png");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+/* ==============================
+   CONTENT
+============================== */
+
+.date-content {
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+
+    max-width: 390px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.save-date-title {
+    margin: 0;
+
+    font-family:
+        "Italianno",
+        cursive;
+
+    font-size: 52px;
+
+    font-weight: 400;
+
+    color: #72171e;
+}
+
+
+.scratch-subtitle {
+    margin:
+        2px
+        0
+        22px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    color: #947967;
+}
+
+
+/* ==============================
+   SCRATCH TEMPLE
+============================== */
+
+.scratch-card {
+    position: relative;
+
+    width: 220px;
+    height: 285px;
+
+    overflow: hidden;
+
+    background: #6f1720;
+
+    clip-path: polygon(
+        0% 100%,
+        0% 31%,
+
+        4% 31%,
+        4% 27%,
+
+        9% 27%,
+        9% 23%,
+
+        15% 23%,
+        15% 19%,
+
+        22% 19%,
+        22% 15%,
+
+        30% 15%,
+        30% 11%,
+
+        38% 11%,
+
+        43% 7%,
+        47% 3%,
+        50% 0%,
+        53% 3%,
+        57% 7%,
+
+        62% 11%,
+
+        70% 11%,
+        70% 15%,
+
+        78% 15%,
+        78% 19%,
+
+        85% 19%,
+        85% 23%,
+
+        91% 23%,
+        91% 27%,
+
+        96% 27%,
+        96% 31%,
+
+        100% 31%,
+
+        100% 100%
+    );
+
+    filter:
+        drop-shadow(
+            0 10px 12px
+            rgba(50,20,20,0.18)
+        );
+}
+
+
+/* ==============================
+   DATE UNDERNEATH
+============================== */
+
+.revealed-date {
+    position: absolute;
+
+    inset: 5px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 40px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #982f39,
+            #791d26 55%,
+            #61131a
+        );
+
+    color: #fff3d4;
+}
+
+
+.muhurtham-small {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 12px;
+
+    color: #e7c680;
+}
+
+
+.wedding-day {
+    margin-top: 3px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 58px;
+
+    line-height: 0.85;
+}
+
+
+.wedding-month {
+    margin-top: 7px;
+
+    font-family:
+        "Italianno",
+        cursive;
+
+    font-size: 45px;
+
+    line-height: 1;
+}
+
+
+.wedding-year {
+    margin-top: 7px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 14px;
+
+    letter-spacing: 4px;
+
+    color: #e4c175;
+}
+
+
+.gold-line {
+    width: 58px;
+
+    height: 1px;
+
+    margin:
+        10px
+        0;
+
+    background: #d6ac53;
+}
+
+
+.wedding-time {
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 21px;
+}
+
+
+.muhurtham-label {
+    margin-top: 3px;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    color: #d6b46d;
+}
+
+
+/* ==============================
+   SCRATCH CANVAS
+============================== */
+
+#scratchCanvas {
+    position: absolute;
+
+    inset: 5px;
+
+    z-index: 5;
+
+    width:
+        calc(
+            100% - 10px
+        );
+
+    height:
+        calc(
+            100% - 10px
+        );
+
+    touch-action: none;
+
+    cursor: crosshair;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+
+#scratchCanvas.complete {
+    opacity: 0;
+
+    transform: scale(1.04);
+
+    pointer-events: none;
+}
+
+
+/* ==============================
+   COUNTDOWN
+============================== */
+
+.after-scratch {
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(18px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease,
+        max-height 1.2s ease;
+}
+
+
+.after-scratch.show {
+    max-height: 200px;
+
+    visibility: visible;
+
+    opacity: 1;
+
+    margin-top: 17px;
+
+    transform:
+        translateY(0);
+}
+
+
+.date-symbol {
+    font-size: 21px;
+
+    color: #aa812e;
+}
+
+
+.after-scratch h3 {
+    margin:
+        2px
+        0
+        11px;
+
+    font-family:
+        "Italianno",
+        cursive;
+
+    font-size: 28px;
+
+    font-weight: 400;
+
+    color: #761b21;
+}
+
+
+.countdown {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 17px;
+}
+
+
+.countdown-box span {
+    display: block;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 26px;
+
+    color: #721a20;
+}
+
+
+.countdown-box small {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+
+    color: #927966;
+}
+
+
+/* ==============================
+   KOLAM
+============================== */
+
+.date-kolam {
+    position: absolute;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+
+.kolam-top-right {
+    width: 95px;
+
+    top: -30px;
+    right: -37px;
+}
+
+
+.kolam-left {
+    width: 90px;
+
+    top: 25%;
+    left: -45px;
+}
+
+
+/* ==============================
+   TREE
+============================== */
+
+.date-tree {
+    position: absolute;
+
+    z-index: 3;
+
+    width: 180px;
+
+    left: -100px;
+    bottom: -5px;
+
+    pointer-events: none;
+
+    transform-origin:
+        left bottom;
+
+    animation:
+        treeMovement
+        7s ease-in-out
+        infinite;
+}
+
+
+@keyframes treeMovement {
+
+    0%,
+    100% {
+        transform: rotate(-1deg);
+    }
+
+    50% {
+        transform: rotate(1deg);
+    }
+
+}
+
+
+/* ==============================
+   LOTUS
+============================== */
+
+.date-lotus {
+    position: absolute;
+
+    z-index: 4;
+
+    pointer-events: none;
+}
+
+
+.lotus-left {
+    width: 100px;
+
+    right: -28px;
+    top: 43%;
+}
+
+
+.lotus-right {
+    width: 175px;
+
+    right: -55px;
+    bottom: -20px;
+}
+
+
+/* ==============================
+   PETALS
+============================== */
+
+.petal-container {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 20;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+
+.petal-container span {
+    position: absolute;
+
+    top: -30px;
+
+    font-size: 13px;
+
+    opacity: 0;
+}
+
+
+.petal-container.active span {
+    animation:
+        fallingPetal
+        8s linear
+        infinite;
+}
+
+
+.petal-container span:nth-child(1) {
+    left: 8%;
+    animation-delay: 0s;
+}
+
+
+.petal-container span:nth-child(2) {
+    left: 22%;
+    animation-delay: 1.2s;
+}
+
+
+.petal-container span:nth-child(3) {
+    left: 37%;
+    animation-delay: 2.5s;
+}
+
+
+.petal-container span:nth-child(4) {
+    left: 53%;
+    animation-delay: 0.7s;
+}
+
+
+.petal-container span:nth-child(5) {
+    left: 68%;
+    animation-delay: 3s;
+}
+
+
+.petal-container span:nth-child(6) {
+    left: 82%;
+    animation-delay: 1.7s;
+}
+
+
+.petal-container span:nth-child(7) {
+    left: 94%;
+    animation-delay: 4s;
+}
+
+
+@keyframes fallingPetal {
+
+    0% {
+        transform:
+            translateY(-30px)
+            translateX(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+
+    10% {
+        opacity: 0.85;
+    }
+
+
+    50% {
+        transform:
+            translateY(50vh)
+            translateX(20px)
+            rotate(180deg);
+    }
+
+
+    100% {
+        transform:
+            translateY(110vh)
+            translateX(-20px)
+            rotate(400deg);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 480px) {
+
+    .date-section {
+        min-height: 100svh;
+
+        padding:
+            45px
+            10px
+            65px;
+    }
+
+
+    .save-date-title {
+        font-size: 48px;
+    }
+
+
+    .scratch-card {
+        width: 210px;
+        height: 270px;
+    }
+
+
+    .date-tree {
+        width: 165px;
+
+        left: -95px;
+    }
+
+
+    .lotus-left {
+        width: 90px;
+    }
+
+
+    .lotus-right {
+        width: 155px;
+    }
+
+}

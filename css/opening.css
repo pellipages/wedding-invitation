@@ -1,0 +1,139 @@
+.opening {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+
+    z-index: 99999;
+
+    overflow: hidden;
+
+    background: #f6f0e3;
+
+    opacity: 1;
+
+    transition:
+        opacity 1.8s ease,
+        filter 1.8s ease;
+}
+
+
+.intro-video {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+
+    background: #f6f0e3;
+
+    transition:
+        transform 8s ease-out,
+        opacity 1.8s ease;
+}
+
+
+.opening.video-playing .intro-video {
+    transform: scale(1.025);
+}
+
+
+/* SKIP */
+
+.skip-intro {
+    position: absolute;
+
+    right: 18px;
+
+    bottom:
+        calc(
+            20px +
+            env(safe-area-inset-bottom)
+        );
+
+    z-index: 10;
+
+    padding: 9px 17px;
+
+    border: 1px solid rgba(255,255,255,0.8);
+
+    border-radius: 30px;
+
+    background: rgba(55,30,20,0.38);
+
+    color: white;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(5px);
+
+    opacity: 0;
+
+    animation:
+        showSkip
+        0.8s ease
+        1s forwards;
+}
+
+
+@keyframes showSkip {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* VIDEO END */
+
+.opening.opening-exit {
+    opacity: 0;
+
+    filter: blur(3px);
+
+    pointer-events: none;
+}
+
+
+.opening.opening-exit .intro-video {
+    transform: scale(1.06);
+
+    opacity: 0;
+}
+
+
+@media (max-width: 480px) {
+
+    .opening {
+        height: 100svh;
+    }
+
+    .intro-video {
+        object-fit: cover;
+    }
+
+}

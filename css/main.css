@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    width: 100%;
+    min-height: 100%;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    margin: 0;
+
+    overflow-x: hidden;
+
+    background: #f6f0e3;
+
+    color: #5f2926;
+}
+
+
+body.intro-active {
+    overflow: hidden;
+}
+
+
+body.invitation-open {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+#website {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    z-index: 1;
+
+    background: #f6f0e3;
+}
+
+
+#hero-container,
+#couple-container,
+#date-container {
+    position: relative;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+img {
+    display: block;
+
+    max-width: 100%;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+}
+
+
+button {
+    font: inherit;
+}
+
+
+@media (max-width: 480px) {
+
+    html,
+    body,
+    #website {
+        width: 100%;
+
+        overflow-x: hidden;
+    }
+
+}
