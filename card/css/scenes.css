@@ -1,0 +1,815 @@
+/* One scene = one subject. Supporting element noted per scene. */
+.sc{position:relative;overflow:hidden;min-height:100svh}
+.sc>*{position:relative;z-index:5}.snap{scroll-snap-align:start}
+
+/* =========================================================
+   A · COUPLE — Subject: Rukmini & Krishna
+   Support: hanging brass diya + lotus cluster
+   ========================================================= */
+
+.couple{
+  position:relative;
+  display:block;
+  min-height:100svh;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+/* quiet warmth behind the couple */
+.couple:before{
+  content:"";
+  position:absolute;
+  inset:auto -20vw -10vw -20vw;
+  height:72%;
+  z-index:0;
+  background:
+    radial-gradient(
+      closest-side at 58% 52%,
+      #b45a3c20,
+      transparent 72%
+    );
+  pointer-events:none;
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+
+.cp-text{
+  position:absolute;
+  z-index:8;
+  left:var(--px);
+  top:13vw;
+  width:min(58vw,700px);
+}
+
+.tnames{
+  font-family:var(--tel);
+  font-size:clamp(42px,7vw,78px);
+  line-height:1.05;
+  color:var(--terra);
+}
+
+.names{
+  font-family:var(--script);
+  font-weight:400;
+  font-size:clamp(82px,13vw,180px);
+  line-height:.88;
+  color:var(--maroon);
+}
+
+.fam{
+  font-family:var(--telb);
+  font-size:clamp(14px,2vw,19px);
+  line-height:1.7;
+  margin-top:18px;
+  max-width:32ch;
+}
+
+
+/* ---------- COUPLE ---------- */
+
+.cp-art{
+  position:absolute;
+  z-index:5;
+  width:min(56vw,720px);
+  height:auto;
+  right:2vw;
+  bottom:-2vw;
+  filter:
+    drop-shadow(0 2vw 3vw #6a1e2b33);
+}
+
+
+/* ---------- HANGING BRASS DIYA ---------- */
+
+.cp-diya{
+  position:absolute;
+  z-index:6;
+  width:clamp(150px,18vw,290px);
+  height:auto;
+  left:-2vw;
+  top:-8vw;
+  transform-origin:top center;
+  filter:drop-shadow(0 1vw 1.8vw #6a1e2b22);
+}
+
+
+/* ---------- LOTUS ---------- */
+
+.cp-lotus{
+  position:absolute;
+  z-index:4;
+  width:clamp(100px,14vw,210px);
+  height:auto;
+  right:-1vw;
+  bottom:-2vw;
+  filter:drop-shadow(0 1vw 2vw #6a1e2b22);
+}
+
+
+/* ---------- TABLET ---------- */
+
+@media(min-width:700px) and (max-width:1099px){
+  .cp-text{
+    top:10vw;
+    width:54vw;
+  }
+  .names{
+    font-size:clamp(90px,12vw,145px);
+  }
+  .cp-art{
+    width:min(57vw,620px);
+    right:1vw;
+    bottom:-2vw;
+  }
+  .cp-diya{
+    width:clamp(180px,20vw,250px);
+    left:-1vw;
+    top:-2vw;
+  }
+  .cp-lotus{
+    width:clamp(90px,24vw,145px);
+    right:-2vw;
+    bottom:4vw;
+  }
+}
+
+
+/* ---------- DESKTOP ---------- */
+
+@media(min-width:1100px){
+  .couple{
+    min-height:100svh;
+  }
+  .cp-text{
+    left:9vw;
+    top:50%;
+    width:45vw;
+    transform:translateY(-50%);
+  }
+  .tnames{
+    font-size:clamp(44px,3.4vw,70px);
+  }
+  .names{
+    font-size:clamp(100px,8.6vw,180px);
+  }
+  .fam{
+    font-size:19px;
+  }
+  .cp-art{
+    width:min(52vw,780px);
+    right:3vw;
+    bottom:0;
+  }
+  .cp-diya{
+    width:clamp(190px,17vw,290px);
+    left:-1vw;
+    top:-7vw;
+  }
+  .cp-lotus{
+    width:clamp(120px,12vw,200px);
+    right:-1vw;
+    bottom:-2vw;
+  }
+}
+
+
+/* ---------- SMALL MOBILE ---------- */
+
+@media(max-width:699px){
+  .cp-text{
+    top:13svh;
+    left:var(--px);
+    width:78vw;
+  }
+  .tnames{
+    font-size:clamp(36px,10vw,52px);
+  }
+  .names{
+    font-size:clamp(76px,19vw,108px);
+  }
+  .fam{
+    font-size:14px;
+    max-width:28ch;
+    margin-top:12px;
+  }
+  .cp-art{
+    width:min(88vw,480px);
+    right:-8vw;
+    bottom:-1vw;
+  }
+  .cp-diya{
+    width:clamp(120px,27vw,170px);
+    left:-5vw;
+    top:-6vw;
+  }
+  .cp-lotus{
+    width:clamp(85px,22vw,135px);
+    right:-3vw;
+    bottom:-1vw;
+  }
+}
+
+
+/* =========================================================
+   B · SAVE THE DATE — Subject: The scratch card
+   Support: Hanging brass diya
+   ========================================================= */
+
+.reveal {
+  position: relative;
+  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2svh var(--px);
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(226, 167, 46, .11),
+      transparent 65%
+    ),
+    var(--ivory);
+}
+
+.rv-diya {
+  position: absolute;
+  z-index: 4;
+  width: clamp(230px, 25vw, 400px);
+  left: -7vw;
+  top: -4vw;
+  pointer-events: none;
+}
+
+.rv-stage {
+  position: relative;
+  z-index: 10;
+  width: min(720px, 72vw);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.rv-kicker {
+  margin: 0 0 .2rem;
+  width: min(720px, 72vw);
+  height: 100%;
+  font-family: var(--serif);
+  font-style: italic;
+  justify-content: center;
+  margin-bottom: .05rem;
+  font-size: clamp(15px, 1.35vw, 20px);
+  color: var(--terra);
+}
+
+.rv-stage h2 {
+  margin: 0;
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(54px, 6.4vw, 88px);
+  line-height: .86;
+  color: var(--maroon);
+}
+
+.rv-instruction {
+  margin: .45rem 0 .7rem;
+  font-family: var(--serif);
+  font-size: clamp(11px, 1vw, 15px);
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: .7;
+}
+
+.scratch {
+  position: relative;
+  width: min(400px, 29vw);
+  height: min(590px, 61svh);
+  flex-shrink: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+  filter: drop-shadow(0 24px 35px rgba(106, 30, 43, .22));
+  isolation: isolate;
+}
+
+.date-plaque {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  transform: none;
+  z-index: 1;
+}
+
+.plaque-content {
+  position: absolute;
+  z-index: 2;
+  left: 13%;
+  right: 13%;
+  top: 17%;
+  bottom: 11%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--ivory);
+  pointer-events: none;
+}
+
+.plaque-top-ornament,
+.plaque-bottom-ornament {
+  font-family: var(--serif);
+  color: #E2A72E;
+  font-size: 17px;
+  opacity: .9;
+}
+
+.plaque-top-ornament { margin-bottom: 12px; }
+.plaque-bottom-ornament { margin-top: 15px; }
+
+.plaque-telugu {
+  font-family: var(--telb);
+  font-size: clamp(15px, 1.6vw, 22px);
+  line-height: 1.3;
+  color: #F4EAD5;
+  white-space: nowrap;
+}
+
+.plaque-divider {
+  width: 55px;
+  height: 1px;
+  margin: 10px 0 17px;
+  background: #E2A72E;
+  opacity: .7;
+}
+
+.scratch .date {
+  position: relative;
+  inset: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: var(--script);
+  color: var(--ivory);
+  font-size: clamp(43px, 4.6vw, 65px);
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.scratch .date span:last-child {
+  margin-top: .12em;
+  font-size: .72em;
+}
+
+.scratch canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.reveal.won .scratch {
+  animation: plaqueReveal 1.4s ease both;
+}
+
+.reveal.won .plaque-content {
+  text-shadow:
+    0 0 12px rgba(226,167,46,.7),
+    0 0 28px rgba(226,167,46,.3);
+}
+
+@keyframes plaqueReveal {
+  0% { transform: rotate(-.7deg) scale(1); }
+  45% {
+    transform: rotate(-.7deg) scale(1.035);
+    filter:
+      drop-shadow(0 22px 32px rgba(106,30,43,.22))
+      drop-shadow(0 0 30px rgba(226,167,46,.4));
+  }
+  100% { transform: rotate(-.7deg) scale(1); }
+}
+
+.rv-after {
+  margin: .4rem 0 .15rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.3vw, 18px);
+  color: var(--terra);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.reveal.won .rv-after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#cd {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(22px, 3vw, 45px);
+  margin-top: .35rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 1.2s ease .25s, transform 1.2s ease .25s;
+}
+
+.reveal.won #cd {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#cd > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cd b {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: .9;
+  color: var(--maroon);
+}
+
+#cd span {
+  margin-top: .35rem;
+  font-family: var(--serif);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: .65;
+}
+
+.rv-lotus-leaves {
+  position: absolute;
+  z-index: 3;
+  width: clamp(130px, 15vw, 230px);
+  right: -2vw;
+  bottom: 27vw;
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+
+.rv-lotus-left {
+  display: block;
+  position: absolute;
+  z-index: 3;
+  left: -1vw;
+  bottom: -2vw;
+  width: clamp(220px, 25vw, 370px);
+  pointer-events: none;
+}
+
+.rv-lotus-left img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: rotate(-5deg);
+}
+
+.rv-lotuses {
+  position: absolute;
+  z-index: 2;
+  right: -9vw;
+  bottom: -4vw;
+  width: clamp(290px, 35vw, 520px);
+  pointer-events: none;
+}
+
+.rv-lotuses img {
+  position: absolute;
+  object-fit: contain;
+}
+
+.rv-lotuses img:first-child {
+  width: 65%;
+  right: 0;
+  bottom: 0;
+}
+
+.rv-lotuses img:last-child {
+  width: 48%;
+  right: 26%;
+  bottom: -2%;
+  opacity: .9;
+}
+
+@media (min-width: 700px) and (max-width: 1099px) {
+  .rv-diya {
+    width: 320px;
+    left: -9vw;
+    top: -4vw;
+  }
+  .scratch {
+    width: 350px;
+    height: min(540px, 60svh);
+  }
+  .rv-lotus-left {
+    width: 250px;
+    left: -3vw;
+    bottom: -2vw;
+  }
+  .rv-lotus-leaves {
+    width: 170px;
+    right: -3vw;
+    bottom: 28vw;
+  }
+  .rv-lotuses {
+    width: 400px;
+    right: -9vw;
+  }
+}
+
+@media (max-width: 699px) {
+  .reveal { padding: 2svh 4vw; }
+  .rv-diya { width: 210px; left: -14vw; top: -4vw; }
+  .rv-stage { width: 100%; }
+  .rv-kicker { font-size: 13px; }
+  .rv-stage h2 { font-size: clamp(48px, 14vw, 66px); }
+  .rv-instruction { margin: .35rem 0 .55rem; font-size: 9px; }
+  .scratch { width: min(285px, 68vw); height: min(425px, 56svh); }
+  .plaque-content { left: 12%; right: 12%; top: 17%; bottom: 11%; }
+  .plaque-telugu { font-size: 14px; }
+  .scratch .date { font-size: clamp(34px, 8.5vw, 46px); }
+  .rv-after { margin-top: .35rem; font-size: 13px; }
+  #cd { gap: 17px; margin-top: .3rem; }
+  #cd b { font-size: 26px; }
+  #cd span { font-size: 7px; }
+  .rv-lotus-left { width: 180px; left: -5vw; bottom: -2vw; }
+  .rv-lotus-leaves { width: 115px; right: -6vw; bottom: 30vw; }
+  .rv-lotuses { width: 235px; right: -11vw; bottom: -2vw; }
+}
+
+
+/* =========================================================
+   C · THE WEDDING JOURNEY — CONTINUOUS TELUGU LANDSCAPE
+   Purely environmental, perimeter-cropped, non-competing layers
+   ========================================================= */
+
+.journey {
+  position: relative;
+  min-height: 0;
+  padding: 9vh 0 0;
+  --sh: max(100svh, 660px);
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 85% 12%, rgba(226, 167, 46, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 15% 45%, rgba(180, 90, 60, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 82%, rgba(106, 30, 43, 0.06) 0%, transparent 60%),
+    transparent;
+}
+
+/* First Viewport: Canopy entering top-right, Lotus grounding bottom-left */
+.journey::before {
+  content: "";
+  position: absolute;
+  top: -3vw;
+  right: -8vw;
+  width: clamp(220px, 28vw, 420px);
+  aspect-ratio: 1 / 1;
+  background: url("../banana-leaves-corner.png") no-repeat center / contain;
+  opacity: 0.72;
+  transform: rotate(-6deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.journey::after {
+  content: "";
+  position: absolute;
+  top: clamp(280px, 42vh, 460px);
+  left: -5vw;
+  width: clamp(140px, 16vw, 240px);
+  aspect-ratio: 1 / 1;
+  background: url("../lotus-1.png") no-repeat center / contain;
+  opacity: 0.68;
+  transform: rotate(12deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.journey > #jbody { position: static; z-index: auto; }
+
+.journey .hd {
+  position: relative;
+  z-index: 6;
+  text-align: center;
+  padding: 0 var(--px);
+}
+
+.journey .hd::after {
+  content: "";
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  width: clamp(90px, 14vw, 180px);
+  aspect-ratio: 1 / 1;
+  background: url("../kolam-lotus-node.svg") no-repeat center / contain;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: -1;
+  filter: sepia(0.6) hue-rotate(330deg);
+}
+
+.journey .hd h2 { font-size: clamp(46px, 13vw, 68px); }
+.journey .div { width: clamp(200px, 52vw, 340px); margin: 1.4vh auto 0; }
+.jempty { text-align: center; font-style: italic; padding: 12vh var(--px); }
+
+/* Footprints Trail */
+.journey > .trail {
+  position: absolute;
+  inset: 0;
+  z-index: 3 !important;
+  pointer-events: none;
+}
+
+.fp {
+  position: absolute;
+  width: var(--w);
+  aspect-ratio: 24/44;
+  translate: -50% -50%;
+  rotate: var(--r);
+  scale: var(--sx) var(--sc);
+  opacity: var(--f);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 44'%3E%3Cg fill='%23B45A3C'%3E%3Cpath d='M12 1c-4 0-6 3-5.6 7 .4 4 2.2 6 2.4 10 .2 3-3 5-3 10 0 4 3 7 7 7s7-3 7-8c0-6-3-8-3.4-13C16 9 16.4 1 12 1z'/%3E%3Ccircle cx='17' cy='39.5' r='2.6'/%3E%3Ccircle cx='12.4' cy='40.8' r='1.9'/%3E%3Ccircle cx='8.4' cy='40' r='1.7'/%3E%3Ccircle cx='5.6' cy='37.8' r='1.5'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+  transition: opacity 1s ease var(--d, 0s), filter 1s ease var(--d, 0s);
+}
+
+.fp.past { opacity: var(--p); }
+.fp.near { opacity: 1; filter: drop-shadow(0 0 4px #e2a72eaa) brightness(1.06); }
+
+/* Destination Stops */
+.stop {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  padding: 12vh 0 16vh;
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stop:focus-visible { outline: 2px dashed var(--terra); outline-offset: -12px; }
+
+.st-art {
+  position: relative;
+  z-index: 4;
+  width: min(88vw, calc(56svh * var(--ar, 1)));
+  margin-left: var(--mx, 4vw);
+  transition: opacity 1.4s ease, translate 1.4s ease, transform .8s ease;
+}
+
+.st-art img { width: 100%; height: auto; }
+
+.st-txt {
+  position: relative;
+  z-index: 6;
+  width: 60vw;
+  margin-top: 3.5vh;
+  transition: opacity 1.4s ease .2s, translate 1.4s ease .2s;
+}
+
+.stop.tr .st-txt { margin-left: auto; margin-right: 5vw; text-align: left; }
+.stop.tl .st-txt { margin-left: 5vw; text-align: left; }
+
+.tt { font-family: var(--tel); font-size: clamp(38px, 11vw, 54px); line-height: 1.15; color: var(--maroon); }
+.en { font-style: italic; letter-spacing: .08em; font-size: 22px; line-height: 1.25; }
+.wh { font-size: 17px; letter-spacing: .05em; color: var(--terra); margin-top: .5em; }
+.ds { font-size: 17px; line-height: 1.4; margin-top: .6em; opacity: .85; }
+
+.go {
+  display: inline-block;
+  margin-top: .8em;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--terra);
+  border-bottom: 1px solid currentColor;
+  transition: opacity .5s;
+}
+
+@media(hover: hover) { .go { opacity: 0; } }
+.stop:hover .go, .stop:focus-visible .go, .stop.cur .go { opacity: 1; }
+.stop:hover .st-art, .stop:focus-visible .st-art { transform: translateY(-6px); }
+
+.st-txt .node { width: clamp(46px, 7vw, 84px); margin: 0 auto 1vh; }
+
+.stop.cl .st-txt { width: min(86vw, 720px); margin: 9svh auto 0; text-align: center; }
+.stop.cl .st-art { margin: 2vh auto 0; width: min(94vw, calc(60svh * var(--ar, 1))); }
+.stop.cl { padding-bottom: 20svh; }
+.stop.cl .tt { font-size: clamp(48px, 14vw, 70px); }
+
+/* Injected Per-Stop Environmental Foliage */
+.stop .d {
+  pointer-events: none;
+  filter: drop-shadow(0 12px 28px rgba(59, 42, 32, 0.08));
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.stop.pA .d[src*="lotus-cluster"] { opacity: 0.78; transform: translateY(2%); }
+.stop.pA .d[src*="temple-parrot"] { opacity: 0.88; filter: drop-shadow(0 6px 14px rgba(59, 42, 32, 0.14)); }
+.stop.pB .d[src*="banana-leaves"] { opacity: 0.74; }
+.stop.pC .d[src*="lotus-1"] { opacity: 0.8; transform: rotate(4deg); }
+.stop.pD .d[src*="banana-leaves"] { opacity: 0.72; }
+
+/* Final Destination (The Pelli Climax): Broad ceremonial aura */
+.stop.cl { position: relative; }
+
+.stop.cl::before {
+  content: "";
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(260px, 45vw, 680px);
+  height: 40%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(226, 167, 46, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.stop.cl .d[src*="lotus-cluster"] { opacity: 0.88; filter: drop-shadow(0 16px 32px rgba(106, 30, 43, 0.16)); }
+.stop.cl .d[src*="lotus-2"] { opacity: 0.82; }
+.stop.cl .d[src*="temple-parrot"] { opacity: 0.92; filter: drop-shadow(0 8px 18px rgba(106, 30, 43, 0.18)); }
+
+/* Scroll reveal */
+.journey.rv .stop:not(.on) .st-art { opacity: .2; translate: 0 14px; }
+.journey.rv .stop:not(.on) .st-txt { opacity: 0; translate: 0 10px; }
+
+@media(min-width: 700px) {
+  .journey .hd h2 { font-size: clamp(60px, 9vw, 84px); }
+  .stop { padding: 14vh 0 18vh; }
+  .st-art { width: min(62vw, calc(58svh * var(--ar, 1))); margin-left: calc(var(--mx, 4vw) * 3); }
+  .st-txt { width: 40vw; margin-top: 4vh; }
+  .tt { font-size: clamp(46px, 8vw, 68px); }
+  .en { font-size: 25px; }
+  .wh, .ds { font-size: 19px; }
+  .stop.cl .st-art { width: min(84vw, calc(58svh * var(--ar, 1))); margin-left: auto; }
+  .stop.cl .tt { font-size: clamp(56px, 9vw, 80px); }
+}
+
+@media(min-width: 1100px) {
+  .journey { padding-top: 7vh; }
+  .journey::before { right: -4vw; top: -2vw; width: min(22vw, 360px); }
+  .journey::after { left: -2vw; top: 380px; width: min(15vw, 240px); }
+  .journey .hd h2 { font-size: clamp(64px, 5.2vw, 92px); }
+  .journey .div { width: clamp(220px, 22vw, 340px); }
+  .stop { display: block; min-height: var(--sh); padding: 0 0 12svh; }
+  .st-art { width: min(var(--aw), calc(var(--ah) * var(--ar, 1))); margin: var(--ay) 0 0 var(--ax); }
+  .st-txt { position: absolute; left: var(--tx); top: var(--ty); width: var(--tw); margin: 0; text-align: left !important; }
+  .tt { font-size: clamp(50px, 4.4vw, 84px); }
+  .en { font-size: clamp(22px, 1.8vw, 30px); }
+  .wh { font-size: clamp(18px, 1.4vw, 24px); }
+  .ds { font-size: clamp(17px, 1.3vw, 22px); }
+  .pA { --ax: 57vw; --ay: 24svh; --aw: 36vw; --ah: 64svh; --tx: 11vw; --ty: 38svh; --tw: 28vw; }
+  .pB { --ax: 10vw; --ay: 20svh; --aw: 37vw; --ah: 70svh; --tx: 62vw; --ty: 36svh; --tw: 26vw; }
+  .pC { --ax: 40vw; --ay: 16svh; --aw: 34vw; --ah: 66svh; --tx: 6vw; --ty: 20svh; --tw: 24vw; }
+  .pD { --ax: 8vw; --ay: 32svh; --aw: 34vw; --ah: 60svh; --tx: 57vw; --ty: 22svh; --tw: 29vw; }
+  .pE { --ax: 24vw; --ay: 10svh; --aw: 44vw; --ah: 70svh; --tx: 73vw; --ty: 56svh; --tw: 21vw; }
+  .stop.cl { min-height: calc(var(--sh) * 1.3); padding-bottom: 22svh; }
+  .stop.cl .st-art { --aw: 52vw; --ah: 64svh; width: min(var(--aw), calc(var(--ah) * var(--ar, 1))); margin: 6svh auto 0; }
+  .stop.cl .st-txt { position: relative; left: auto; top: auto; width: min(52vw, 700px); margin: 9svh auto 0; text-align: center !important; }
+  .stop.cl .tt { font-size: clamp(64px, 5.6vw, 110px); }
+}
+
+@media(max-width: 699px) {
+  .journey::before { width: 170px; right: -14vw; top: -2vw; opacity: 0.6; }
+  .journey::after { width: 110px; left: -10vw; top: 360px; opacity: 0.55; }
+  .stop .d[src*="banana-leaves"] { opacity: 0.55; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  .fp, .st-art, .st-txt, .go, .stop .d { transition: none !important; }
+  .stop:hover .st-art { transform: none; }
+}
+
+/* Event chapter extras */
+.acts { margin-top: 14px; }
+.wr .acts .btn { font-size: 16px; padding: 11px 20px; }
+.w-pelli .ctitle { padding-top: 14vw; text-align: center; }
+@media(min-width: 1100px) { .w-pelli .ctitle { padding-top: 6vw; } }

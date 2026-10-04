@@ -1,0 +1,48 @@
+/* Each celebration is its own chapter with its own composition. */
+#world{position:fixed;inset:0;z-index:80;overflow-y:auto;overflow-x:hidden;clip-path:circle(0 at 50% 50%);transition:clip-path 1.2s cubic-bezier(.6,0,.2,1);color:var(--ivory)}
+#world.on{clip-path:circle(160% at 50% 50%)}
+.w-eng{background:var(--ggrain),linear-gradient(170deg,#b45a3c,#7e3a26 55%,#5a3a25)}
+.w-pasupu{background:var(--grain),linear-gradient(170deg,#f5cd58,#E2A72E 50%,#b98a1f);color:#3a2404}
+.w-pelli {
+  background: 
+    var(--ggrain),
+    url("../green-background.png") center center / cover no-repeat,
+    #2c3a22;
+  color: var(--ivory);
+}
+.w-vindu{background:var(--ggrain),linear-gradient(170deg,#c27b3a,#a4602c 45%,#6b4a24)}
+.wr{position:relative;min-height:100svh;overflow:hidden}.wr .in{position:relative;z-index:6}
+.back{position:sticky;top:12px;margin:12px;z-index:9;background:#0006;font-size:16px}
+.wr .hero{position:relative;z-index:3}.wr .txt,.wr .col{position:relative;z-index:6}
+.wr .tel{font-family:var(--tel);font-size:clamp(32px,9vw,48px);line-height:1.2}
+.wr h3{font-family:var(--script);font-weight:400;font-size:clamp(56px,17vw,88px);line-height:1}
+.wr .dt{font-size:clamp(22px,5.5vw,30px);margin-top:8px}.wr .dsc{max-width:70vw;margin-top:8px}
+.cds{display:flex;gap:6vw;margin:12px 0 16px;font-size:13px;letter-spacing:.12em}.cds b{display:block;font-size:clamp(34px,9vw,52px);line-height:1}
+.pin{display:inline;width:20px;vertical-align:-4px;margin-right:6px}
+.pad{padding:0 var(--px)}.ctr{text-align:center}.ctr .cds{justify-content:center}.ctr .dsc{margin-inline:auto}
+/* Engagement — intimate: art full-bleed on top, text beneath, parrot as a small discovery */
+.w-eng .hero{width:100vw;margin-top:12vw}.w-eng .txt{padding:6vw var(--px) 24vw}
+/* Pasupu — abundant turmeric: tall art to the right, text to the left below */
+.w-pasupu .hero{width:82vw;margin:10vw 0 0 auto}.w-pasupu .txt{padding:4vw var(--px) 18vw}
+/* Pelli — ceremonial, centred: celestial crest, title, knot, wide mandapam art, details */
+.w-pelli .in{display:flex;flex-direction:column;align-items:center}.w-pelli .crest{width:56vw;margin-top:12vw}
+.w-pelli .knot{width:16vw;margin:4vw 0;opacity:.9}.w-pelli .hero{width:104vw;margin:4vw 0 0}.w-pelli .txt{padding:4vw var(--px) 18vw}
+.w-pelli.on .hero{animation:unfold 1.8s ease both}@keyframes unfold{from{opacity:0;scale:.9;translate:0 4vw}}
+/* Vindu Bhojanam — warm: title, big tall banquet art to the right, details */
+.w-vindu .col{display:contents}.w-vindu .hd{padding:14vw var(--px) 0}.w-vindu .hero{width:76vw;margin:4vw 0 0 auto}.w-vindu .txt{padding:6vw var(--px) 18vw}
+@media(min-width:700px){
+ .wr h3{font-size:clamp(72px,11vw,120px)}.wr .dsc{max-width:52vw}
+ .w-eng .hero{width:70vw;margin:8vw auto 0 0}.w-eng .txt{padding-left:12vw}
+ .w-pasupu .hero{width:52vw;margin-right:8vw}.w-vindu .hero{width:46vw;margin-right:8vw}
+ .w-pelli .crest{width:36vw}.w-pelli .hero{width:86vw}.w-pelli .knot{width:10vw}}
+@media(min-width:1100px){
+ .wr .tel{font-size:clamp(44px,3.6vw,72px)}.wr h3{font-size:clamp(96px,7.5vw,150px)}.wr .dt{font-size:clamp(24px,1.8vw,34px)}.wr .dsc{max-width:34vw}.cds b{font-size:clamp(40px,3.4vw,66px)}
+ .w-eng .in,.w-pasupu .in,.w-vindu .in{display:grid;align-items:center;min-height:100svh;padding:0 4vw}
+ .w-eng .in{grid-template-columns:1.15fr 1fr}.w-eng .hero{width:min(52vw,calc(94svh));margin:0}.w-eng .txt{padding:0 3vw}
+ .w-pasupu .in{grid-template-columns:1fr 1fr}.w-pasupu .hero{grid-column:2;grid-row:1;width:min(34vw,calc(80svh*.644));margin:0 auto}.w-pasupu .txt{grid-column:1;grid-row:1;padding:0 3vw 0 9vw}
+ .w-vindu .in{grid-template-columns:1fr 1fr}.w-vindu .col{display:block;grid-column:1;grid-row:1;padding:0 3vw 0 9vw}.w-vindu .hd{padding:0}.w-vindu .txt{padding:0}
+ .w-vindu .hero{grid-column:2;grid-row:1;width:min(32vw,calc(88svh*.562));margin:0 auto}
+ .w-pelli .crest{width:min(22vw,380px);margin-top:6vw}.w-pelli .hero{width:min(60vw,980px)}.w-pelli .knot{width:min(7vw,110px)}}
+.w-vindu .in{display:flex;flex-direction:column}.w-vindu .hd{order:1}.w-vindu .hero{order:2}.w-vindu .txt{order:3}
+.w-eng .txt{padding-bottom:40vw}.rs-c h2{max-width:56vw}
+@media(min-width:1100px){.w-vindu .in{display:grid}}

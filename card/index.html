@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rukmini & Krishna — Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Lakki+Reddy&family=Ramaraja&family=Noto+Serif+Telugu:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/scenes.css">
+<link rel="stylesheet" href="css/worlds.css">
+<link rel="stylesheet" href="css/moments.css">
+<link rel="stylesheet" href="css/capture.css">
+<link rel="stylesheet" href="css/blessings.css">
+<link rel="stylesheet" href="css/rsvp.css">
+<link rel="stylesheet" href="css/close.css">
+<link rel="stylesheet" href="css/intro.css">
+</head><body>
+<div id="env">
+    <div class="envelope" id="envelope">
+    <!-- Back base / interior liner -->
+    <div class="env-back"></div>
+
+    <!-- 3D Folding Top Flap (The Hinge) -->
+    <div class="flap"></div>
+
+    <!-- Wax Seal placed on the flap tip -->
+    <div class="seal" aria-label="R & K Seal">
+      <div class="seal-inner">
+        <span class="seal-initials">R <span>&amp;</span> K</span>
+      </div>
+    </div>
+
+    <!-- Front pocket (folded sides and bottom) -->
+    <div class="env-pocket"></div>
+  </div>
+
+  <p class="tap">tap to open</p>
+  <!-- INTRO OVERLAY · The Quiet Shrine -->
+  <div id="bless">
+
+    <!-- Asymmetric Altar Environment Framing (Perimeter only) -->
+    <div class="bless-altar-env" aria-hidden="true">
+      <!-- Subtle marigold thoranam softly draped along top edge -->
+      <img src="marigold-thoranam.png" alt="" class="bless-thoranam">
+
+      <!-- Asymmetric hanging brass diyas entering from upper corners -->
+      <img src="hanging-diya.png" alt="" class="bless-diya bless-diya-left">
+      <img src="hanging-diya.png" alt="" class="bless-diya bless-diya-right">
+
+      <!-- Grounding lotus cluster along the lower perimeter -->
+      <img src="lotus-cluster.png" alt="" class="bless-lotus-base">
+      <img src="lotus-1.png" alt="" class="bless-lotus-side">
+
+      <!-- Scattered sacred akshantalu grains at the floor base -->
+      <img src="akshintalu-particle.png" alt="" class="bless-grain bless-grain-1">
+      <img src="akshintalu-particle.png" alt="" class="bless-grain bless-grain-2">
+      <img src="akshintalu-particle.png" alt="" class="bless-grain bless-grain-3">
+    </div>
+
+    <!-- Central Altar Stage: Sacred vertical axis -->
+    <div class="bless-stage">
+
+      <!-- Kolam ground beneath the deity -->
+      <div class="bless-kolam-ground" aria-hidden="true">
+        <img src="kolam-lotus-node.svg" alt="" class="bless-kolam-svg">
+      </div>
+
+      <!-- The Hero Focal Point: Dominant Ganesha Art -->
+      <div class="bless-ganesha-wrap">
+        <img class="g bless-ganesha-img" src="ganesha-art.png" alt="Sri Maha Ganesha">
+      </div>
+
+      <!-- Sacred Invocation & Whisper Line -->
+      <div class="bless-invocation">
+        <h2 class="bless-mantra">॥ శ్రీ గణేశాయ నమః ॥</h2>
+        <p class="bless-subtext">With blessings, the celebration begins.</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<main>
+<section class="sc snap couple" id="couple">
+
+  <img src="hanging-diya.png" alt="" class="cp-diya">
+
+  <div class="cp-text">
+    <div class="tnames">రుక్మిణి &amp; కృష్ణ</div>
+    <h1 class="names">Rukmini<br>&amp; Krishna</h1>
+    <p class="fam">
+      Rukmini, daughter of <i>[Parents]</i><br>
+      Krishna, son of <i>[Parents]</i>
+    </p>
+  </div>
+
+  <img src="lotus-cluster.png" alt="" class="cp-lotus">
+
+  <img src="couple.png" alt="Rukmini and Krishna" class="cp-art">
+
+</section>
+<section class="sc snap reveal" id="reveal">
+
+  <!-- LARGE DIYA / BELL GROUP — LEFT -->
+  <img
+    src="hanging-diya.png"
+    alt=""
+    class="rv-diya"
+    aria-hidden="true"
+  >
+
+  <div class="rv-stage">
+
+    <p class="rv-kicker">A little secret awaits...</p>
+
+    <h2>Save the Date</h2>
+
+    <p class="rv-instruction">scratch to reveal</p>
+
+    <div class="scratch">
+
+      <!-- MAROON CEREMONIAL PLAQUE -->
+      <img
+        src="save-date-plaque.png"
+        alt=""
+        class="date-plaque"
+        aria-hidden="true"
+      >
+
+      <!-- CONTENT ON THE PLAQUE -->
+      <div class="plaque-content">
+
+        <div class="plaque-top-ornament">✦</div>
+
+        <div class="plaque-telugu">
+          శుభ ముహూర్తం
+        </div>
+
+        <div class="plaque-divider"></div>
+
+        <div class="date">
+          <span>14 December</span>
+          <span>2026</span>
+        </div>
+
+        <div class="plaque-bottom-ornament">✦</div>
+
+      </div>
+
+      <!-- KEEP THIS FOR EXISTING SCRATCH JS -->
+      <canvas id="sc"></canvas>
+
+    </div>
+
+    <p class="rv-after" id="rvAfter">
+      The countdown begins here.
+    </p>
+
+    <div id="cd" aria-label="Countdown">
+      <div>
+        <b id="d">--</b>
+        <span>days</span>
+      </div>
+
+      <div>
+        <b id="h">--</b>
+        <span>hours</span>
+      </div>
+
+      <div>
+        <b id="m">--</b>
+        <span>minutes</span>
+      </div>
+    </div>
+
+  </div>
+
+  <img src="banana-leaves-corner.png" alt="" class="rv-lotus-leaves" aria-hidden="true">
+
+  <!-- LOTUSES — LEAVE THIS EXACTLY AS IT IS -->
+  <div class="rv-lotuses" aria-hidden="true">
+    <img src="lotus-1.png" alt="">
+    <img src="lotus-2.png" alt="">
+  </div>
+
+</section>
+<section class="sc snap journey" id="journey">
+  <div class="hd"><h2>The Wedding<br>Journey</h2><img src="tamboolam-divider.png" alt="" class="div"></div><div id="jbody"></div>
+</section>
+
+<!-- D · Moments — Living Wedding Memory Wall -->
+<section class="sc moments-world" id="moments">
+  
+  <img src="banana-leaves-corner.png" alt="" class="mw-env mw-leaf" aria-hidden="true">
+  <img src="temple-parrot.png" alt="" class="mw-env mw-parrot" aria-hidden="true">
+
+  <header class="mw-header">
+    <span class="mw-tel">మధుర జ్ఞాపకాలు</span>
+    <h2 class="mw-title">Moments</h2>
+    <p class="mw-tagline">Memories gathering around the wedding.</p>
+  </header>
+
+  <!-- Asymmetric Physical Memory Wall -->
+  <div class="wall mw-wall" id="wall" role="region" aria-label="Wedding Memory Wall"></div>
+
+  <!-- Captured by you: Invitation Slip -->
+  <div class="mw-guest-chapter" id="captured">
+    <div class="cby-env-layer" aria-hidden="true">
+      <img src="marigold-thoranam.png" alt="" class="cby-thoranam">
+      <img src="temple-parrot.png" alt="" class="cby-parrot">
+      <img src="lotus-cluster.png" alt="" class="cby-lotus-cluster">
+      <img src="lotus-1.png" alt="" class="cby-lotus-single-left">
+      <img src="lotus-2.png" alt="" class="cby-lotus-single-right">
+      <img src="sacred-knot.png" alt="" class="cby-knot">
+    </div>
+
+    <div class="cby-wrap">
+      <div class="cby-slip">
+        <div class="cby-tape" aria-hidden="true"></div>
+
+        <div class="cby-header">
+          <img src="kolam-lotus-node.svg" alt="" class="cby-kolam-badge" aria-hidden="true">
+          <span class="cby-tel">మీ జ్ఞాపకాలు</span>
+          <h3 class="cby-title">Captured by you</h3>
+          <p class="cby-desc">Leave a quiet fragment of this celebration behind.</p>
+          <img src="tamboolam-divider.png" alt="" class="cby-divider" aria-hidden="true">
+        </div>
+
+        <div class="cby-upload-zone" id="pdrop">
+          <input type="file" id="ph" accept="image/*,video/*" class="cby-file-input">
+          <div class="cby-upload-inner">
+            <div class="cby-preview-box" id="p-prev-box">
+              <span class="cby-plus-icon">✦</span>
+            </div>
+            <div class="cby-upload-meta">
+              <span class="cby-upload-title" id="pfiletxt">Attach a photograph or video</span>
+              <span class="cby-upload-sub">Candid frames, laughter, quiet ceremonies</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cby-fields">
+          <div class="cby-row">
+            <div class="cby-field">
+              <label for="pn" class="cby-label">Your name</label>
+              <input id="pn" placeholder="e.g. Ananya" autocomplete="name">
+            </div>
+            <div class="cby-field">
+              <label for="pc" class="cby-label">
+                <img src="map-pin-terracotta.png" alt="" class="cby-pin-icon" aria-hidden="true">
+                Celebration
+              </label>
+              <select id="pc" aria-label="Select celebration"></select>
+            </div>
+          </div>
+
+          <div class="cby-field">
+            <label for="pcap" class="cby-label">A handwritten thought</label>
+            <input id="pcap" placeholder="e.g. Under the morning sun at Pasupu...">
+          </div>
+        </div>
+
+        <div class="cby-actions">
+          <button id="padd" class="cby-submit-btn" type="button">
+            <span>Pin to the wall</span>
+            <span class="cby-btn-sparkle" aria-hidden="true">❧</span>
+          </button>
+        </div>
+
+        <span class="cby-watermark" aria-hidden="true">R &amp; K · 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimalist Lightbox -->
+  <div id="mw-viewer" class="mw-viewer" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+    <div class="mw-viewer-backdrop"></div>
+    <div class="mw-viewer-container">
+      <button class="mw-viewer-close" aria-label="Close photograph view">✕</button>
+      <div class="mw-viewer-photo-wrap">
+        <img id="mw-viewer-img" src="" alt="">
+      </div>
+      <div class="mw-viewer-meta">
+        <p id="mw-viewer-cap" class="mw-viewer-cap"></p>
+        <span id="mw-viewer-by" class="mw-viewer-by"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- E · Blessings — The Ceremony Corner -->
+<section class="sc snap bless-sc" id="blessings">
+  <div class="bl-env" aria-hidden="true">
+    <img src="hanging-diya.png" alt="" class="bl-env-diya">
+    <img src="banana-leaves-corner.png" alt="" class="bl-env-leaf">
+    <img src="temple-parrot.png" alt="" class="bl-env-parrot">
+    <img src="lotus-cluster.png" alt="" class="bl-env-lotus">
+  </div>
+
+  <div class="bl-stage">
+    <header class="bl-header">
+      <div class="bl-sparkle" aria-hidden="true">✦</div>
+      <span class="bl-tel">ఆశీర్వాదం</span>
+      <h2 class="bl-title">Send Your Blessings</h2>
+      <p class="bl-sub">Leave a little love for Rukmini &amp; Krishna.</p>
+    </header>
+
+    <div class="bl-desk-wrap">
+      <div class="bl-quill-dock" id="blQuillDock" title="Dip the quill to write">
+        <img src="quill.png" alt="Feather Quill" class="bl-quill-img" id="blQuill">
+        <img src="quill-brooch.png" alt="" class="bl-brooch-img" aria-hidden="true">
+      </div>
+
+      <div class="bl-envelope-stage" id="blEnvStage">
+        <div class="bl-stationery" id="blPaper">
+          <img src="paper.png" alt="" class="bl-paper-bg" aria-hidden="true">
+
+          <div class="bl-letter-content">
+            <div class="bl-salutation">Dear Rukmini &amp; Krishna,</div>
+
+            <div class="bl-ink-body">
+              <textarea id="bm" rows="4" placeholder="May your path ahead be filled with laughter, patience, and warmth…" aria-label="Write your blessing"></textarea>
+            </div>
+
+            <div class="bl-signoff">
+              <span class="bl-dash">—</span>
+              <div class="bl-author-field">
+                <input id="bn" placeholder="Your name" autocomplete="name" aria-label="Your name">
+                <label class="bl-anon-toggle">
+                  <input type="checkbox" id="anon">
+                  <span>Remain anonymous</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="bl-paper-seal" aria-hidden="true">
+            <img src="sacred-knot.png" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="bl-actions" id="blActionArea">
+        <button id="bsend" class="bl-leave-btn" type="button">
+          <span>Leave this blessing</span>
+          <span class="bl-btn-glyph" aria-hidden="true">❧</span>
+        </button>
+      </div>
+
+      <div class="bl-consecrated" id="blDone" aria-live="polite" style="display:none;">
+        <div class="bl-done-mark">✦</div>
+        <h3 class="bl-done-title">Your blessing has found its place.</h3>
+        <p class="bl-done-desc">May it travel with them into the years ahead.</p>
+        <span class="bl-done-pinned-notice">Pinned among their wedding memories ↑</span>
+      </div>
+
+      <p id="bt" style="display:none;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- F · WILL YOU JOIN US? — The Personal Threshold -->
+<section class="sc snap rsvp-world" id="rsvp">
+  <div class="rs-env" aria-hidden="true">
+    <img src="hanging-diya.png" alt="" class="rs-env-diya" id="rsDiya">
+    <img src="banana-leaves-corner.png" alt="" class="rs-env-leaf">
+    <img src="temple-parrot.png" alt="" class="rs-env-parrot">
+    <img src="lotus-cluster.png" alt="" class="rs-env-lotus">
+    <img src="kolam-lotus-node.svg" alt="" class="rs-env-kolam">
+    <img src="akshintalu-particle.png" alt="" class="rs-grain rs-grain-1">
+    <img src="akshintalu-particle.png" alt="" class="rs-grain rs-grain-2">
+    <img src="akshintalu-particle.png" alt="" class="rs-grain rs-grain-3">
+  </div>
+
+  <div class="rs-stage">
+    <header class="rs-header">
+      <span class="rs-tel" aria-hidden="true">మీ రాక మాకెంతో సంతోషం</span>
+      <h2 class="rs-personal-lead">Our celebration is incomplete without you.</h2>
+      <h3 class="rs-question">Will you join us?</h3>
+    </header>
+
+    <div class="rs-choices-stage" id="rsChoices">
+      <button type="button" class="rs-choice-slip rs-slip-yes" data-r="joyfully attending" id="rsChoiceYes" aria-label="Yes, I’ll be there. Save a place for me.">
+        <div class="rs-slip-tape" aria-hidden="true"></div>
+        <div class="rs-slip-stamp" aria-hidden="true">✦</div>
+        <span class="rs-slip-title">Yes, I’ll be there</span>
+        <span class="rs-slip-sub">Save a place for me.</span>
+      </button>
+
+      <button type="button" class="rs-choice-slip rs-slip-spirit alt" data-r="in spirit" id="rsChoiceSpirit" aria-label="I’ll be with you in spirit. Sending my love from afar.">
+        <div class="rs-slip-tape" aria-hidden="true"></div>
+        <div class="rs-slip-stamp" aria-hidden="true">❧</div>
+        <span class="rs-slip-title">I’ll be with you in spirit</span>
+        <span class="rs-slip-sub">Sending my love from afar.</span>
+      </button>
+    </div>
+
+    <div class="rs-unfolded-panel" id="rsFormPanel" style="display: none;">
+      <div class="rs-unfolded-slip">
+        <div class="rs-panel-lead">
+          <span class="rs-panel-note">We’ll save a place for you.</span>
+          <p class="rs-panel-instruction">A few quiet details to prepare for your arrival:</p>
+        </div>
+
+        <div class="rs-fields">
+          <div class="rs-field">
+            <label for="rn" class="rs-label">Your name</label>
+            <input id="rn" placeholder="e.g. Radhika" autocomplete="name">
+          </div>
+
+          <div class="rs-field">
+            <label for="rg" class="rs-label">Number of guests</label>
+            <input id="rg" type="number" min="1" max="10" placeholder="1">
+          </div>
+
+          <div class="rs-field">
+            <label for="rnotes" class="rs-label">Anything we should know? <span class="rs-opt">(optional)</span></label>
+            <input id="rnotes" placeholder="Dietary preferences, arrival timing…">
+          </div>
+        </div>
+
+        <div class="rs-actions">
+          <button id="rsConfirmBtn" class="rs-confirm-btn" type="button">
+            <span>Confirm my RSVP</span>
+            <span class="rs-btn-sparkle" aria-hidden="true">✦</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rs-resolution" id="rsConfirmedMessage" style="display: none;" aria-live="polite">
+      <div class="rs-res-knot" aria-hidden="true">
+        <img src="sacred-knot.png" alt="">
+      </div>
+      <h3 class="rs-res-lead">We’ll save a place for you.</h3>
+      <p class="rs-res-sub">Until then, keep a little room in your heart for the celebrations ahead.</p>
+    </div>
+
+    <div class="rs-spirit-resolution" id="rsSpiritMessage" style="display: none;" aria-live="polite">
+      <div class="rs-res-knot" aria-hidden="true">
+        <img src="sacred-knot.png" alt="">
+      </div>
+      <h3 class="rs-spirit-lead">Your love still belongs here.</h3>
+      <p class="rs-spirit-sub">Sending it with us into the day.</p>
+      
+      <div class="rs-spirit-cta">
+        <a href="#blessings" class="rs-blessing-bridge" id="rsBlessingBridge">
+          <span>Send Your Blessings</span>
+          <span class="rs-bridge-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <p class="thanks sm" id="rt" style="display: none;"></p>
+    
+    <div class="rs-share-wrap">
+      <button id="share" class="rs-share-link" type="button">
+        <span>Share the invitation</span>
+        <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- G · CLOSING — The Final Botanical Portrait -->
+<section class="sc snap close-world" id="close">
+
+  <!-- Perimeter Foliage ONLY — strictly pinned to edges & corners -->
+  <div class="cl-perimeter-canopy" aria-hidden="true">
+    <img src="banana-leaves-corner.png" alt="" class="cl-edge-leaf-tl">
+    <img src="banana-leaves-corner.png" alt="" class="cl-edge-leaf-br">
+  </div>
+
+  <!-- The Sacred Central Axis (Completely free of background foliage) -->
+  <div class="cl-sanctuary">
+
+    <!-- 1. The Couple: Commanding, Large Final Portrait (40–50% viewport height) -->
+    <div class="cl-hero-portrait">
+      <img src="couple.png" alt="Rukmini & Krishna" class="cl-couple-large">
+    </div>
+
+    <!-- 2 & 3. Statement: Equal Size, Equal Weight, Generous Horizontal Width -->
+    <div class="cl-lines-wrap">
+      <p class="cl-poetry-line">Some celebrations stay with you.</p>
+      <p class="cl-poetry-line">With you, it meant a little more.</p>
+    </div>
+
+    <!-- 4. Valediction & Names -->
+    <div class="cl-signature">
+      <span class="cl-valediction">With love,</span>
+      <span class="cl-couple-names">Rukmini &amp; Krishna</span>
+    </div>
+
+    <!-- 5. Ceremonial Telugu Seal in Matching Ivory -->
+    <div class="cl-seal" aria-label="Shubhamasthu">॥ శుభమస్తు ॥</div>
+
+  </div>
+
+</section>
+</main>
+
+<div id="world"></div>
+<script src="js/data.js"></script>
+<script src="js/core.js"></script>
+<script src="js/intro.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/moments.js"></script>
+<script src="js/capture.js"></script>
+<script src="js/blessings.js"></script>
+<script src="js/rsvp.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/close.js"></script>
+</body></html>

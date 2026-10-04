@@ -1,0 +1,503 @@
+/* =========================================================
+   INTRO · A QUIET SHRINE BEFORE THE CELEBRATION BEGINS
+   ========================================================= */
+:root {
+  /* Set this to your actual exported image file path */
+  --terracotta-img: url('../terracotta.jpg');
+}
+
+#bless {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* Initially unclickable so it doesn't block envelope */
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+#bless.dismissed,
+#bless.hidden,
+#bless:not(.active) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* When the envelope is tapped and opened by intro.js:
+   Bring Ganesha's shrine to the FRONT above the opened envelope */
+#bless.on {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important; /* Higher than #envelope so Ganesha is completely visible! */
+}
+
+#bless.dismissed,
+#bless.hidden,
+#bless.gone {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+#sc {
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* Also ensure the opened envelope fades away cleanly */
+#envelope.open {
+  opacity: 0;
+  transition: opacity 0.8s ease 0.4s;
+  pointer-events: none;
+}
+
+/* =========================================================
+   ASYMMETRIC ALTAR ENVIRONMENT (Strictly Peripheral)
+   ========================================================= */
+.bless-altar-env {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle marigold drape across the upper frame */
+.bless-thoranam {
+  position: absolute;
+  top: -2.5vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(105vw, 840px);
+  height: auto;
+  opacity: 0.82;
+  filter: drop-shadow(0 4px 10px rgba(106, 30, 43, 0.12));
+}
+
+/* Diyas: Natural asymmetry — left hangs higher, right dips lower */
+.bless-diya {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 0 16px rgba(226, 167, 46, 0.4)) drop-shadow(0 6px 14px rgba(106, 30, 43, 0.16));
+}
+
+.bless-diya-left {
+  top: -4vw;
+  left: -2vw;
+  width: clamp(140px, 15vw, 240px);
+  opacity: 0.88;
+}
+
+.bless-diya-right {
+  top: 1vw; /* lower drop */
+  right: -3vw;
+  width: clamp(120px, 13vw, 210px);
+  transform: scaleX(-1) rotate(-3deg);
+  opacity: 0.78;
+}
+
+/* --- 1. DRAG LOTUS TO THE LEFT EDGE --- */
+.bless-lotus-base {
+  position: absolute;
+  bottom: -2vw;
+  /* Shifted clearly to the left edge rather than centered */
+  left: -3vw;
+  right: auto;
+  width: clamp(170px, 22vw, 320px);
+  height: auto;
+  opacity: 0.85;
+  transform: rotate(-8deg);
+  filter: drop-shadow(0 6px 18px rgba(106, 30, 43, 0.14));
+}
+
+.bless-lotus-side {
+  position: absolute;
+  bottom: 2vw;
+  right: -2vw;
+  width: clamp(100px, 12vw, 180px);
+  height: auto;
+  opacity: 0.65;
+  transform: rotate(14deg);
+}
+
+/* Loose sacred akshantalu grains resting near the base */
+.bless-grain {
+  position: absolute;
+  width: 12px;
+  height: auto;
+  opacity: 0.7;
+}
+
+.bless-grain-1 { bottom: 8vw; left: 24vw; transform: rotate(15deg); }
+.bless-grain-2 { bottom: 6vw; right: 28vw; transform: rotate(-25deg); }
+.bless-grain-3 { bottom: 12vw; right: 18vw; transform: rotate(40deg); }
+
+/* =========================================================
+   CENTRAL ALTAR STAGE (The Sacred Axis)
+   ========================================================= */
+.bless-stage {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: min(90vw, 680px);
+  margin: 0 auto;
+}
+
+/* Kolam floor grounding the shrine */
+.bless-kolam-ground {
+  position: absolute;
+  bottom: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(220px, 34vw, 440px);
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.22;
+  filter: sepia(0.5) hue-rotate(330deg);
+}
+
+.bless-kolam-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 1. THE HERO: Ganesha Artwork — Centered, Large, Dominant */
+.bless-ganesha-wrap {
+  position: relative;
+  z-index: 4;
+  margin-bottom: clamp(14px, 2.5svh, 28px);
+}
+
+.bless-ganesha-img {
+  display: block;
+  /* Occupies 38–46% of viewport height */
+  height: clamp(230px, 42svh, 460px);
+  width: auto;
+  max-width: 85vw;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 28px rgba(106, 30, 43, 0.22));
+}
+
+/* 2. INVOCATION & WHISPER LINE */
+.bless-invocation {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.bless-mantra {
+  margin: 0;
+  font-family: var(--tel);
+  font-weight: 600;
+  font-size: clamp(24px, 3.4vw, 44px);
+  line-height: 1.15;
+  color: var(--maroon);
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 8px rgba(226, 167, 46, 0.2);
+}
+
+.bless-subtext {
+  margin: 8px 0 0;
+  font-family: 'Pinyon Script', cursive !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-size: clamp(24px, 3.2vw, 40px);
+  line-height: 1.2;
+  color: var(--terra);
+  letter-spacing: 0.02em;
+  opacity: 0.95;
+  text-shadow: 0 1px 8px rgba(226, 167, 46, 0.2);
+}
+
+/* =========================================================
+   3D TACTILE TERRACOTTA ENVELOPE (Origami Fold & Hinge)
+   ========================================================= */
+
+:root {
+  /* Replace with your exact filename/path */
+  --terracotta-img: url('../terracotta.jpg');
+}
+
+/* --- The Base Envelope (Body) --- */
+.envelope {
+  position: relative;
+  width: clamp(340px, 46vw, 620px);
+  aspect-ratio: 2 / 1; /* Wide ratio matching your reference */
+  perspective: 1200px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 2px;
+  box-sizing: border-box;
+
+  /* Your JPG image texture */
+  background-color: #ba4f37; /* Fallback tone */
+  background-image: url("../terracotta.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 1px solid rgba(215, 203, 180, 0.4);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 18px 45px rgba(60, 30, 20, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.envelope:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 24px 52px rgba(60, 30, 20, 0.32);
+}
+
+/* --- The Triangular Top Flap --- */
+.envelope .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%; /* Ends precisely in the middle of the envelope */
+  z-index: 4;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s linear 0.4s;
+  
+  background-color: #ba4f37;
+  background-image: url("../terracotta.jpg");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope:hover {
+  transform: translateY(-4px);
+}
+
+/* 1. Base / Interior backplate */
+.env-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: 
+    linear-gradient(135deg, rgba(140, 50, 34, 0.95), rgba(106, 30, 43, 0.98)),
+    var(--terracotta-img) center / cover no-repeat,
+    #8c3222;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.08),
+    0 24px 50px rgba(59, 30, 20, 0.32);
+}
+
+/* 2. Front Pocket (Constructed from bottom & side folding flaps) */
+.env-pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 0 0 4px 4px;
+  background: 
+    linear-gradient(to top, rgba(184, 79, 56, 0.96) 0%, rgba(160, 65, 45, 0.92) 100%),
+    var(--terracotta-img) center / cover no-repeat,
+    #b84f38;
+  /* Triangular cutout exposing the V-opening at the top */
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 50%);
+  filter: drop-shadow(0 -2px 6px rgba(0, 0, 0, 0.18));
+}
+
+/* 3. The 3D Hinged Top Flap */
+.envelope .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56%; /* Extends down to 56% */
+  z-index: 4;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s linear 0.4s;
+  
+  background: 
+    linear-gradient(160deg, #ba4f37 0%, #9e3d29 100%),
+    var(--terracotta-img, transparent) center / cover no-repeat;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.22));
+}
+
+/* Fine golden piping line along the flap edge */
+.envelope .flap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-bottom: 1.5px solid rgba(226, 167, 46, 0.55);
+}
+
+/* 4. Wax Seal */
+/* --- Wax Seal Stamp --- */
+.envelope .seal {
+  position: absolute;
+  top: 50%;  /* Exact vertical center */
+  left: 50%; /* Exact horizontal center */
+  transform: translate(-50%, -50%);
+  width: clamp(46px, 5vw, 60px);
+  height: clamp(46px, 5vw, 60px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  
+  background: radial-gradient(circle at 38% 32%, #94323e 0%, #6f1d28 65%, #4a0f17 100%);
+  border: 1px solid rgba(226, 167, 46, 0.7);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    0 6px 14px rgba(50, 10, 18, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+
+  display: grid;
+  place-items: center;
+  z-index: 5;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.seal-inner {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  border: 1px dashed rgba(226, 167, 46, 0.45);
+  display: grid;
+  place-items: center;
+}
+
+.seal-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(17px, 2vw, 24px);
+  color: #f7e6c4;
+  line-height: 1;
+  text-align: center;
+  transform: translateY(-0.5px);
+  user-select: none;
+  pointer-events: none;
+}
+
+.seal-initials span {
+  font-family: var(--serif, 'Cormorant Garamond', serif);
+  font-size: 0.55em;
+  opacity: 0.85;
+  margin: 0 1.5px;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+#env {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* Once dismissed or opened, completely kill its hit-testing */
+#env.gone,
+#env.dismissed,
+#env.hidden,
+#env.closed {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* =========================================================
+   OPENING ANIMATION (Triggered on Tap)
+   ========================================================= */
+
+/* The Flap rotates 180deg on its top hinge */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1; /* Slips behind the envelope pocket once fully opened */
+}
+
+/* The seal disappears cleanly as the envelope unseals */
+.envelope.open .seal {
+  transform: translate(-50%, -50%) scale(0.65);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================= */
+@media (max-width: 699px) {
+  .bless-thoranam {
+    top: -10px;
+    width: 120vw;
+  }
+
+  .bless-diya-left {
+    top: -12px;
+    left: -4vw;
+    width: 110px;
+  }
+
+  .bless-diya-right {
+    top: 6px;
+    right: -5vw;
+    width: 95px;
+  }
+
+  .bless-lotus-base {
+    bottom: -10px;
+    left: -6vw;
+    width: 140px;
+    transform: rotate(-6deg);
+  }
+
+  .bless-lotus-side {
+    display: none;
+  }
+
+  .bless-ganesha-img {
+    height: clamp(310px, 57svh, 620px);
+    width: auto;
+    max-width: 92vw;
+    object-fit: contain;
+    filter: drop-shadow(0 16px 32px rgba(106, 30, 43, 0.24));
+  }
+
+  .bless-mantra {
+    font-size: clamp(21px, 6.2vw, 30px);
+  }
+
+  .bless-grain {
+    display: none;
+  }
+
+  .bless-subtext {
+    font-size: clamp(22px, 6.5vw, 30px);
+  }
+}

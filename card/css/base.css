@@ -1,0 +1,61 @@
+/* Tokens, paper, type, shared controls. Breakpoints: <700 mobile · 700–1099 tablet · ≥1100 desktop */
+:root{--ivory:#F4EAD5;--green:#4B5E3A;--terra:#B45A3C;--turm:#E2A72E;--maroon:#6A1E2B;--ink:#3b2a20;
+--script:'Pinyon Script','Cormorant Garamond',cursive;--serif:'Cormorant Garamond','Noto Serif Telugu',serif;--tel:'Lakki Reddy','Ramaraja','Noto Serif Telugu',serif;--telb:'Noto Serif Telugu',serif;
+--h2:clamp(46px,14vw,72px);--px:7vw;--body:20px;
+--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .42 0 0 0 0 .25 .16 0 0 0 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+--fibre:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .02' numOctaves='4' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .78 0 0 0 0 .6 0 0 0 0 .34 .32 0 0 0 -.06'/%3E%3C/filter%3E%3Crect width='700' height='700' filter='url(%23n)'/%3E%3C/svg%3E");
+--ggrain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .75 0 0 0 0 .85 0 0 0 0 .55 .13 0 0 0 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media(min-width:700px){:root{--h2:clamp(64px,9vw,100px);--px:8vw}}
+@media(min-width:1100px){:root{--h2:clamp(80px,6.2vw,124px);--px:9vw;--body:22px}}
+*{box-sizing:border-box;margin:0}
+html{scroll-snap-type:y proximity}
+body{font-family:var(--serif);color:var(--ink);font-size:var(--body);line-height:1.5;overflow-x:hidden;background:var(--grain),var(--fibre),var(--ivory)}
+img{display:block;max-width:none;height:auto}
+h2{font-family:var(--script);font-weight:400;font-size:var(--h2);line-height:1;color:var(--maroon)}
+.small{font-style:italic}
+.d{position:absolute!important;pointer-events:none}   /* environment layers: never intercept touches, never carry text */
+button,.btn{font:600 18px var(--serif);letter-spacing:.06em;background:var(--maroon);color:var(--ivory);border:0;border-radius:40px;padding:13px 26px;cursor:pointer;text-decoration:none;display:inline-block;margin:5px 5px 5px 0}
+.btn.alt,button.alt{background:transparent;color:inherit;border:1.5px solid currentColor}
+input,select,textarea{font:20px var(--serif);background:#fffdf6;border:1.5px solid var(--terra);border-radius:8px;padding:11px 14px;width:100%;color:var(--ink)}
+.slip{position:relative;z-index:6;background:var(--grain),#fbf3df;border:1px solid #c9a97a;box-shadow:0 2vw 5vw #0003;padding:clamp(20px,6vw,36px);display:flex;flex-direction:column;gap:6px}
+.slip:before{content:"";position:absolute;top:-10px;left:50%;width:22%;height:20px;translate:-50% 0;background:#e2a72e88;rotate:-2deg}
+.thanks{font-family:var(--script);font-size:clamp(34px,9vw,60px);color:var(--green);line-height:1.1}.thanks.sm{font-size:clamp(26px,7vw,40px)}
+.fall{position:fixed;top:-40px;z-index:90;pointer-events:none;animation:fall linear forwards}@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(var(--r))}}
+.lit .d{animation:sway 2.8s ease-in-out 1}@keyframes sway{40%{scale:1.05;translate:0 -1vw}}
+/* envelope + Ganesha: quiet, nothing but the blessing */
+#env{position:fixed;inset:0;z-index:100;background:var(--ggrain),var(--green);display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 1.4s;overflow:hidden}
+#env.gone{opacity:0;pointer-events:none}
+.envelope{position:relative;width:min(82vw,460px);aspect-ratio:3/2;background:#e9d8b4;border-radius:6px;box-shadow:0 20px 50px #0006;cursor:pointer;perspective:900px}
+#env {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* Your chosen image background */
+  background: 
+    var(--grain),
+    url("../invitation-background.png") center center / cover no-repeat,
+    #2c3a22; /* Fallback color */
+  
+  transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+
+#envelope {
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.flap{position:absolute;left:0;top:0;width:100%;height:60%;background:var(--terra);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .9s cubic-bezier(.5,0,.2,1),z-index 0s .45s;z-index:3}
+.envelope:before{content:"";position:absolute;inset:0;background:#d8c298;clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%)}
+.open .flap{transform:rotateX(180deg);z-index:0}
+.seal{position:absolute;left:50%;top:52%;width:18%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:var(--maroon);z-index:4;display:grid;place-items:center;transition:opacity .4s}
+.seal img{width:55%;height:70%;object-fit:contain;filter:brightness(2.5) sepia(.4)}.open .seal{opacity:0}
+.tap{color:var(--ivory);margin-top:30px;font-style:italic;letter-spacing:.12em;animation:pulse 2s infinite}@keyframes pulse{50%{opacity:.4}}
+#bless{position:absolute;inset:0;background:var(--grain),var(--fibre),var(--ivory);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 1.4s}
+#bless.on{opacity:1}#bless>img.g{height:min(66svh,740px);width:auto;max-width:92vw;object-fit:contain}
+#bless p{font-family:var(--tel);font-size:clamp(28px,5vw,52px);color:var(--maroon);margin-top:10px}

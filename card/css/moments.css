@@ -1,0 +1,663 @@
+/* =========================================================
+   MOMENTS — LIVING TELUGU WEDDING MEMORY WALL
+   ========================================================= */
+
+.moments-world {
+  position: relative;
+  min-height: 100svh;
+  padding: 8vw 0 14vw;
+  background: 
+    radial-gradient(ellipse at 75% 25%, rgba(226, 167, 46, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 70%, rgba(180, 90, 60, 0.07) 0%, transparent 60%),
+    transparent;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* --- Environmental Assets: Subdued, Scaled, Peripheral --- */
+.mw-env {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.78;
+}
+
+.mw-leaf {
+  width: clamp(140px, 18vw, 290px);
+  top: -3vw;
+  right: -5vw;
+  transform: rotate(8deg);
+}
+
+.mw-parrot {
+  width: clamp(70px, 7vw, 110px);
+  top: 36vw;
+  left: 2vw;
+  opacity: 0.85;
+}
+
+/* --- Integrated Editorial Header --- */
+.mw-header {
+  position: relative;
+  z-index: 6;
+  padding: 0 var(--px);
+  margin-bottom: 2vw;
+  max-width: min(90vw, 760px);
+}
+
+.mw-tel {
+  display: block;
+  font-family: var(--tel);
+  font-size: clamp(20px, 2.8vw, 36px);
+  line-height: 1.1;
+  color: var(--terra);
+  margin-bottom: 4px;
+}
+
+.mw-title {
+  font-family: var(--script);
+  font-size: clamp(60px, 9.5vw, 120px);
+  line-height: 0.88;
+  color: var(--maroon);
+  font-weight: 400;
+  margin: 0;
+}
+
+.mw-tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(16px, 1.6vw, 22px);
+  color: var(--ink);
+  opacity: 0.85;
+  margin-top: 10px;
+}
+
+/* --- Asymmetric Memory Wall Canvas --- */
+.mw-wall {
+  position: relative;
+  width: 100%;
+  margin: 2vw 0 6vw;
+  min-height: 280vw;
+}
+
+/* --- Physical Memory Item --- */
+.mw-item {
+  position: absolute;
+  z-index: var(--z, 2);
+  left: var(--l, 0);
+  top: var(--t, 0);
+  width: var(--w, 50vw);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  opacity: 0;
+  transform: translateY(24px) rotate(var(--rot, 0deg));
+  transition: 
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.4s ease;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.mw-item.mw-revealed {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--rot, 0deg));
+}
+
+.mw-item:hover,
+.mw-item:focus-visible {
+  z-index: 25 !important;
+  transform: translateY(-4px) scale(1.02) rotate(calc(var(--rot, 0deg) * 0.4));
+}
+
+.mw-item:focus-visible .mw-photo-frame {
+  box-shadow: 0 0 0 3px var(--terra), 0 20px 45px rgba(59, 42, 32, 0.28);
+}
+
+/* Physical Photo Frame */
+.mw-photo-frame {
+  position: relative;
+  background: #fdfaf3;
+  padding: clamp(6px, 1vw, 14px);
+  border-radius: 2px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 12px 28px rgba(59, 42, 32, 0.16);
+  border: 1px solid rgba(201, 169, 122, 0.4);
+  transition: box-shadow 0.4s ease;
+}
+
+.mw-photo-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--ar, 4/3);
+  object-fit: cover;
+  object-position: var(--pos, 50% 50%);
+  background: #e9dec7;
+}
+
+.mw-item img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* --- DYNAMIC SIZE & TEXTURE FOR BLESSING NOTE SLIPS --- */
+.mw-item.is-text-note {
+  height: auto;
+  min-width: min(78vw, 300px);
+}
+
+.mw-item.is-text-note .mw-photo-frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  min-height: 120px;
+  padding: clamp(14px, 2.2vw, 22px);
+  background: var(--grain), #faf3e1;
+  border: 1px solid #d4be96;
+}
+
+.mw-note-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: left;
+}
+
+.mw-note-kicker {
+  margin: 0;
+  font-family: var(--tel);
+  font-size: 13px;
+  color: var(--terra);
+  letter-spacing: 0.04em;
+}
+
+.mw-note-text {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.35vw, 19px);
+  line-height: 1.5;
+  color: var(--ink);
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.mw-note-author {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--maroon);
+  text-align: right;
+  margin-top: 4px;
+  border-top: 1px dashed rgba(226, 167, 46, 0.45);
+  padding-top: 6px;
+}
+
+/* Dragging State */
+.mw-item.is-dragging {
+  cursor: grabbing;
+  z-index: 100 !important;
+  transition: transform 0.05s linear, filter 0.2s ease !important;
+  filter: drop-shadow(0 20px 35px rgba(59, 42, 32, 0.32));
+  transform: translateY(var(--dy, 0px)) translateX(var(--dx, 0px)) scale(1.05) rotate(var(--drag-rot, var(--rot, 0deg))) !important;
+}
+
+/* Physical Corner / Tape Treatments */
+.mw-tape-strip {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 28%;
+  height: 18px;
+  background: rgba(226, 167, 46, 0.42);
+  backdrop-filter: blur(1px);
+  border-left: 1px dashed rgba(255, 255, 255, 0.5);
+  border-right: 1px dashed rgba(255, 255, 255, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.mw-photo-corners::before,
+.mw-photo-corners::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: rgba(180, 90, 60, 0.55);
+  pointer-events: none;
+  z-index: 4;
+}
+.mw-photo-corners::before {
+  top: 4px;
+  left: 4px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.mw-photo-corners::after {
+  bottom: 4px;
+  right: 4px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* Handwritten Note Caption */
+.mw-caption-note {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(13px, 1.25vw, 17px);
+  line-height: 1.35;
+  color: var(--ink);
+  margin-top: 8px;
+  padding: 0 4px;
+  letter-spacing: 0.02em;
+}
+
+.mw-caption-side {
+  position: absolute;
+  top: 12%;
+  left: calc(100% + 14px);
+  width: max-content;
+  max-width: 180px;
+  margin-top: 0;
+  background: rgba(244, 234, 213, 0.88);
+  padding: 4px 8px;
+  border-left: 2px solid var(--terra);
+  backdrop-filter: blur(2px);
+}
+
+.mw-caption-meta {
+  display: block;
+  font-style: normal;
+  font-size: 0.78em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-top: 2px;
+}
+
+/* Fresh Memory Drop Animation */
+.mw-item.mw-newly-pinned {
+  animation: mwPinDrop 1s cubic-bezier(0.2, 1.2, 0.4, 1) forwards;
+}
+
+@keyframes mwPinDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(1.15) rotate(calc(var(--rot, 0deg) + 6deg));
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(var(--rot, 0deg));
+  }
+}
+
+/* Empty State */
+.mw-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12vh var(--px);
+  color: var(--ink);
+}
+
+.mw-empty-verse {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 32px);
+  color: var(--maroon);
+  max-width: 32ch;
+  line-height: 1.4;
+}
+
+.mw-empty-sub {
+  font-size: 16px;
+  margin-top: 10px;
+  color: var(--terra);
+  letter-spacing: 0.05em;
+}
+
+/* --- CHAPTER 2: Transition & "Captured by You" Invitation Slip --- */
+.mw-guest-chapter {
+  position: relative;
+  z-index: 10;
+  margin-top: 4vw;
+}
+
+.mw-transition-node {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3.5vw;
+}
+
+.mw-node-icon {
+  width: clamp(48px, 6vw, 76px);
+  height: auto;
+  opacity: 0.75;
+  filter: drop-shadow(0 4px 10px rgba(106, 30, 43, 0.12));
+}
+
+.mw-slipwrap {
+  width: min(92vw, 620px);
+  margin: 0 auto;
+  padding: 0 var(--px) 8vw;
+}
+
+.mw-guest-slip {
+  background: var(--grain), #faf3e3;
+  border: 1px solid #c9a97a;
+  border-radius: 4px;
+  padding: clamp(24px, 5vw, 42px);
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.04),
+    0 18px 48px rgba(59, 42, 32, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transform: rotate(-0.5deg);
+  position: relative;
+}
+
+.mw-guest-slip::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg);
+  width: 90px;
+  height: 22px;
+  background: rgba(226, 167, 46, 0.55);
+  border-left: 1px dashed rgba(255, 255, 255, 0.5);
+  border-right: 1px dashed rgba(255, 255, 255, 0.5);
+}
+
+.mw-slip-header {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.mw-slip-tel {
+  display: block;
+  font-family: var(--tel);
+  font-size: 18px;
+  color: var(--terra);
+}
+
+.mw-slip-title {
+  font-family: var(--script);
+  font-size: clamp(38px, 5vw, 54px);
+  font-weight: 400;
+  line-height: 0.95;
+  color: var(--maroon);
+  margin: 2px 0 6px;
+}
+
+.mw-slip-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.3vw, 17px);
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+/* Custom Slip Inputs */
+.mw-file-drop {
+  position: relative;
+  border: 1.5px dashed var(--terra);
+  border-radius: 8px;
+  background: rgba(255, 253, 246, 0.6);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.mw-file-drop:hover {
+  background: #fffdf6;
+  border-color: var(--maroon);
+}
+
+.mw-file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.mw-file-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  gap: 3px;
+}
+
+.mw-file-icon {
+  font-size: 18px;
+  color: var(--turm);
+}
+
+.mw-file-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--maroon);
+}
+
+.mw-file-hint {
+  font-size: 13px;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.mw-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.mw-field input,
+.mw-field select {
+  font-size: 17px;
+  padding: 10px 14px;
+  background: #fffdf6;
+  border: 1.5px solid #d4b58c;
+  border-radius: 6px;
+  width: 100%;
+  color: var(--ink);
+  font-family: var(--serif);
+  transition: border-color 0.3s;
+}
+
+.mw-field input:focus,
+.mw-field select:focus {
+  outline: none;
+  border-color: var(--maroon);
+}
+
+.mw-submit-btn {
+  background: var(--maroon);
+  color: var(--ivory);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 30px;
+  padding: 13px 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 14px rgba(106, 30, 43, 0.25);
+}
+
+.mw-submit-btn:hover {
+  background: #501620;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(106, 30, 43, 0.32);
+}
+
+/* --- Tactile Lightbox / Viewer --- */
+.mw-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vw;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.mw-viewer.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mw-viewer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 28, 20, 0.88);
+  backdrop-filter: blur(6px);
+}
+
+.mw-viewer-container {
+  position: relative;
+  z-index: 2;
+  max-width: min(92vw, 860px);
+  max-height: 90svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: mwZoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes mwZoomIn {
+  from { transform: scale(0.94); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.mw-viewer-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: var(--ivory);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 1;
+}
+
+.mw-viewer-photo-wrap {
+  background: #fdfaf3;
+  padding: clamp(8px, 1.2vw, 16px);
+  border-radius: 2px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+.mw-viewer-photo-wrap img {
+  display: block;
+  max-width: 100%;
+  max-height: 72svh;
+  object-fit: contain;
+}
+
+.mw-viewer-meta {
+  margin-top: 14px;
+  text-align: center;
+  color: var(--ivory);
+}
+
+.mw-viewer-cap {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.3;
+}
+
+.mw-viewer-by {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--turm);
+  margin-top: 4px;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN PROFILES
+   ========================================================= */
+
+@media (min-width: 700px) {
+  .mw-form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .mw-leaf {
+    width: 220px;
+    top: -2vw;
+    right: -2vw;
+  }
+  .mw-parrot {
+    width: 90px;
+    top: 24vw;
+  }
+}
+
+@media (min-width: 1100px) {
+  .moments-world {
+    padding-top: 5vw;
+  }
+  .mw-leaf {
+    width: min(15vw, 240px);
+    top: -2vw;
+    right: -1vw;
+  }
+  .mw-parrot {
+    width: 100px;
+    top: 18vw;
+    left: 4vw;
+  }
+  .mw-header {
+    margin-bottom: 1vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mw-item,
+  .mw-viewer-container,
+  .mw-viewer {
+    transition: none !important;
+    animation: none !important;
+  }
+  .mw-item:hover,
+  .mw-item:focus-visible {
+    transform: rotate(var(--rot, 0deg)) !important;
+  }
+}

@@ -1,0 +1,504 @@
+/* =========================================================
+   RSVP — WILL YOU JOIN US?
+   The Personal Invitation Threshold
+   ========================================================= */
+
+.rsvp-world {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12vw var(--px) 14vw;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(226, 167, 46, 0.08) 0%, transparent 65%),
+    radial-gradient(ellipse at 20% 80%, rgba(180, 90, 60, 0.06) 0%, transparent 60%),
+    transparent;
+}
+
+/* --- Environment Layers --- */
+.rs-env {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rs-env-diya {
+  position: absolute;
+  top: -4vw;
+  left: 2vw;
+  width: clamp(140px, 15vw, 240px);
+  opacity: 0.85;
+  filter: drop-shadow(0 4px 14px rgba(106, 30, 43, 0.16));
+  transition: filter 1.2s ease, transform 1.2s ease;
+}
+
+.rs-env-diya.lit-warmth {
+  filter: drop-shadow(0 0 24px rgba(226, 167, 46, 0.85)) drop-shadow(0 4px 14px rgba(106, 30, 43, 0.25));
+  transform: scale(1.03);
+}
+
+.rs-env-leaf {
+  position: absolute;
+  top: -3vw;
+  right: -6vw;
+  width: clamp(160px, 18vw, 300px);
+  opacity: 0.8;
+  transform: rotate(10deg);
+}
+
+.rs-env-parrot {
+  position: absolute;
+  top: 18vw;
+  right: 5vw;
+  width: clamp(65px, 6.5vw, 105px);
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 12px rgba(106, 30, 43, 0.15));
+}
+
+.rs-env-lotus {
+  position: absolute;
+  bottom: -4vw;
+  left: -3vw;
+  width: clamp(150px, 17vw, 250px);
+  opacity: 0.85;
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 6px 18px rgba(106, 30, 43, 0.12));
+}
+
+.rs-env-kolam {
+  position: absolute;
+  bottom: 5vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(70px, 9vw, 120px);
+  opacity: 0.25;
+}
+
+/* Scattered rice resting on paper */
+.rs-grain {
+  position: absolute;
+  width: 14px;
+  height: auto;
+  opacity: 0.65;
+}
+
+.rs-grain-1 { bottom: 18vw; left: 16vw; transform: rotate(18deg); }
+.rs-grain-2 { bottom: 12vw; right: 22vw; transform: rotate(-24deg); }
+.rs-grain-3 { bottom: 26vw; right: 14vw; transform: rotate(45deg); }
+
+/* --- Central Stage & Typography Hierarchy --- */
+.rs-stage {
+  position: relative;
+  z-index: 5;
+  width: min(92vw, 680px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rs-header {
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.rs-tel {
+  display: block;
+  font-family: var(--tel);
+  font-size: clamp(16px, 1.8vw, 22px);
+  color: var(--terra);
+  margin-bottom: 6px;
+}
+
+.rs-personal-lead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(23px, 3.2vw, 36px);
+  line-height: 1.25;
+  color: var(--maroon);
+  font-weight: 400;
+  max-width: 24ch;
+  margin: 0 auto;
+}
+
+.rs-question {
+  font-family: var(--script);
+  font-size: clamp(54px, 7.8vw, 92px);
+  line-height: 0.95;
+  color: var(--maroon);
+  font-weight: 400;
+  margin-top: 8px;
+}
+
+/* --- The Two Physical Invitation Slips --- */
+.rs-choices-stage {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  perspective: 1000px;
+  transition: opacity 0.6s ease;
+}
+
+.rs-choice-slip {
+  position: relative;
+  background: var(--grain), #faf3e1;
+  border: 1px solid #d4be96;
+  border-radius: 4px;
+  padding: clamp(22px, 3.5vw, 32px) clamp(20px, 3vw, 28px);
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.04),
+    0 16px 40px rgba(59, 42, 32, 0.12);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s;
+}
+
+.rs-slip-yes {
+  transform: rotate(-1.2deg);
+}
+
+.rs-slip-spirit {
+  transform: rotate(1.4deg);
+}
+
+.rs-choice-slip:hover,
+.rs-choice-slip:focus-visible {
+  transform: translateY(-5px) rotate(0deg) scale(1.02);
+  border-color: var(--maroon);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.06),
+    0 24px 50px rgba(59, 42, 32, 0.2);
+}
+
+.rs-choice-slip:focus-visible {
+  outline: 2px dashed var(--terra);
+  outline-offset: 4px;
+}
+
+.rs-slip-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-0.5deg);
+  width: 80px;
+  height: 20px;
+  background: rgba(226, 167, 46, 0.5);
+  border-left: 1px dashed rgba(255, 255, 255, 0.6);
+  border-right: 1px dashed rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.rs-slip-stamp {
+  font-size: 18px;
+  color: var(--turm);
+  margin-bottom: 4px;
+}
+
+.rs-slip-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(20px, 2.2vw, 25px);
+  color: var(--maroon);
+  letter-spacing: 0.02em;
+}
+
+.rs-slip-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.4vw, 17px);
+  color: var(--ink);
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+/* --- Unfolded Details Form --- */
+.rs-unfolded-panel {
+  width: 100%;
+  animation: rsUnfoldIn 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+@keyframes rsUnfoldIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.rs-unfolded-slip {
+  position: relative;
+  background: var(--grain), #faf3e1;
+  border: 1px solid #d4be96;
+  border-radius: 4px;
+  padding: clamp(26px, 4.5vw, 42px);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.04),
+    0 20px 48px rgba(59, 42, 32, 0.15);
+  transform: rotate(-0.4deg);
+}
+
+.rs-panel-lead {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rs-panel-note {
+  display: block;
+  font-family: var(--script);
+  font-size: clamp(34px, 4.8vw, 48px);
+  line-height: 1;
+  color: var(--maroon);
+}
+
+.rs-panel-instruction {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.3vw, 17px);
+  color: var(--ink);
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+.rs-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rs-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rs-label {
+  font-family: var(--serif);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--terra);
+  font-weight: 600;
+}
+
+.rs-opt {
+  text-transform: none;
+  font-style: italic;
+  font-weight: normal;
+  opacity: 0.8;
+}
+
+.rs-field input {
+  font-family: var(--serif);
+  font-size: 17px;
+  padding: 10px 14px;
+  background: #fffdf9;
+  border: 1.5px solid #d8c298;
+  border-radius: 6px;
+  color: var(--ink);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.rs-field input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: var(--maroon);
+}
+
+.rs-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.rs-confirm-btn {
+  background: var(--maroon);
+  color: var(--ivory);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border: none;
+  border-radius: 40px;
+  padding: 13px 36px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 16px rgba(106, 30, 43, 0.25);
+}
+
+.rs-confirm-btn:hover {
+  background: #501620;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(106, 30, 43, 0.35);
+}
+
+.rs-btn-sparkle {
+  color: var(--turm);
+}
+
+/* --- Resolutions --- */
+.rs-resolution,
+.rs-spirit-resolution {
+  text-align: center;
+  padding: 30px 14px;
+  animation: rsFadeUp 0.9s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+@keyframes rsFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rs-res-knot {
+  width: 44px;
+  margin: 0 auto 12px;
+  opacity: 0.85;
+}
+
+.rs-res-knot img {
+  width: 100%;
+  height: auto;
+}
+
+.rs-res-lead,
+.rs-spirit-lead {
+  font-family: var(--script);
+  font-size: clamp(40px, 5.5vw, 62px);
+  font-weight: 400;
+  color: var(--maroon);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.rs-res-sub,
+.rs-spirit-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(16px, 1.6vw, 21px);
+  color: var(--ink);
+  opacity: 0.88;
+  max-width: 32ch;
+  margin: 0 auto;
+}
+
+.rs-spirit-cta {
+  margin-top: 22px;
+}
+
+.rs-blessing-bridge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--maroon);
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 19px;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--terra);
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s, transform 0.3s;
+}
+
+.rs-blessing-bridge:hover {
+  color: var(--terra);
+  border-color: var(--maroon);
+  transform: translateX(3px);
+}
+
+.rs-share-wrap {
+  margin-top: 32px;
+}
+
+.rs-share-link {
+  background: transparent;
+  border: none;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--terra);
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.rs-share-link:hover {
+  opacity: 1;
+}
+
+/* --- Responsive Layout --- */
+@media (min-width: 650px) {
+  .rs-choices-stage {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 699px) {
+  .rs-env-diya,
+  .rs-env-leaf {
+    display: none;
+  }
+  .rs-env-parrot {
+    top: 6vw;
+    right: 2vw;
+    width: 55px;
+  }
+  .rs-env-lotus {
+    bottom: -15px;
+    left: -6vw;
+    width: 120px;
+  }
+  .rs-grain-1, .rs-grain-2, .rs-grain-3 {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-choice-slip,
+  .rs-confirm-btn,
+  .rs-unfolded-panel,
+  .rs-resolution,
+  .rs-spirit-resolution {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Petal Shower within RSVP */
+.fall {
+  position: fixed;
+  top: -40px;
+  z-index: 95;
+  pointer-events: none;
+  user-select: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  10% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), 115vh) rotate(var(--r));
+  }
+}

@@ -1,0 +1,351 @@
+/* =========================================================
+   CAPTURED BY YOU — Aesthetic Physical Slip
+   ========================================================= */
+
+.mw-guest-chapter {
+  position: relative;
+  z-index: 10;
+  margin-top: 6vw;
+  padding-bottom: 8vw;
+}
+
+/* --- Environmental Assets Framed Around the Chapter --- */
+.cby-env-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+/* Marigold thoranam draped across the top */
+.cby-thoranam {
+  position: absolute;
+  top: -3.5vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(94vw, 760px);
+  opacity: 0.85;
+}
+
+/* Lotus cluster peeking from the bottom-left */
+.cby-lotus {
+  position: absolute;
+  bottom: -2vw;
+  left: -4vw;
+  width: clamp(140px, 16vw, 240px);
+  opacity: 0.8;
+  transform: rotate(-6deg);
+}
+
+/* Sacred knot floating subtly on the right */
+.cby-knot {
+  position: absolute;
+  top: 14vw;
+  right: -2vw;
+  width: clamp(55px, 6vw, 95px);
+  opacity: 0.35;
+  filter: drop-shadow(0 2px 8px rgba(106, 30, 43, 0.15));
+}
+
+/* --- Slip Wrapper & Card Architecture --- */
+.cby-wrap {
+  position: relative;
+  z-index: 5;
+  width: min(92vw, 640px);
+  margin: 0 auto;
+  padding: 0 var(--px);
+}
+
+.cby-slip {
+  position: relative;
+  background: var(--grain), #fdf8ee;
+  border: 1px solid #d8be96;
+  border-radius: 4px;
+  padding: clamp(26px, 5vw, 44px);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.04),
+    0 22px 50px rgba(59, 42, 32, 0.13);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transform: rotate(-0.5deg);
+  transition: transform 0.4s ease;
+}
+
+.cby-slip:hover {
+  transform: rotate(0deg);
+}
+
+/* Top Washed Turmeric / Gold Tape */
+.cby-tape {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg);
+  width: 95px;
+  height: 22px;
+  background: rgba(226, 167, 46, 0.55);
+  backdrop-filter: blur(1px);
+  border-left: 1px dashed rgba(255, 255, 255, 0.6);
+  border-right: 1px dashed rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+}
+
+/* Header & Typography */
+.cby-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cby-kolam-badge {
+  width: clamp(34px, 4vw, 46px);
+  height: auto;
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.cby-tel {
+  font-family: var(--tel);
+  font-size: clamp(16px, 2vw, 22px);
+  color: var(--terra);
+  line-height: 1.2;
+}
+
+.cby-title {
+  font-family: var(--script);
+  font-size: clamp(40px, 5.5vw, 56px);
+  font-weight: 400;
+  line-height: 0.95;
+  color: var(--maroon);
+  margin: 2px 0 6px;
+}
+
+.cby-desc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(14px, 1.3vw, 17px);
+  color: var(--ink);
+  opacity: 0.82;
+  margin-bottom: 8px;
+}
+
+.cby-divider {
+  width: clamp(160px, 30vw, 240px);
+  height: auto;
+  opacity: 0.75;
+}
+
+/* --- Upload Area: Tactile Polaroid Frame --- */
+.cby-upload-zone {
+  position: relative;
+  background: #faf3e3;
+  border: 1.5px dashed #caa26c;
+  border-radius: 6px;
+  padding: 16px;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.cby-upload-zone:hover {
+  background: #fffdf9;
+  border-color: var(--maroon);
+  box-shadow: 0 4px 14px rgba(106, 30, 43, 0.08);
+}
+
+.cby-file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.cby-upload-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  pointer-events: none;
+}
+
+.cby-preview-box {
+  width: 62px;
+  height: 62px;
+  flex-shrink: 0;
+  background: #fdfaf3;
+  border: 1px solid #d8c298;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.cby-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cby-plus-icon {
+  font-size: 20px;
+  color: var(--turm);
+}
+
+.cby-upload-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.cby-upload-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--maroon);
+  line-height: 1.25;
+}
+
+.cby-upload-sub {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink);
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* --- Form Fields --- */
+.cby-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cby-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.cby-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cby-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--serif);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--terra);
+  font-weight: 600;
+}
+
+.cby-pin-icon {
+  width: 13px;
+  height: auto;
+  opacity: 0.85;
+}
+
+.cby-field input,
+.cby-field select {
+  font-family: var(--serif);
+  font-size: 16px;
+  padding: 10px 14px;
+  background: #fffdf9;
+  border: 1.5px solid #d8c298;
+  border-radius: 6px;
+  color: var(--ink);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.cby-field input:focus,
+.cby-field select:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: var(--maroon);
+}
+
+/* --- Submit Action --- */
+.cby-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.cby-submit-btn {
+  background: var(--maroon);
+  color: var(--ivory);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 32px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 16px rgba(106, 30, 43, 0.25);
+}
+
+.cby-submit-btn:hover {
+  background: #501620;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(106, 30, 43, 0.34);
+}
+
+.cby-btn-sparkle {
+  color: var(--turm);
+  font-size: 16px;
+}
+
+/* Watermark */
+.cby-watermark {
+  position: absolute;
+  bottom: 8px;
+  right: 14px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--terra);
+  opacity: 0.45;
+}
+
+/* --- Responsive Adjustments --- */
+@media (min-width: 600px) {
+  .cby-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .cby-lotus {
+    left: -2vw;
+    width: 220px;
+  }
+  .cby-knot {
+    right: 1vw;
+    width: 80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cby-slip,
+  .cby-submit-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+}
