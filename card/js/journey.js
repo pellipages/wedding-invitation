@@ -86,7 +86,7 @@ const pin='<svg class="pin" viewBox="0 0 20 28" fill="currentColor" aria-hidden=
 function openWorld(k,push){
  const e=EVENTS.find(x=>x.k==k);if(!e)return;
  if(!wcur)jy=push===false&&!scrollY?sec.offsetTop:scrollY;wcur=e;clearInterval(tick);
- const t0=new Date(e.when),t1=new Date(t0.getTime()+(e.mins||120)*6e4),title=`${e.n} — Rukmini & Krishna`;
+ const t0=new Date(e.when),t1=new Date(t0.getTime()+(e.mins||120)*6e4),title=`${e.n} — Harika & Prem`;
  const gcal=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${enc(title)}&dates=${ics(t0)}/${ics(t1)}&details=${enc(e.desc||'')}&location=${enc(e.venue||'')}`;
  const head=`<div class="tel">${esc(e.t)}</div><h3>${esc(e.n)}</h3>`;
  const info=`<p class="dt">${esc(e.date)} · ${esc(e.time)}</p><p class="dsc">${esc(e.desc)}</p><p class="dsc">${pin}${esc(e.venue)}</p>
@@ -100,7 +100,7 @@ function openWorld(k,push){
  world.innerHTML=`<div class="wr">${L(WORLD_ENV[e.k])}${L(e.extras)}<button class="back btn alt" data-back>← Continue the Wedding Journey</button><div class="in">${inner}</div></div>`;flush();
  const cd=()=>{const v=left(t0);world.querySelectorAll('[data-c]').forEach(b=>b.textContent=+b.dataset.c?pad(v[b.dataset.c]):v[0])};cd();tick=setInterval(cd,1000);
  world.querySelector('[data-back]').onclick=()=>closeWorld();
- world.querySelector('[data-ics]').onclick=()=>{const s=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Rukmini & Krishna//EN','BEGIN:VEVENT',`UID:${e.k}@rukmini-krishna`,`DTSTAMP:${ics(new Date())}`,`DTSTART:${ics(t0)}`,`DTEND:${ics(t1)}`,`SUMMARY:${title}`,`DESCRIPTION:${(e.desc||'').replace(/\n/g,' ')}`,`LOCATION:${e.venue||''}`,'END:VEVENT','END:VCALENDAR'].join('\r\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'text/calendar'}));a.download=e.k+'.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)};
+ world.querySelector('[data-ics]').onclick=()=>{const s=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Harika & Prem//EN','BEGIN:VEVENT',`UID:${e.k}@harika-prem`,`DTSTAMP:${ics(new Date())}`,`DTSTART:${ics(t0)}`,`DTEND:${ics(t1)}`,`SUMMARY:${title}`,`DESCRIPTION:${(e.desc||'').replace(/\n/g,' ')}`,`LOCATION:${e.venue||''}`,'END:VEVENT','END:VCALENDAR'].join('\r\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'text/calendar'}));a.download=e.k+'.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)};
  if(push!==false)history.pushState({w:1},'','#/event/'+e.k);
  document.documentElement.style.overflow='hidden';world.scrollTop=0;
  requestAnimationFrame(()=>{world.classList.add('on');world.querySelector('[data-back]').focus({preventScroll:true})})}

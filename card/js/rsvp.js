@@ -147,7 +147,7 @@
   if (shareBtn) {
     shareBtn.addEventListener('click', () => {
       const shareData = {
-        title: 'Rukmini & Krishna — Wedding',
+        title: 'Harika & Prem — Wedding',
         text: 'Our celebration is incomplete without you. Will you join us?',
         url: window.top.location.href
       };
