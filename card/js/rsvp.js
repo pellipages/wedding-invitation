@@ -149,13 +149,13 @@
       const shareData = {
         title: 'Rukmini & Krishna — Wedding',
         text: 'Our celebration is incomplete without you. Will you join us?',
-        url: window.location.href
+        url: window.top.location.href
       };
 
       if (navigator.share) {
         navigator.share(shareData).catch(() => {});
       } else if (navigator.clipboard) {
-        navigator.clipboard.writeText(window.location.href).then(() => {
+        navigator.clipboard.writeText(window.top.location.href).then(() => {
           shareBtn.textContent = 'Link copied to clipboard ✓';
           setTimeout(() => {
             shareBtn.innerHTML = '<span>Share the invitation</span> <span aria-hidden="true">↗</span>';
