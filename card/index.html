@@ -85,7 +85,7 @@
 
   <div class="cp-text">
     <div class="tnames">హారిక &amp; ప్రేమ్</div>
-    <h1 class="names">Harika<br>&amp; Prem</h1>
+    <h1 class="names">Harika<br>&amp; Prem </h1>
     <p class="fam">
       <i>Harika Jillalla</i><br>
       &amp; <i>Prem Sai Reddy Chandra</i>
@@ -417,6 +417,11 @@
           </div>
         </div>
 
+        <div class="rs-hp" aria-hidden="true">
+          <label for="rweb">Leave this field empty</label>
+          <input id="rweb" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="rs-actions">
           <button id="rsConfirmBtn" class="rs-confirm-btn" type="button">
             <span>Confirm my RSVP</span>
@@ -425,6 +430,8 @@
         </div>
       </div>
     </div>
+
+    <p id="rsError" class="rs-error" role="alert" hidden></p>
 
     <div class="rs-resolution" id="rsConfirmedMessage" style="display: none;" aria-live="polite">
       <div class="rs-res-knot" aria-hidden="true">

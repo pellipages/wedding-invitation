@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#faf3e1">
+<title>Harika & Prem — RSVP Book</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lakki+Reddy&family=Pinyon+Script&display=swap');
+
+:root {
+  --paper: #faf3e1;
+  --paper-deep: #f3e5c7;
+  --white: #fffdf8;
+  --maroon: #501620;
+  --maroon-soft: #6a1e2b;
+  --terra: #b45a3c;
+  --gold: #e2a72e;
+  --ink: #3b2a20;
+  --muted: #806d5d;
+  --line: #d8c298;
+  --green: #4b5e3a;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --script: "Pinyon Script", cursive;
+  --tel: "Lakki Reddy", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--paper);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(226,167,46,.09), transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(180,90,60,.07), transparent 32%),
+    var(--paper);
+  overflow-x: hidden;
+}
+
+/* -------------------------------------------------------
+   Decorative environment
+------------------------------------------------------- */
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .20;
+  background-image:
+    radial-gradient(rgba(59,42,32,.12) .55px, transparent .55px);
+  background-size: 5px 5px;
+  mix-blend-mode: multiply;
+}
+
+.decor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+.decor-left {
+  left: -45px;
+  bottom: -30px;
+  width: clamp(180px, 22vw, 310px);
+  opacity: .70;
+  transform: rotate(-6deg);
+}
+
+.decor-right {
+  right: -55px;
+  top: -25px;
+  width: clamp(170px, 21vw, 290px);
+  opacity: .62;
+  transform: rotate(8deg);
+}
+
+.decor-kolam {
+  left: 50%;
+  bottom: 26px;
+  width: 90px;
+  opacity: .12;
+  transform: translateX(-50%);
+}
+
+/* -------------------------------------------------------
+   Access screen
+------------------------------------------------------- */
+
+.access {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px 20px;
+}
+
+.access-card {
+  width: min(92vw, 530px);
+  padding: clamp(38px, 7vw, 62px) clamp(26px, 7vw, 64px);
+  text-align: center;
+  background: rgba(255,253,248,.88);
+  border: 1px solid var(--line);
+  box-shadow:
+    0 3px 10px rgba(59,42,32,.05),
+    0 28px 70px rgba(59,42,32,.13);
+  position: relative;
+}
+
+.access-card::before,
+.access-card::after {
+  content: "✦";
+  position: absolute;
+  color: var(--gold);
+  font-size: 18px;
+  opacity: .8;
+}
+
+.access-card::before {
+  top: 20px;
+  left: 22px;
+}
+
+.access-card::after {
+  right: 22px;
+  bottom: 20px;
+}
+
+.kicker {
+  display: block;
+  color: var(--terra);
+  font-family: var(--tel);
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.title {
+  margin: 0;
+  color: var(--maroon);
+  font-family: var(--script);
+  font-size: clamp(60px, 12vw, 92px);
+  line-height: .85;
+  font-weight: 400;
+}
+
+.access-subtitle {
+  max-width: 29ch;
+  margin: 24px auto 30px;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.35;
+  font-style: italic;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  color: var(--maroon);
+  font-size: 15px;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  font: 17px var(--serif);
+  padding: 13px 15px;
+  border-radius: 2px;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--terra);
+  box-shadow: 0 0 0 3px rgba(180,90,60,.09);
+}
+
+.primary {
+  width: 100%;
+  margin-top: 14px;
+  border: 1px solid var(--maroon);
+  background: var(--maroon);
+  color: #fffaf0;
+  padding: 13px 18px;
+  font: 500 18px var(--serif);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.primary:hover {
+  background: var(--maroon-soft);
+  transform: translateY(-1px);
+}
+
+.message {
+  margin: 14px 0 0;
+  color: #a02626;
+  font-style: italic;
+  font-size: 15px;
+}
+
+.message[hidden] {
+  display: none;
+}
+
+/* -------------------------------------------------------
+   Dashboard
+------------------------------------------------------- */
+
+.dashboard {
+  position: relative;
+  z-index: 2;
+  width: min(1180px, 94vw);
+  margin: 0 auto;
+  padding: 54px 0 80px;
+}
+
+.dashboard-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 34px;
+}
+
+.eyebrow {
+  margin: 0 0 3px;
+  color: var(--terra);
+  font-family: var(--tel);
+  font-size: 18px;
+}
+
+.dashboard-title {
+  margin: 0;
+  color: var(--maroon);
+  font-family: var(--script);
+  font-size: clamp(58px, 8vw, 86px);
+  line-height: .85;
+  font-weight: 400;
+}
+
+.dashboard-note {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  font-style: italic;
+}
+
+.head-actions {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.secondary {
+  border: 1px solid var(--line);
+  background: rgba(255,253,248,.8);
+  color: var(--maroon);
+  padding: 10px 15px;
+  font: 16px var(--serif);
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.secondary:hover {
+  border-color: var(--maroon);
+}
+
+/* Stats */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.stat {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 23px;
+  background: rgba(255,253,248,.82);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 28px rgba(59,42,32,.06);
+}
+
+.stat::after {
+  content: "✦";
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  color: var(--gold);
+  opacity: .65;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.stat-value {
+  margin-top: 2px;
+  color: var(--maroon);
+  font-size: clamp(38px, 5vw, 52px);
+  line-height: 1;
+}
+
+/* Toolbar */
+
+.content-card {
+  background: rgba(255,253,248,.84);
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 45px rgba(59,42,32,.07);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px;
+  border-bottom: 1px solid #e5d9bd;
+}
+
+.search {
+  flex: 1;
+  max-width: 390px;
+}
+
+.filters {
+  display: flex;
+  gap: 5px;
+}
+
+.filter {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px 12px;
+  font: 15px var(--serif);
+  cursor: pointer;
+}
+
+.filter.active {
+  border-color: var(--line);
+  background: var(--paper);
+  color: var(--maroon);
+}
+
+/* Table */
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 14px 17px;
+  color: var(--muted);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 16px 17px;
+  border-top: 1px solid #eee6d7;
+  vertical-align: top;
+  font-size: 17px;
+}
+
+.name {
+  color: var(--maroon);
+  font-weight: 600;
+}
+
+.note {
+  max-width: 280px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.time {
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 2px 7px;
+  border: 1px solid #d5a45b;
+  color: #93601e;
+  font-size: 12px;
+  border-radius: 99px;
+  vertical-align: middle;
+}
+
+.empty {
+  padding: 55px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 18px;
+}
+
+/* Footer */
+
+.footer {
+  padding-top: 30px;
+  text-align: center;
+  color: #9a8775;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Hidden */
+[hidden] {
+  display: none !important;
+}
+
+/* Mobile */
+
+@media (max-width: 720px) {
+  .dashboard {
+    width: min(94vw, 560px);
+    padding-top: 32px;
+  }
+
+  .dashboard-head {
+    display: block;
+  }
+
+  .head-actions {
+    margin-top: 22px;
+  }
+
+  .head-actions button {
+    flex: 1;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .stat {
+    padding: 17px 19px;
+  }
+
+  .stat-value {
+    font-size: 40px;
+  }
+
+  .toolbar {
+    display: block;
+  }
+
+  .search {
+    max-width: none;
+  }
+
+  .filters {
+    margin-top: 10px;
+    overflow-x: auto;
+  }
+
+  .filter {
+    white-space: nowrap;
+  }
+
+  table,
+  thead,
+  tbody,
+  tr,
+  td {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    padding: 16px 17px;
+    border-top: 1px solid #eee6d7;
+  }
+
+  td {
+    padding: 2px 0;
+    border: 0;
+  }
+
+  td:nth-child(2)::before {
+    content: "Guests · ";
+    color: var(--muted);
+  }
+
+  td:nth-child(3)::before {
+    content: "Note · ";
+    color: var(--muted);
+  }
+
+  td:nth-child(4) {
+    margin-top: 6px;
+  }
+
+  .note {
+    max-width: none;
+  }
+
+  .time {
+    white-space: normal;
+    font-size: 13px;
+  }
+
+  .decor-left {
+    width: 180px;
+    left: -65px;
+  }
+
+  .decor-right {
+    width: 170px;
+    right: -65px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <img class="decor decor-left" src="/assets/lotus-left.png" alt="" aria-hidden="true">
+  <img class="decor decor-right" src="/assets/lotus-right.png" alt="" aria-hidden="true">
+  <img class="decor decor-kolam" src="/assets/kolam-red.png" alt="" aria-hidden="true">
+
+  <!-- ACCESS -->
+  <main class="access" id="access">
+    <section class="access-card">
+      <span class="kicker">Harika &amp; Prem</span>
+      <h1 class="title">RSVP Book</h1>
+
+      <p class="access-subtitle">
+        A private little space to keep track of everyone
+        who will be celebrating with you.
+      </p>
+
+      <label class="field-label" for="token">
+        Private access key
+      </label>
+
+      <input
+        id="token"
+        type="password"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Enter your access key"
+      >
+
+      <button class="primary" id="login">
+        Open RSVP Book
+      </button>
+
+      <p class="message" id="loginError" hidden></p>
+    </section>
+  </main>
+
+  <!-- DASHBOARD -->
+  <main class="dashboard" id="dashboard" hidden>
+
+    <header class="dashboard-head">
+      <div>
+        <p class="eyebrow">A little record of your celebration</p>
+        <h1 class="dashboard-title">RSVP Book</h1>
+        <p class="dashboard-note">
+          Every yes, every note, every person who'll be there.
+        </p>
+      </div>
+
+      <div class="head-actions">
+        <button class="secondary" id="refresh">Refresh</button>
+        <button class="secondary" id="csv">Download CSV</button>
+        <button class="secondary" id="logout">Lock</button>
+      </div>
+    </header>
+
+    <section class="stats" aria-label="RSVP summary">
+      <div class="stat">
+        <div class="stat-label">Responses</div>
+        <div class="stat-value" id="statResponses">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Guests joining you</div>
+        <div class="stat-value" id="statGuests">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">In spirit</div>
+        <div class="stat-value" id="statSpirit">—</div>
+      </div>
+    </section>
+
+    <section class="content-card">
+
+      <div class="toolbar">
+        <input
+          class="search"
+          id="search"
+          type="search"
+          placeholder="Search names or notes…"
+          autocomplete="off"
+        >
+
+        <div class="filters" aria-label="Filter responses">
+          <button class="filter active" data-filter="attending">Attending</button>
+          <button class="filter" data-filter="in_spirit">In spirit</button>
+          <button class="filter" data-filter="all">All</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Guests</th>
+              <th>Note</th>
+              <th>Submitted</th>
+            </tr>
+          </thead>
+
+          <tbody id="rows"></tbody>
+        </table>
+
+        <div class="empty" id="empty" hidden>
+          No responses to show yet.
+        </div>
+      </div>
+
+    </section>
+
+    <p class="footer">
+      Harika &amp; Prem · Private RSVP Book
+    </p>
+
+  </main>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+
+  let token = '';
+  let data = [];
+  let currentFilter = 'attending';
+
+  function showLoginError(message) {
+    $('loginError').textContent = message;
+    $('loginError').hidden = false;
+  }
+
+  function clearLoginError() {
+    $('loginError').hidden = true;
+    $('loginError').textContent = '';
+  }
+
+  async function request(path = '') {
+    const response = await fetch('/api/rsvps' + path, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token
+      },
+      cache: 'no-store',
+      credentials: 'omit'
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error('That access key is not correct.');
+      }
+
+      if (response.status === 429) {
+        throw new Error('Too many attempts. Please wait a little and try again.');
+      }
+
+      throw new Error('We could not open the RSVP book right now.');
+    }
+
+    return response;
+  }
+
+  async function load() {
+    const response = await request();
+    const payload = await response.json();
+
+    if (!payload.ok || !Array.isArray(payload.rsvps)) {
+      throw new Error('The RSVP response was not in the expected format.');
+    }
+
+    data = payload.rsvps;
+
+    $('statResponses').textContent = payload.stats.responses;
+    $('statGuests').textContent = payload.stats.total_guests;
+    $('statSpirit').textContent = payload.stats.in_spirit;
+
+    render();
+  }
+
+  function formatTime(value) {
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+      return '—';
+    }
+
+    return date.toLocaleString([], {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    });
+  }
+
+  function render() {
+    const query = $('search').value.trim().toLowerCase();
+
+    const filtered = data.filter(item => {
+      if (currentFilter !== 'all' && item.status !== currentFilter) {
+        return false;
+      }
+
+      if (!query) return true;
+
+      return (
+        String(item.name || '').toLowerCase().includes(query) ||
+        String(item.note || '').toLowerCase().includes(query)
+      );
+    });
+
+    const tbody = $('rows');
+    tbody.replaceChildren();
+
+    $('empty').hidden = filtered.length !== 0;
+
+    for (const item of filtered) {
+      const row = tbody.insertRow();
+
+      const nameCell = row.insertCell();
+      const guestsCell = row.insertCell();
+      const noteCell = row.insertCell();
+      const timeCell = row.insertCell();
+
+      const name = document.createElement('span');
+      name.className = 'name';
+      name.textContent = item.name || 'In spirit';
+
+      nameCell.appendChild(name);
+
+      if (item.possible_duplicate) {
+        const duplicate = document.createElement('span');
+        duplicate.className = 'badge';
+        duplicate.textContent = 'possible duplicate';
+        nameCell.appendChild(duplicate);
+      }
+
+      guestsCell.textContent =
+        item.status === 'in_spirit' ? '—' : String(item.guests);
+
+      noteCell.className = 'note';
+      noteCell.textContent = item.note || '—';
+
+      timeCell.className = 'time';
+      timeCell.textContent = formatTime(item.created_at);
+    }
+  }
+
+  $('login').addEventListener('click', async () => {
+    clearLoginError();
+
+    const value = $('token').value.trim();
+
+    if (!value) {
+      showLoginError('Please enter your access key.');
+      return;
+    }
+
+    token = value;
+    $('login').disabled = true;
+
+    try {
+      await load();
+
+      $('token').value = '';
+      $('access').hidden = true;
+      $('dashboard').hidden = false;
+    } catch (error) {
+      token = '';
+      showLoginError(error.message);
+    } finally {
+      $('login').disabled = false;
+    }
+  });
+
+  $('token').addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+      $('login').click();
+    }
+  });
+
+  $('refresh').addEventListener('click', async () => {
+    $('refresh').disabled = true;
+
+    try {
+      await load();
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      $('refresh').disabled = false;
+    }
+  });
+
+  $('search').addEventListener('input', render);
+
+  document.querySelectorAll('.filter').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.filter').forEach(b => {
+        b.classList.remove('active');
+      });
+
+      button.classList.add('active');
+      currentFilter = button.dataset.filter;
+      render();
+    });
+  });
+
+  $('csv').addEventListener('click', async () => {
+    try {
+      const response = await request('?format=csv');
+      const blob = await response.blob();
+
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+
+      anchor.href = url;
+      anchor.download = 'harika-prem-rsvps.csv';
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (error) {
+      alert(error.message);
+    }
+  });
+
+  $('logout').addEventListener('click', () => {
+    token = '';
+    data = [];
+    $('dashboard').hidden = true;
+    $('access').hidden = false;
+    $('token').value = '';
+    clearLoginError();
+    $('token').focus();
+  });
+})();
+</script>
+</body>
+</html>
