@@ -223,7 +223,6 @@
   width: 28%;
   height: 18px;
   background: rgba(226, 167, 46, 0.42);
-  backdrop-filter: blur(1px);
   border-left: 1px dashed rgba(255, 255, 255, 0.5);
   border-right: 1px dashed rgba(255, 255, 255, 0.5);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -277,7 +276,6 @@
   background: rgba(244, 234, 213, 0.88);
   padding: 4px 8px;
   border-left: 2px solid var(--terra);
-  backdrop-filter: blur(2px);
 }
 
 .mw-caption-meta {

@@ -11,10 +11,7 @@
 
     transform-origin: center;
 
-    will-change:
-        opacity,
-        transform,
-        filter;
+    will-change: opacity, transform;
 }
 
 

@@ -44,10 +44,6 @@ function setupHero() {
             1 - progress * 0.025;
 
 
-        const blur =
-            progress * 3;
-
-
         hero.style.opacity =
             opacity;
 
@@ -56,12 +52,6 @@ function setupHero() {
             "scale(" +
             scale +
             ")";
-
-
-        hero.style.filter =
-            "blur(" +
-            blur +
-            "px)";
 
     }
 
