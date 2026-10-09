@@ -344,7 +344,7 @@
         if (fileTxt) fileTxt.textContent = 'Choose a photograph or video';
 
         if (typeof rain === 'function') {
-          rain('petal.png', 12, 22, 4);
+          rain('petal.webp', 12, 22, 4);
         }
 
         const allItems = wall.querySelectorAll('.mw-item');

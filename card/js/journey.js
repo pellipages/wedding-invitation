@@ -14,12 +14,12 @@ const prof=list.map((_,i)=>i==N-1?'pF':SEQ[(i+(i/5|0))%5]);   /* never the same 
 
 /* ---------- environment per profile (layer syntax from core.js: mobile | tablet | desktop) ---------- */
 const DEC={
- pA:['lotus-cluster.png|x|w:30vw;l:-6vw;b:-1%;z:1|w:min(24vw,380px);l:-3vw;b:2%;z:1','temple-parrot.png|w:20vw;r:3vw;t:5%;z:5|w:14vw;r:5vw|w:min(9vw,150px);r:5vw;t:8%;z:5'],
- pB: ['banana-leaves-corner.png|w:40vw;r:-16vw;t:3%;z:1;rot:-8deg|w:34vw;r:-8vw;l:auto;rot:-8deg|w:min(24vw,360px);r:-6vw;l:auto;t:-3%;z:1;rot:-6deg', 'temple-parrot.png|x|x|w:min(7vw,110px);r:9vw;b:9%;z:5'],
- pC:['lotus-1.png|w:40vw;l:-10vw;b:1%;z:1|w:30vw;l:-6vw|w:min(22vw,340px);l:-4vw;b:-3%;z:1'],
- pD:['banana-leaves-corner.png|x|w:28vw;r:-10vw;t:6%;z:1;f:1|w:min(16vw,250px);r:-6vw;t:-5%;z:1;f:1','temple-parrot.png|x|x|w:min(7.5vw,120px);r:6vw;b:6%;z:5'],
- pE:['lotus-2.png|w:36vw;r:-8vw;b:0;z:1|w:28vw|w:min(17vw,270px);r:-4vw;b:-2%;z:1','temple-parrot.png|x|w:12vw;l:3vw;t:5%;z:5|w:min(8vw,130px);l:5vw;t:6%;z:5'],
- pF:['lotus-cluster.png|w:44vw;l:-14vw;b:0;z:1|w:32vw|w:min(24vw,380px);l:-4vw;b:-1%;z:1','lotus-2.png|w:38vw;r:-12vw;b:0;z:1|w:28vw|w:min(21vw,340px);r:-3vw;b:0;z:1','temple-parrot.png|w:18vw;l:4vw;t:2%;z:5|w:12vw|w:min(8vw,130px);l:9vw;t:5%;z:5']};
+ pA:['lotus-cluster.webp|x|w:30vw;l:-6vw;b:-1%;z:1|w:min(24vw,380px);l:-3vw;b:2%;z:1','temple-parrot.webp|w:20vw;r:3vw;t:5%;z:5|w:14vw;r:5vw|w:min(9vw,150px);r:5vw;t:8%;z:5'],
+ pB: ['banana-leaves-corner.webp|w:40vw;r:-16vw;t:3%;z:1;rot:-8deg|w:34vw;r:-8vw;l:auto;rot:-8deg|w:min(24vw,360px);r:-6vw;l:auto;t:-3%;z:1;rot:-6deg', 'temple-parrot.webp|x|x|w:min(7vw,110px);r:9vw;b:9%;z:5'],
+ pC:['lotus-1.webp|w:40vw;l:-10vw;b:1%;z:1|w:30vw;l:-6vw|w:min(22vw,340px);l:-4vw;b:-3%;z:1'],
+ pD:['banana-leaves-corner.webp|x|w:28vw;r:-10vw;t:6%;z:1;f:1|w:min(16vw,250px);r:-6vw;t:-5%;z:1;f:1','temple-parrot.webp|x|x|w:min(7.5vw,120px);r:6vw;b:6%;z:5'],
+ pE:['lotus-2.webp|w:36vw;r:-8vw;b:0;z:1|w:28vw|w:min(17vw,270px);r:-4vw;b:-2%;z:1','temple-parrot.webp|x|w:12vw;l:3vw;t:5%;z:5|w:min(8vw,130px);l:5vw;t:6%;z:5'],
+ pF:['lotus-cluster.webp|w:44vw;l:-14vw;b:0;z:1|w:32vw|w:min(24vw,380px);l:-4vw;b:-1%;z:1','lotus-2.webp|w:38vw;r:-12vw;b:0;z:1|w:28vw|w:min(21vw,340px);r:-3vw;b:0;z:1','temple-parrot.webp|w:18vw;l:4vw;t:2%;z:5|w:12vw|w:min(8vw,130px);l:9vw;t:5%;z:5']};
 
 /* ---------- desktop path: waypoints after entry; the last one is the exit. [ref a=artwork s=stop, fx, fy] ---------- */
 const PT={
@@ -68,10 +68,17 @@ function trail(){
  tr.append(frag);paint()}
 /* the path comes alive as it is walked: ahead = faint, here = warm, behind = settled */
 function paint(){segs.forEach((arr,s)=>{const c=s<cur?'past':(s==cur||(cur<0&&s==0))?'near':'';arr.forEach(f=>{if(f._c!==c){f._c=c;f.className='fp '+c}})})}
-function measure(){const vh=innerHeight;let best=-2;
- stops.forEach((el,i)=>{const r=el.getBoundingClientRect(),vis=Math.min(r.bottom,vh)-Math.max(r.top,0);if(vis/Math.min(vh,r.height)>=.5){el.classList.add('on');best=i}});
- if(best==-2)best=stops[0]&&stops[0].getBoundingClientRect().top>vh*.6?-1:cur;
- if(best!=cur){stops.forEach((s,i)=>s.classList.toggle('cur',i==best));cur=best;paint()}}
+/* perf: read every rect first, write classes after. The old version interleaved
+   getBoundingClientRect() with classList.add() inside one loop, forcing a full style
+   recalculation per stop on every observer callback (layout thrash while scrolling). */
+let mq=0;
+function measure(){if(mq)return;mq=requestAnimationFrame(()=>{mq=0;const vh=innerHeight;let best=-2;
+ const rects=stops.map(el=>el.getBoundingClientRect());
+ const first=rects[0];
+ rects.forEach((r,i)=>{const vis=Math.min(r.bottom,vh)-Math.max(r.top,0);if(vis/Math.min(vh,r.height)>=.5){best=i}});
+ if(best==-2)best=first&&first.top>vh*.6?-1:cur;
+ stops.forEach((el,i)=>{const r=rects[i],vis=Math.min(r.bottom,vh)-Math.max(r.top,0);if(vis/Math.min(vh,r.height)>=.5&&!el.classList.contains('on'))el.classList.add('on')});
+ if(best!=cur){stops.forEach((s,i)=>s.classList.toggle('cur',i==best));cur=best;paint()}})}
 
 /* ---------- wiring: IntersectionObserver only, no scroll handlers ---------- */
 let rt;const sched=()=>{clearTimeout(rt);rt=setTimeout(()=>{trail();measure()},120)};

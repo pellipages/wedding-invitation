@@ -2,9 +2,9 @@
 :root{--ivory:#F4EAD5;--green:#4B5E3A;--terra:#B45A3C;--turm:#E2A72E;--maroon:#6A1E2B;--ink:#3b2a20;
 --script:'Pinyon Script','Cormorant Garamond',cursive;--serif:'Cormorant Garamond','Noto Serif Telugu',serif;--tel:'Lakki Reddy','Ramaraja','Noto Serif Telugu',serif;--telb:'Noto Serif Telugu',serif;
 --h2:clamp(46px,14vw,72px);--px:7vw;--body:20px;
---grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .42 0 0 0 0 .25 .16 0 0 0 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
---fibre:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .02' numOctaves='4' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .78 0 0 0 0 .6 0 0 0 0 .34 .32 0 0 0 -.06'/%3E%3C/filter%3E%3Crect width='700' height='700' filter='url(%23n)'/%3E%3C/svg%3E");
---ggrain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .75 0 0 0 0 .85 0 0 0 0 .55 .13 0 0 0 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
+--grain:url("../grain-noise.webp");
+--fibre:url("../fibre-noise.webp");
+--ggrain:url("../ggrain-noise.webp")}
 @media(min-width:700px){:root{--h2:clamp(64px,9vw,100px);--px:8vw}}
 @media(min-width:1100px){:root{--h2:clamp(80px,6.2vw,124px);--px:9vw;--body:22px}}
 *{box-sizing:border-box;margin:0}
@@ -38,7 +38,7 @@ input,select,textarea{font:20px var(--serif);background:#fffdf6;border:1.5px sol
   /* Your chosen image background */
   background: 
     var(--grain),
-    url("../invitation-background.png") center center / cover no-repeat,
+    url("../invitation-background.webp") center center / cover no-repeat,
     #2c3a22; /* Fallback color */
   
   transition: opacity 1.2s ease, visibility 1.2s ease;

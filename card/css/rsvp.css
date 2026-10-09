@@ -33,7 +33,7 @@
   width: clamp(140px, 15vw, 240px);
   opacity: 0.85;
   filter: drop-shadow(0 4px 14px rgba(106, 30, 43, 0.16));
-  transition: filter 1.2s ease, transform 1.2s ease;
+  transition: transform 1.2s ease;
 }
 
 .rs-env-diya.lit-warmth {

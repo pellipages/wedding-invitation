@@ -96,7 +96,7 @@
           hasShowered = true;
 
           if (typeof rain === 'function') {
-            rain('petal.png', 22, 24, 4.5);
+            rain('petal.webp', 22, 24, 4.5);
           }
 
           observer.disconnect();
@@ -112,7 +112,7 @@
     if (diya) diya.classList.add('lit-warmth');
 
     if (typeof rain === 'function') {
-      rain('akshintalu-particle.png', 40, 12, 3.5);
+      rain('akshintalu-particle.webp', 40, 12, 3.5);
     }
 
     if (rsvpSection && typeof lit === 'function') {
@@ -127,7 +127,7 @@
       invokeCeremonyPresence();
 
       if (typeof rain === 'function') {
-        rain('petal.png', 16, 22, 4);
+        rain('petal.webp', 16, 22, 4);
       }
 
       if (choicesStage) {
@@ -199,9 +199,9 @@
 
         // Grand celebration shower of petals and akshintalu
         if (typeof rain === 'function') {
-          rain('petal.png', 28, 26, 4.5);
+          rain('petal.webp', 28, 26, 4.5);
           setTimeout(() => {
-            rain('akshintalu-particle.png', 50, 12, 3.5);
+            rain('akshintalu-particle.webp', 50, 12, 3.5);
           }, 300);
         }
 
@@ -241,7 +241,7 @@
       invokeCeremonyPresence();
 
       if (typeof rain === 'function') {
-        rain('petal.png', 14, 20, 4);
+        rain('petal.webp', 14, 20, 4);
       }
 
       if (choiceSpirit) {

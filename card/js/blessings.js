@@ -92,8 +92,8 @@
 
     // 4. Sacred Akshantalu & petal rain ritual
     if (typeof rain === 'function') {
-      rain('akshintalu-particle.png', 90, 14, 4);
-      setTimeout(() => rain('petal.png', 16, 24, 5), 500);
+      rain('akshintalu-particle.webp', 90, 14, 4);
+      setTimeout(() => rain('petal.webp', 16, 24, 5), 500);
     }
 
     const section = document.getElementById('blessings');

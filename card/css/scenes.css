@@ -399,13 +399,26 @@
 
 @keyframes plaqueReveal {
   0% { transform: rotate(-.7deg) scale(1); }
-  45% {
-    transform: rotate(-.7deg) scale(1.035);
-    filter:
-      drop-shadow(0 22px 32px rgba(106,30,43,.22))
-      drop-shadow(0 0 30px rgba(226,167,46,.4));
-  }
+  45% { transform: rotate(-.7deg) scale(1.035); }
   100% { transform: rotate(-.7deg) scale(1); }
+}
+
+/* Golden pulse on reveal: opacity-only (the old keyframe animated a drop-shadow filter,
+   which re-rasterised the whole plaque every frame at the exact moment of the reveal). */
+.reveal.won .scratch::after {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(226,167,46,.42), rgba(226,167,46,0));
+  opacity: 0;
+  animation: plaqueGlow 1.4s ease both;
+}
+
+@keyframes plaqueGlow {
+  0%, 100% { opacity: 0; }
+  45% { opacity: 1; }
 }
 
 .rv-after {
@@ -593,7 +606,7 @@
   right: -8vw;
   width: clamp(220px, 28vw, 420px);
   aspect-ratio: 1 / 1;
-  background: url("../banana-leaves-corner.png") no-repeat center / contain;
+  background: url("../banana-leaves-corner.webp") no-repeat center / contain;
   opacity: 0.72;
   transform: rotate(-6deg);
   pointer-events: none;
@@ -607,7 +620,7 @@
   left: -5vw;
   width: clamp(140px, 16vw, 240px);
   aspect-ratio: 1 / 1;
-  background: url("../lotus-1.png") no-repeat center / contain;
+  background: url("../lotus-1.webp") no-repeat center / contain;
   opacity: 0.68;
   transform: rotate(12deg);
   pointer-events: none;
@@ -631,7 +644,7 @@
   transform: translate(-50%, -20%);
   width: clamp(90px, 14vw, 180px);
   aspect-ratio: 1 / 1;
-  background: url("../kolam-lotus-node.svg") no-repeat center / contain;
+  background: url("../kolam-lotus-node.webp") no-repeat center / contain;
   opacity: 0.18;
   pointer-events: none;
   z-index: -1;
@@ -658,12 +671,31 @@
   rotate: var(--r);
   scale: var(--sx) var(--sc);
   opacity: var(--f);
+  /* perf: opacity-only transition (compositor). The old animated drop-shadow filter
+     repainted all 88 footprints every frame while scrolling. Glow is now a pseudo
+     element whose OPACITY fades, and the footprint art lives on ::after. */
+  transition: opacity 1s ease var(--d, 0s);
+  will-change: opacity;
+  contain: layout style;
+}
+.fp::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  background: radial-gradient(closest-side, #e2a72eb0, #e2a72e00);
+  opacity: 0;
+  transition: opacity 1s ease var(--d, 0s);
+}
+.fp::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 44'%3E%3Cg fill='%23B45A3C'%3E%3Cpath d='M12 1c-4 0-6 3-5.6 7 .4 4 2.2 6 2.4 10 .2 3-3 5-3 10 0 4 3 7 7 7s7-3 7-8c0-6-3-8-3.4-13C16 9 16.4 1 12 1z'/%3E%3Ccircle cx='17' cy='39.5' r='2.6'/%3E%3Ccircle cx='12.4' cy='40.8' r='1.9'/%3E%3Ccircle cx='8.4' cy='40' r='1.7'/%3E%3Ccircle cx='5.6' cy='37.8' r='1.5'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
-  transition: opacity 1s ease var(--d, 0s), filter 1s ease var(--d, 0s);
 }
 
 .fp.past { opacity: var(--p); }
-.fp.near { opacity: 1; filter: drop-shadow(0 0 4px #e2a72eaa) brightness(1.06); }
+.fp.near { opacity: 1; }
+.fp.near::before { opacity: 1; }
 
 /* Destination Stops */
 .stop {

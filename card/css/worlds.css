@@ -6,7 +6,7 @@
 .w-pelli {
   background: 
     var(--ggrain),
-    url("../green-background.png") center center / cover no-repeat,
+    url("../green-background.webp") center center / cover no-repeat,
     #2c3a22;
   color: var(--ivory);
 }

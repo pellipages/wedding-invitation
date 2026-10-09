@@ -28,6 +28,9 @@ envelope.onclick = () => {
       bless.classList.add('dismissed');
       bless.style.pointerEvents = 'none';
     }
+    // Intro layer is invisible now; drop it so it stops costing a full-screen
+    // composited layer + a running pulse animation for the rest of the visit.
+    setTimeout(() => { if (env) env.style.display = 'none'; }, 1800);
   }, 5000);
 };
 
@@ -125,7 +128,7 @@ const WEDDING = new Date((EVENTS.find(e => e.sevenBefore) || EVENTS[0]).when);
     setTimeout(() => c.remove(), 1300);
     $('#reveal').classList.add('won');
     lit($('#reveal'));
-    rain('petal.png', 14, 26, 4);
+    rain('petal.webp', 14, 26, 4);
     $('#cd').style.opacity = '1';
     tick();
     setInterval(tick, 1000);

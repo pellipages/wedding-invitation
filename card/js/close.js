@@ -14,7 +14,7 @@
         if (entry.isIntersecting && !triggered) {
           triggered = true;
           if (typeof rain === 'function') {
-            rain('petal.png', 8, 22, 7);
+            rain('petal.webp', 8, 22, 7);
           }
           observer.disconnect();
         }
