@@ -2,3 +2,5 @@
 .env.*
 
 .backup-rsvp/
+.vercel
+*.patch
