@@ -298,9 +298,8 @@
   transform: none;
   border: none;
   border-radius: 0;
-  overflow: hidden;
-  filter: drop-shadow(0 24px 35px rgba(106, 30, 43, .22));
   isolation: isolate;
+  contain: layout;
 }
 
 .date-plaque {
@@ -311,6 +310,7 @@
   object-fit: fill;
   transform: none;
   z-index: 1;
+  filter: drop-shadow(0 24px 35px rgba(106, 30, 43, .22));
 }
 
 .plaque-content {
@@ -382,7 +382,9 @@
   height: 100%;
   touch-action: none;
   cursor: crosshair;
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: opacity 1.2s ease;
 }
 
 .reveal.won .scratch {
