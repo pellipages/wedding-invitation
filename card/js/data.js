@@ -40,9 +40,9 @@ const SCENES={
 /* Memory wall. m = mobile [left, top, width, rotation, z] in vw; d = tablet/desktop. Photos may bleed off screen.
    Replace src with real photographs (e.g. 'photos/01.jpg'); illustrations stand in for now. */
 const PHOTOS=[
-{src:'couple.webp',cap:'Harika & Prem',pos:'50% 30%',m:[-6,0,66,-3,2],d:[3,4,30,-4,2]},
-{src:'sangeeth-art.webp',cap:'Sangeeth',pos:'50% 40%',m:[44,34,62,4,3],d:[26,26,24,5,3]},
-{src:'pellikuthuru-art.webp',cap:'Pellikuthuru',pos:'50% 25%',m:[-10,78,58,-5,2],d:[47,2,26,3,2]},
-{src:'pelli-photo.webp',cap:'Pelli',pos:'50% 50%',m:[30,104,74,3,4],d:[66,22,38,-4,4]},
+{src:'memory-01.webp',cap:'Love that lifts you up',pos:'65% 72%',m:[-6,0,66,-3,2],d:[3,4,30,-4,2]},
+{src:'memory-02.webp',cap:'Sealed with a kiss',pos:'50% 40%',m:[44,34,62,4,3],d:[26,26,24,5,3]},
+{src:'memory-03.webp',cap:'One breath apart',pos:'50% 25%',m:[-10,78,58,-5,2],d:[47,2,26,3,2]},
+{src:'memory-04.webp',cap:'Together, at last',pos:'50% 5%',m:[30,104,74,3,4],d:[66,22,38,-4,4]},
 // {src:'vindu-bhojanam-art.webp',cap:'Vindu Bhojanam',pos:'50% 20%',m:[-4,148,52,-6,3],d:[-3,36,24,-6,3]},
-{src:'haldi-art.webp',cap:'Haldi',pos:'50% 40%',m:[40,168,56,5,2],d:[44,36,28,5,2]}];
+{src:'memory-05.webp',cap:'Forever begins here',pos:'50% 40%',m:[40,168,56,5,2],d:[44,36,28,5,2]}];
