@@ -19,4 +19,4 @@ async function call(path, init) {
 export const rpc = (fn, args) => call(`rpc/${fn}`, { method: 'POST', body: JSON.stringify(args) });
 
 export const listRsvps = () =>
-  call('rsvps?select=id,name,guests,note,status,created_at,name_normalized&order=created_at.desc&limit=2000', { method: 'GET' });
+  call('rsvps?select=id,name,guests,note,status,events,created_at,name_normalized&order=created_at.desc&limit=2000', { method: 'GET' });

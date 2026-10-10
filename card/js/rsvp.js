@@ -23,6 +23,94 @@
   const legacyRt = document.getElementById('rt');
   const honeypot = document.getElementById('rweb');
   const errorMsg = document.getElementById('rsError');
+  const eventsWrap = document.getElementById('rsEvents');
+  const eventsList = document.getElementById('rsEventsList');
+  const eventsAllBtn = document.getElementById('rsEventsAll');
+
+  // The picker is generated from EVENTS (js/data.js), so it always matches the invitation.
+  // Everything is inserted with textContent / properties — never innerHTML.
+  const eventCatalog = (typeof EVENTS !== 'undefined' && Array.isArray(EVENTS))
+    ? EVENTS.filter(ev => ev && typeof ev.k === 'string' && typeof ev.n === 'string')
+    : [];
+
+  function eventDate(ev) {
+    let day = '';
+    try {
+      day = new Date(ev.when).toLocaleDateString('en-US', { weekday: 'long', timeZone: 'America/Chicago' });
+    } catch (_) { /* fall back to the plain date below */ }
+    return [day, ev.date].filter(Boolean).join(', ');
+  }
+
+  function eventInputs() {
+    return eventsList ? Array.from(eventsList.querySelectorAll('input.rs-event-input')) : [];
+  }
+
+  function selectedEvents() {
+    return eventInputs().filter(i => i.checked).map(i => i.value);
+  }
+
+  function syncEventPicker() {
+    const inputs = eventInputs();
+    inputs.forEach(i => i.closest('.rs-event-card').classList.toggle('is-on', i.checked));
+    if (eventsAllBtn) {
+      eventsAllBtn.textContent = inputs.length && inputs.every(i => i.checked) ? 'Clear all' : 'Select all';
+    }
+    if (selectedEvents().length) clearError();
+  }
+
+  function buildEventPicker() {
+    if (!eventsWrap || !eventsList) return;
+    if (!eventCatalog.length) { eventsWrap.hidden = true; return; } // no events configured: behave as before
+
+    eventCatalog.forEach(ev => {
+      const card = document.createElement('label');
+      card.className = 'rs-event-card';
+
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.className = 'rs-event-input';
+      input.name = 'events';
+      input.value = ev.k;
+
+      const mark = document.createElement('span');
+      mark.className = 'rs-event-mark';
+      mark.setAttribute('aria-hidden', 'true');
+
+      const text = document.createElement('span');
+      text.className = 'rs-event-text';
+      const name = document.createElement('span');
+      name.className = 'rs-event-name';
+      name.textContent = ev.n;
+      const when = document.createElement('span');
+      when.className = 'rs-event-when';
+      const date = document.createElement('span');
+      date.className = 'rs-event-date';
+      date.textContent = eventDate(ev);
+      when.appendChild(date);
+      if (ev.time) {
+        const time = document.createElement('span');
+        time.className = 'rs-event-time';
+        time.textContent = ev.time;
+        when.appendChild(time);
+      }
+      text.append(name, when);
+
+      card.append(input, mark, text);
+      eventsList.appendChild(card);
+    });
+
+    eventsList.addEventListener('change', syncEventPicker);
+    if (eventsAllBtn) {
+      eventsAllBtn.addEventListener('click', () => {
+        const inputs = eventInputs();
+        const all = inputs.every(i => i.checked);
+        inputs.forEach(i => { i.checked = !all; });
+        syncEventPicker();
+      });
+    }
+  }
+
+  buildEventPicker();
 
   // One idempotency key per invitation visit.
   // If a request succeeds but the response is lost, retrying won't create
@@ -170,6 +258,15 @@
         return;
       }
 
+      const events = selectedEvents();
+
+      if (eventCatalog.length && events.length === 0) {
+        showError('Please choose at least one event you’ll be attending.');
+        const first = eventInputs()[0];
+        if (first) first.focus();
+        return;
+      }
+
       confirmBtn.disabled = true;
 
       try {
@@ -178,6 +275,7 @@
           name,
           guests,
           note: notes,
+          ...(eventCatalog.length ? { events } : {}),
           website: honeypot ? honeypot.value : ''
         });
 
@@ -188,6 +286,7 @@
             name,
             guests: String(guests),
             notes,
+            events,
             r: 'joyfully attending',
             time: Date.now()
           };

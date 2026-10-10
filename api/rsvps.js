@@ -1,5 +1,6 @@
 import { send, originAllowed, ipHash, safeEqual, logError } from './_lib/http.js';
 import { rpc, listRsvps } from './_lib/db.js';
+import { EVENTS, EVENT_LABELS } from './_lib/events.js';
 
 const csvCell = v => {
   let s = String(v ?? '');
@@ -26,12 +27,15 @@ export default async function handler(req, res) {
     for (const r of rows) if (r.status === 'attending') seen.set(r.name_normalized, (seen.get(r.name_normalized) || 0) + 1);
     const items = rows.map(r => ({
       id: r.id, name: r.name, guests: r.guests, note: r.note, status: r.status, created_at: r.created_at,
+      events: Array.isArray(r.events) ? r.events : [],
       possible_duplicate: r.status === 'attending' && seen.get(r.name_normalized) > 1,
     }));
 
     if (new URL(req.url, 'http://x').searchParams.get('format') === 'csv') {
-      const csv = ['name,guests,status,note,submitted_at,possible_duplicate']
-        .concat(items.map(i => [i.name, i.guests, i.status, i.note, i.created_at, i.possible_duplicate].map(csvCell).join(',')))
+      // `events` is appended last so existing spreadsheet columns keep their positions.
+      const csv = ['name,guests,status,note,submitted_at,possible_duplicate,events']
+        .concat(items.map(i => [i.name, i.guests, i.status, i.note, i.created_at, i.possible_duplicate,
+          i.events.map(k => EVENT_LABELS[k] || k).join('; ')].map(csvCell).join(',')))
         .join('\n');
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/csv; charset=utf-8');
@@ -47,7 +51,13 @@ export default async function handler(req, res) {
         responses: attending.length,
         total_guests: attending.reduce((s, i) => s + i.guests, 0),
         in_spirit: items.length - attending.length,
+        by_event: EVENTS.map(e => {
+          const going = attending.filter(i => i.events.includes(e.key));
+          return { key: e.key, label: e.label, responses: going.length, guests: going.reduce((s, i) => s + i.guests, 0) };
+        }),
+        no_event_selection: attending.filter(i => i.events.length === 0).length, // RSVPs made before the selector existed
       },
+      event_catalog: EVENTS,
       rsvps: items,
     });
   } catch (err) {

@@ -353,6 +353,39 @@ input:focus {
   gap: 5px;
 }
 
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.event-select {
+  width: auto;
+  max-width: 200px;
+  padding: 8px 10px;
+  font: 15px var(--serif);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--maroon);
+  border-radius: 2px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.chip {
+  padding: 2px 9px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--maroon);
+  font-size: 14px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
 .filter {
   border: 1px solid transparent;
   background: transparent;
@@ -366,6 +399,73 @@ input:focus {
   border-color: var(--line);
   background: var(--paper);
   color: var(--maroon);
+}
+
+/* Per-event totals */
+
+.event-stats {
+  margin-bottom: 24px;
+}
+
+.section-label {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+}
+
+.event-stat {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  text-align: left;
+  background: rgba(255,253,248,.82);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font: 16px var(--serif);
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.event-stat:hover,
+.event-stat.active {
+  border-color: var(--maroon);
+}
+
+.event-stat.active {
+  background: var(--paper);
+}
+
+.event-stat-name {
+  color: var(--maroon);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.event-stat-count {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.event-stat-count strong {
+  color: var(--maroon);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.event-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-style: italic;
 }
 
 /* Table */
@@ -489,7 +589,6 @@ td {
   }
 
   .filters {
-    margin-top: 10px;
     overflow-x: auto;
   }
 
@@ -525,12 +624,37 @@ td {
   }
 
   td:nth-child(3)::before {
+    content: "Events";
+    display: block;
+    margin-bottom: 3px;
+    color: var(--muted);
+  }
+
+  td:nth-child(4)::before {
     content: "Note · ";
     color: var(--muted);
   }
 
-  td:nth-child(4) {
+  td:nth-child(5) {
     margin-top: 6px;
+  }
+
+  td:nth-child(3):empty {
+    display: none;
+  }
+
+  .toolbar-right {
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .event-select {
+    max-width: none;
+    flex: 1;
+  }
+
+  .event-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
   .note {
@@ -629,6 +753,12 @@ td {
       </div>
     </section>
 
+    <section class="event-stats" aria-label="Attendance by event">
+      <h2 class="section-label">Attendance by event</h2>
+      <div class="event-grid" id="eventGrid"></div>
+      <p class="event-note" id="eventNote" hidden></p>
+    </section>
+
     <section class="content-card">
 
       <div class="toolbar">
@@ -640,10 +770,16 @@ td {
           autocomplete="off"
         >
 
-        <div class="filters" aria-label="Filter responses">
-          <button class="filter active" data-filter="attending">Attending</button>
-          <button class="filter" data-filter="in_spirit">In spirit</button>
-          <button class="filter" data-filter="all">All</button>
+        <div class="toolbar-right">
+          <select class="event-select" id="eventFilter" aria-label="Filter by event">
+            <option value="">All events</option>
+          </select>
+
+          <div class="filters" aria-label="Filter responses">
+            <button class="filter active" data-filter="attending">Attending</button>
+            <button class="filter" data-filter="in_spirit">In spirit</button>
+            <button class="filter" data-filter="all">All</button>
+          </div>
         </div>
       </div>
 
@@ -653,6 +789,7 @@ td {
             <tr>
               <th>Name</th>
               <th>Guests</th>
+              <th>Events</th>
               <th>Note</th>
               <th>Submitted</th>
             </tr>
@@ -682,6 +819,10 @@ td {
   let token = '';
   let data = [];
   let currentFilter = 'attending';
+  let currentEvent = '';          // '' = all, '__none__' = RSVPs made before the selector, else an event key
+  let catalog = [];               // [{key,label}] — comes from the server, never from the page
+  let labels = {};
+  const NONE = '__none__';
 
   function showLoginError(message) {
     $('loginError').textContent = message;
@@ -727,11 +868,79 @@ td {
     }
 
     data = payload.rsvps;
+    catalog = Array.isArray(payload.event_catalog) ? payload.event_catalog : [];
+    labels = Object.fromEntries(catalog.map(e => [e.key, e.label]));
 
     $('statResponses').textContent = payload.stats.responses;
     $('statGuests').textContent = payload.stats.total_guests;
     $('statSpirit').textContent = payload.stats.in_spirit;
 
+    renderEventStats(payload.stats);
+    render();
+  }
+
+  function eventItems(item) {
+    return Array.isArray(item.events) ? item.events : [];
+  }
+
+  function renderEventStats(stats) {
+    const grid = $('eventGrid');
+    grid.replaceChildren();
+
+    const byEvent = Array.isArray(stats.by_event) ? stats.by_event : [];
+    const none = Number(stats.no_event_selection) || 0;
+
+    // Rebuild the dropdown, keeping the current choice if it still exists.
+    const select = $('eventFilter');
+    select.replaceChildren(new Option('All events', ''));
+    for (const e of byEvent) select.add(new Option(e.label, e.key));
+    if (none > 0) select.add(new Option('No event chosen (earlier RSVPs)', NONE));
+    if (![...select.options].some(o => o.value === currentEvent)) currentEvent = '';
+    select.value = currentEvent;
+
+    for (const e of byEvent) {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'event-stat' + (currentEvent === e.key ? ' active' : '');
+      card.dataset.event = e.key;
+
+      const name = document.createElement('div');
+      name.className = 'event-stat-name';
+      name.textContent = e.label;
+
+      const count = document.createElement('div');
+      count.className = 'event-stat-count';
+      const strong = document.createElement('strong');
+      strong.textContent = String(e.guests);
+      count.append(strong, ' guests · ' + e.responses + (e.responses === 1 ? ' response' : ' responses'));
+
+      card.append(name, count);
+      card.addEventListener('click', () => {
+        // Tapping a card filters the list to that event; tapping it again clears the filter.
+        setEventFilter(currentEvent === e.key ? '' : e.key, true);
+      });
+      grid.appendChild(card);
+    }
+
+    const note = $('eventNote');
+    note.hidden = none === 0;
+    note.textContent = none === 0 ? '' :
+      none + (none === 1 ? ' response was' : ' responses were') +
+      ' made before event selection existed, so they are not counted above.';
+  }
+
+  function setEventFilter(value, focusAttending) {
+    currentEvent = value;
+    $('eventFilter').value = value;
+    if (focusAttending && value) {
+      currentFilter = 'attending';
+      document.querySelectorAll('.filter').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === 'attending');
+      });
+    }
+    document.querySelectorAll('.event-stat').forEach(c => {
+      c.classList.toggle('active', c.dataset.event === currentEvent);
+    });
     render();
   }
 
@@ -759,11 +968,18 @@ td {
         return false;
       }
 
+      if (currentEvent === NONE) {
+        if (item.status !== 'attending' || eventItems(item).length) return false;
+      } else if (currentEvent && !eventItems(item).includes(currentEvent)) {
+        return false;
+      }
+
       if (!query) return true;
 
       return (
         String(item.name || '').toLowerCase().includes(query) ||
-        String(item.note || '').toLowerCase().includes(query)
+        String(item.note || '').toLowerCase().includes(query) ||
+        eventItems(item).some(k => String(labels[k] || k).toLowerCase().includes(query))
       );
     });
 
@@ -777,6 +993,7 @@ td {
 
       const nameCell = row.insertCell();
       const guestsCell = row.insertCell();
+      const eventsCell = row.insertCell();
       const noteCell = row.insertCell();
       const timeCell = row.insertCell();
 
@@ -795,6 +1012,27 @@ td {
 
       guestsCell.textContent =
         item.status === 'in_spirit' ? '—' : String(item.guests);
+
+      const picked = eventItems(item);
+      if (picked.length) {
+        const chips = document.createElement('div');
+        chips.className = 'chips';
+        // Show in the catalogue's order; unknown keys (e.g. an event removed later) still show as text.
+        const order = catalog.map(e => e.key);
+        [...picked].sort((a, b) => {
+          const ia = order.indexOf(a), ib = order.indexOf(b);
+          return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+        }).forEach(k => {
+          const chip = document.createElement('span');
+          chip.className = 'chip';
+          chip.textContent = labels[k] || k;
+          chips.appendChild(chip);
+        });
+        eventsCell.appendChild(chips);
+      } else {
+        eventsCell.textContent = item.status === 'in_spirit' ? '—' : 'Not specified';
+        eventsCell.className = 'note';
+      }
 
       noteCell.className = 'note';
       noteCell.textContent = item.note || '—';
@@ -850,6 +1088,7 @@ td {
   });
 
   $('search').addEventListener('input', render);
+  $('eventFilter').addEventListener('change', event => setEventFilter(event.target.value, false));
 
   document.querySelectorAll('.filter').forEach(button => {
     button.addEventListener('click', () => {
@@ -886,6 +1125,7 @@ td {
   $('logout').addEventListener('click', () => {
     token = '';
     data = [];
+    currentEvent = '';
     $('dashboard').hidden = true;
     $('access').hidden = false;
     $('token').value = '';

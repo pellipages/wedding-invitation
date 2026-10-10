@@ -529,3 +529,165 @@
   opacity: 0;
   pointer-events: none;
 }
+
+/* --- Event selector ("Events you'll attend") --- */
+.rs-events {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rs-events legend.rs-label {
+  padding: 0;
+  margin-bottom: 2px;
+}
+
+.rs-events-hint {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink);
+  opacity: 0.8;
+}
+
+.rs-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rs-event-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+  padding: 12px 16px;
+  background: #fffdf9;
+  border: 1.5px solid #d8c298;
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+
+/* Native checkbox stays in the DOM for keyboard + screen readers, but is visually replaced. */
+.rs-event-card .rs-event-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  pointer-events: none;
+}
+
+.rs-event-mark {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid #d8c298;
+  background: #fffdf9;
+  display: grid;
+  place-items: center;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.rs-event-mark::after {
+  content: "✓";
+  font: 700 15px/1 var(--serif);
+  color: var(--ivory);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.rs-event-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.rs-event-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--maroon);
+}
+
+.rs-event-when {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.3;
+  color: var(--ink);
+  opacity: 0.8;
+}
+
+.rs-event-card.is-on {
+  border-color: var(--maroon);
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(106, 30, 43, 0.12);
+}
+
+.rs-event-card.is-on .rs-event-mark {
+  background: var(--maroon);
+  border-color: var(--maroon);
+}
+
+.rs-event-card.is-on .rs-event-mark::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Focus ring only for keyboard users (taps on a phone shouldn't leave a ring behind). */
+.rs-event-card .rs-event-input:focus-visible + .rs-event-mark {
+  outline: 2px dashed var(--terra);
+  outline-offset: 3px;
+}
+
+/* Phones: date and time on their own lines. Wider screens: one line with a separator. */
+.rs-event-when span {
+  display: block;
+}
+
+@media (min-width: 700px) {
+  .rs-event-when span {
+    display: inline;
+  }
+
+  .rs-event-time::before {
+    content: " • ";
+  }
+}
+
+/* Overrides the site-wide pill button style for this small text-style control. */
+.rs-events .rs-events-all {
+  align-self: flex-start;
+  margin: 2px 0 0;
+  padding: 4px 2px;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  color: var(--terra);
+  font: 600 14px var(--serif);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-event-card,
+  .rs-event-mark,
+  .rs-event-mark::after { transition: none; }
+}
