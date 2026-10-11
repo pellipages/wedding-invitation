@@ -98,6 +98,8 @@
 
         if (!envelope || !bless) {
             doc.documentElement.classList.add('bridge-reveal');
+            // No Ganesha screen to tap, so ask for the music here (the first tap anywhere will start it).
+            if (window.weddingMusic) { window.weddingMusic.begin(); }
             return;
         }
 

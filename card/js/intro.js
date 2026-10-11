@@ -4,6 +4,58 @@ const env = $('#env');
 const envelope = $('#envelope');
 const bless = $('#bless');
 
+const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+let blessed = 0, blessTimer = 0;
+
+// Music lives in the page that wraps this card (js/music.js). Calling it from inside the guest's tap
+// is what lets the browser allow sound. Opened on its own (no wrapper), this simply does nothing.
+const startMusic = () => {
+  try { if (window.parent !== window && window.parent.weddingMusic) window.parent.weddingMusic.begin(); } catch (_) {}
+};
+
+// Let the guest into the site (what used to happen on its own 5 seconds after Ganesha appeared).
+const enterSite = () => {
+  if (bless) {
+    bless.classList.add('dismissed');
+    bless.style.pointerEvents = 'none';
+  }
+  // Welcome shower: the moment the guest is let into the site, petals rain down once and stop.
+  // Two short waves (a full one, then a lighter one) so it feels like a welcome, not a loop.
+  // Each petal removes itself after its fall (see rain() in core.js), so nothing keeps running.
+  if (!calm && typeof rain === 'function') {
+    rain('petal.webp', 34, 26, 4);
+    setTimeout(() => rain('petal.webp', 18, 20, 4), 1200);
+  }
+  // Intro layer is invisible now; drop it so it stops costing a full-screen
+  // composited layer + a running pulse animation for the rest of the visit.
+  setTimeout(() => { if (env) env.style.display = 'none'; }, 1800);
+};
+
+// The blessing: one tap starts the music, showers akshintalu and petals over Ganesha, then opens the site.
+const receiveBlessing = () => {
+  if (blessed || !bless || !bless.classList.contains('on')) return;
+  blessed = 1;
+  clearTimeout(blessTimer);
+  startMusic();                       // must stay first and synchronous: it is the tap that unlocks sound
+  bless.classList.add('blessed');
+  if (!calm && typeof rain === 'function') {
+    // z-index 1000 so they fall in FRONT of the shrine (the shrine layer sits at 998/999)
+    rain('akshintalu-particle.webp', 46, 17, 2.6, 1000);
+    rain('petal.webp', 26, 30, 3.4, 1000);
+    setTimeout(() => {
+      rain('akshintalu-particle.webp', 30, 15, 2.6, 1000);
+      rain('petal.webp', 14, 26, 3.4, 1000);
+    }, 1200);
+    setTimeout(() => {
+      rain('akshintalu-particle.webp', 22, 14, 2.6, 1000);
+      rain('petal.webp', 10, 24, 3.4, 1000);
+    }, 2800);
+  }
+  // How long Ganesha stays after the tap (ms). Raise this to keep him on screen longer.
+  setTimeout(enterSite, calm ? 1500 : 6000);
+};
+if (bless) bless.addEventListener('click', receiveBlessing);
+
 envelope.onclick = () => {
   if (opened) return;
   opened = 1;
@@ -22,24 +74,15 @@ envelope.onclick = () => {
     }
   }, 1800);
 
-  // Step 3: Transition past Ganesha to reveal the main wedding site
-  setTimeout(() => {
-    if (bless) {
-      bless.classList.add('dismissed');
-      bless.style.pointerEvents = 'none';
-    }
-    // Welcome shower: the moment the guest is let into the site, petals rain down once and stop.
-    // Two short waves (a full one, then a lighter one) so it feels like a welcome, not a loop.
-    // Each petal removes itself after its fall (see rain() in core.js), so nothing keeps running.
-    const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!calm && typeof rain === 'function') {
-      rain('petal.webp', 34, 26, 4);
-      setTimeout(() => rain('petal.webp', 18, 20, 4), 1200);
-    }
-    // Intro layer is invisible now; drop it so it stops costing a full-screen
-    // composited layer + a running pulse animation for the rest of the visit.
-    setTimeout(() => { if (env) env.style.display = 'none'; }, 1800);
-  }, 5000);
+  // Step 3: Ganesha now waits for the guest's tap (see receiveBlessing above).
+  // Safety net so nobody is stuck on this screen: after 25 s carry on without the tap.
+  // Sound is then still pending, and the next tap anywhere starts it (see music.js).
+  blessTimer = setTimeout(() => {
+    if (blessed) return;
+    blessed = 1;
+    startMusic();
+    enterSite();
+  }, 25000);
 };
 
 // Scratch to reveal card

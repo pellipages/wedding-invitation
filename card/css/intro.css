@@ -501,3 +501,64 @@
     font-size: clamp(22px, 6.5vw, 30px);
   }
 }
+
+/* =========================================================
+   TAP TO RECEIVE BLESSINGS
+   The tap that starts the music and the akshintalu + petal shower (see js/intro.js).
+   It fades in a few seconds after Ganesha appears (3.6s); the whole shrine is tappable, this is the visible cue.
+   ========================================================= */
+.bless-tap {
+  margin: clamp(14px, 2.6svh, 26px) 0 0;
+  padding: 12px 30px;
+  font: 600 clamp(16px, 2vw, 20px) var(--serif, 'Cormorant Garamond', serif);
+  font-style: italic;
+  letter-spacing: 0.1em;
+  color: #F4EAD5;
+  background: var(--maroon, #6A1E2B);
+  border: 1px solid rgba(226, 167, 46, 0.75);
+  border-radius: 40px;
+  box-shadow: 0 6px 18px rgba(106, 30, 43, 0.3), 0 0 0 4px rgba(226, 167, 46, 0.12);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+#bless.on .bless-tap {
+  animation: blessTapIn 0.9s ease 3.6s forwards, blessTapPulse 2.4s ease-in-out 4.6s infinite;
+}
+
+@keyframes blessTapIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blessTapPulse {
+  50% { box-shadow: 0 6px 18px rgba(106, 30, 43, 0.3), 0 0 0 9px rgba(226, 167, 46, 0.18); }
+}
+
+.bless-tap:focus-visible {
+  outline: 2px solid var(--turm, #E2A72E);
+  outline-offset: 4px;
+}
+
+/* after the tap: button bows out, Ganesha glows warmly while the shower falls */
+#bless.blessed {
+  cursor: default;
+}
+
+#bless.blessed .bless-tap {
+  animation: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+#bless.blessed .bless-ganesha-img {
+  filter: drop-shadow(0 0 34px rgba(226, 167, 46, 0.55)) drop-shadow(0 14px 28px rgba(106, 30, 43, 0.22));
+  transition: filter 1.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #bless.on .bless-tap { animation: blessTapIn 0.01s linear 3s forwards; }
+}
