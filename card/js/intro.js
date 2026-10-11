@@ -28,6 +28,14 @@ envelope.onclick = () => {
       bless.classList.add('dismissed');
       bless.style.pointerEvents = 'none';
     }
+    // Welcome shower: the moment the guest is let into the site, petals rain down once and stop.
+    // Two short waves (a full one, then a lighter one) so it feels like a welcome, not a loop.
+    // Each petal removes itself after its fall (see rain() in core.js), so nothing keeps running.
+    const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!calm && typeof rain === 'function') {
+      rain('petal.webp', 34, 26, 4);
+      setTimeout(() => rain('petal.webp', 18, 20, 4), 1200);
+    }
     // Intro layer is invisible now; drop it so it stops costing a full-screen
     // composited layer + a running pulse animation for the rest of the visit.
     setTimeout(() => { if (env) env.style.display = 'none'; }, 1800);
