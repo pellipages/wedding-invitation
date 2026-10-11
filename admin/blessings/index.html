@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f4ead5">
+<title>Harika & Prem — Book of Blessings</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lakki+Reddy&family=Noto+Serif+Telugu:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ivory: #f4ead5;
+  --paper: #fffdf6;
+  --blush: #fdf0e4;
+  --sage: #f2f1dc;
+  --maroon: #501620;
+  --maroon-soft: #6a1e2b;
+  --terra: #b45a3c;
+  --gold: #e2a72e;
+  --gold-deep: #a87a12;
+  --ink: #3b2a20;
+  --muted: #806d5d;
+  --line: #d8c298;
+  --green: #4b5e3a;
+  --serif: "Cormorant Garamond", "Noto Serif Telugu", Georgia, serif;
+  --script: "Pinyon Script", "Cormorant Garamond", cursive;
+  --tel: "Lakki Reddy", "Noto Serif Telugu", serif;
+  --foil: linear-gradient(115deg, #8a5a06 0%, #c9961f 28%, #e8c14e 48%, #b9871a 70%, #8a5a06 100%);
+}
+
+* { box-sizing: border-box; }
+
+html { min-height: 100%; background: var(--ivory); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.5;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(226,167,46,.12), transparent 34%),
+    radial-gradient(circle at 85% 88%, rgba(180,90,60,.08), transparent 36%),
+    url("/card/grain-noise.webp"),
+    url("/card/fibre-noise.webp"),
+    var(--ivory);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+[hidden] { display: none !important; }
+
+/* gold foil helpers ------------------------------------------------------ */
+.foil {
+  background: var(--foil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--gold-deep);          /* fallback */
+}
+
+.te { font-family: var(--tel); }
+
+/* ---------------------------------------------------------------------- */
+.page { position: relative; min-height: 100vh; overflow: hidden; }
+
+.thoranam {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+}
+
+.decor { position: fixed; pointer-events: none; z-index: 0; user-select: none; }
+.decor-lotus { left: -30px; bottom: -34px; width: clamp(150px, 20vw, 270px); opacity: .55; transform: rotate(-4deg); }
+.decor-leaf  { right: -40px; bottom: -24px; width: clamp(130px, 17vw, 230px); opacity: .5; transform: scaleX(-1); }
+
+/* ====================== ACCESS ========================================= */
+.access {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  display: grid; place-items: center;
+  padding: 64px 18px 36px;
+}
+
+.access-card {
+  position: relative;
+  width: min(94vw, 540px);
+  padding: clamp(40px, 7vw, 64px) clamp(26px, 7vw, 62px) clamp(34px, 6vw, 52px);
+  text-align: center;
+  background: rgba(255,253,246,.92);
+  border: 1px solid var(--line);
+  box-shadow: 0 3px 10px rgba(59,42,32,.05), 0 30px 70px rgba(59,42,32,.14);
+}
+
+/* double gold frame */
+.access-card::before {
+  content: ""; position: absolute; inset: 9px; pointer-events: none;
+  border: 1px solid rgba(226,167,46,.75);
+}
+.access-card::after {
+  content: ""; position: absolute; inset: 14px; pointer-events: none;
+  border: 1px solid rgba(226,167,46,.28);
+}
+
+.kicker {
+  display: block;
+  font-size: 13px; letter-spacing: .34em; text-transform: uppercase;
+  color: var(--terra);
+}
+.names-te { display: block; margin-top: 6px; font-size: 18px; color: var(--gold-deep); }
+
+.access-title {
+  margin: 14px 0 0;
+  font-family: var(--script); font-weight: 400;
+  font-size: clamp(60px, 15vw, 88px); line-height: 1;
+  color: var(--maroon);
+}
+
+.rule {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  margin: 12px auto 16px; max-width: 280px; color: var(--gold);
+}
+.rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.rule::after { transform: scaleX(-1); }
+.rule span { font-size: 15px; }
+
+.lede { margin: 0; font-style: italic; font-size: 21px; color: var(--ink); }
+.lede-te { margin: 8px 0 0; font-size: 16px; color: var(--gold-deep); line-height: 1.7; }
+
+.field-label {
+  display: block; margin: 30px 0 8px;
+  font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--muted);
+}
+
+input[type="password"], input[type="search"] {
+  width: 100%;
+  font: 500 20px var(--serif);
+  color: var(--ink);
+  background: #fffefb;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+input[type="password"] { text-align: center; letter-spacing: .12em; }
+input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(226,167,46,.2); }
+.hint-te { margin: 7px 0 0; font-size: 15px; color: var(--gold-deep); }
+
+.primary {
+  position: relative; overflow: hidden;
+  margin-top: 22px; width: 100%;
+  font: 600 19px var(--serif); letter-spacing: .08em;
+  color: var(--ivory);
+  background: var(--maroon-soft);
+  border: 0; border-radius: 40px; padding: 14px 26px;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(226,167,46,.55) inset;
+  transition: transform .25s, background .25s, box-shadow .25s;
+}
+.primary .te { margin-left: 8px; color: #f3d98a; font-weight: 400; font-size: 17px; }
+.primary:hover { background: var(--maroon); transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(226,167,46,.9) inset, 0 10px 26px rgba(106,30,43,.32); }
+.primary[disabled] { opacity: .7; cursor: progress; transform: none; }
+
+.message { margin: 16px 0 0; min-height: 1.3em; font-style: italic; color: var(--maroon-soft); font-size: 18px; }
+
+/* ====================== BOOK =========================================== */
+.book {
+  position: relative; z-index: 2;
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  padding: clamp(54px, 9vw, 96px) clamp(16px, 4vw, 40px) 60px;
+}
+
+.hero { text-align: center; }
+.hero .kicker { font-size: 13px; }
+.hero-tel {
+  display: block; margin-top: 4px;
+  font-family: var(--tel); font-size: clamp(24px, 5vw, 38px); line-height: 1.5;
+}
+.hero-title {
+  margin: 0;
+  font-family: var(--script); font-weight: 400;
+  font-size: clamp(66px, 16vw, 124px); line-height: .95;
+  color: var(--maroon);
+}
+.hero-lede { margin: 6px auto 0; max-width: 34ch; font-style: italic; font-size: clamp(20px, 3.4vw, 25px); }
+.hero-lede-te { margin: 6px auto 0; max-width: 40ch; font-size: clamp(15px, 2.6vw, 18px); color: var(--gold-deep); line-height: 1.8; }
+
+.count-ribbon {
+  display: inline-flex; align-items: baseline; gap: 12px; flex-wrap: wrap; justify-content: center;
+  margin: 26px auto 0; padding: 12px 30px;
+  background: rgba(255,253,246,.8);
+  border: 1px solid rgba(226,167,46,.7);
+  box-shadow: 0 10px 30px rgba(59,42,32,.08);
+}
+.count-num { font-family: var(--script); font-size: 54px; line-height: .9; color: var(--maroon); }
+.count-label { font-size: 15px; letter-spacing: .2em; text-transform: uppercase; color: var(--terra); }
+.count-label .te { letter-spacing: 0; text-transform: none; font-size: 17px; margin-left: 6px; color: var(--gold-deep); }
+
+/* toolbar */
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+  margin: 38px 0 6px; padding: 14px 16px;
+  background: rgba(255,253,246,.78);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(3px);
+}
+.search { flex: 1 1 260px; min-width: 0; }
+.search input { font-size: 18px; padding: 10px 14px; }
+
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 30px; overflow: hidden; background: #fffefb; }
+.seg button {
+  font: 600 15px var(--serif); letter-spacing: .06em;
+  color: var(--muted); background: transparent; border: 0; padding: 9px 16px; cursor: pointer;
+}
+.seg button[aria-pressed="true"] { color: var(--ivory); background: var(--maroon-soft); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.ghost {
+  font: 600 15px var(--serif); letter-spacing: .05em;
+  color: var(--maroon-soft); background: transparent;
+  border: 1px solid rgba(180,90,60,.5); border-radius: 30px; padding: 9px 16px; cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.ghost:hover { background: rgba(226,167,46,.16); border-color: var(--gold); }
+
+.status { min-height: 1.4em; margin: 6px 4px 18px; font-style: italic; font-size: 16px; color: var(--muted); }
+
+/* ====================== GALLERY ======================================== */
+.gallery { column-width: 310px; column-gap: 30px; padding-top: 10px; }
+
+.card {
+  --tilt: 0deg;
+  position: relative;
+  display: inline-block; width: 100%;
+  break-inside: avoid;
+  margin: 0 0 30px;
+  padding: 36px 30px 24px;
+  background: var(--paper);
+  border: 1px solid #e7d7b4;
+  box-shadow: 0 2px 6px rgba(59,42,32,.06), 0 18px 38px rgba(59,42,32,.1);
+  transform: rotate(var(--tilt));
+  opacity: 0;
+  translate: 0 22px;
+  transition: opacity .7s ease, translate .7s cubic-bezier(.2,.7,.2,1), box-shadow .3s;
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+.card.in { opacity: 1; translate: 0 0; }
+.card:hover { box-shadow: 0 4px 10px rgba(59,42,32,.08), 0 24px 46px rgba(59,42,32,.15); }
+.card.in:hover { transition-delay: 0s; }
+
+.t-a { background: var(--paper); }
+.t-b { background: var(--blush); }
+.t-c { background: var(--sage); }
+.card:nth-child(4n+1) { --tilt: -.5deg; }
+.card:nth-child(4n+2) { --tilt: .4deg; }
+.card:nth-child(4n+3) { --tilt: -.25deg; }
+.card:nth-child(4n)   { --tilt: .55deg; }
+
+/* inner gold frame */
+.card::before {
+  content: ""; position: absolute; inset: 8px; pointer-events: none;
+  border: 1px solid rgba(226,167,46,.6);
+}
+/* gold foil seal tape */
+.card::after {
+  content: ""; position: absolute; top: -11px; left: 50%; width: 92px; height: 22px;
+  translate: -50% 0; rotate: -1.5deg;
+  background: linear-gradient(90deg, rgba(226,167,46,.55), rgba(250,226,150,.7), rgba(226,167,46,.55));
+  box-shadow: 0 1px 3px rgba(59,42,32,.18);
+}
+
+.card-cap { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px; }
+.card-cap .orn { color: var(--gold); font-size: 13px; }
+.card-cap .tc { font-family: var(--tel); font-size: 17px; line-height: 1.5; }
+
+.msg {
+  position: relative; margin: 0;
+  font-style: italic; font-size: 22px; line-height: 1.5; color: var(--ink);
+  white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.msg::before {
+  content: "\201C"; position: absolute; left: -6px; top: -26px;
+  font-family: var(--script); font-style: normal; font-size: 64px; line-height: 1;
+  color: var(--gold); opacity: .8;
+}
+
+.divider { display: flex; align-items: center; gap: 10px; margin: 20px 0 14px; color: var(--gold); }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(226,167,46,.8)); }
+.divider::after { transform: scaleX(-1); }
+.divider span { font-size: 14px; }
+
+.from { text-align: right; }
+.from .name { display: block; font-family: var(--script); font-size: 32px; line-height: 1.15; color: var(--maroon); overflow-wrap: anywhere; }
+.from .name.anon { font-family: var(--serif); font-style: italic; font-size: 22px; }
+.from .name-te { display: block; font-family: var(--tel); font-size: 14px; color: var(--gold-deep); }
+.from time { display: block; margin-top: 4px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--terra); }
+
+/* empty state */
+.empty { text-align: center; padding: 50px 16px 30px; }
+.empty img { width: 150px; opacity: .85; }
+.empty p { margin: 8px 0 0; font-style: italic; font-size: 22px; }
+.empty p.te { font-style: normal; font-size: 17px; color: var(--gold-deep); line-height: 1.8; }
+
+.footer { margin: 34px 0 0; text-align: center; font-size: 15px; color: var(--muted); }
+.footer .te { display: block; margin-top: 4px; font-size: 17px; }
+
+/* ====================== RESPONSIVE ===================================== */
+@media (max-width: 640px) {
+  body { font-size: 18px; }
+  .gallery { column-width: auto; column-count: 1; }
+  .card { padding: 34px 24px 22px; }
+  .msg { font-size: 21px; }
+  .toolbar { padding: 12px; }
+  .seg, .actions { width: 100%; }
+  .seg button { flex: 1; }
+  .ghost { flex: 1 1 auto; text-align: center; }
+  .decor { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; opacity: 1; translate: 0 0; }
+  .primary, .ghost { transition: none; }
+}
+
+/* ====================== PRINT / SAVE AS PDF ============================ */
+.print-head { display: none; }
+@media print {
+  @page { margin: 14mm; }
+  html, body { background: #fff !important; }
+  body { font-size: 15px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .thoranam, .decor, .toolbar, .status, .access, .seg, .actions, .footer .te { display: none !important; }
+  .book { padding: 0; width: 100%; }
+  .gallery { column-count: 2; column-gap: 14mm; }
+  .card { opacity: 1 !important; translate: 0 0 !important; transform: none !important; transition: none !important; box-shadow: none; break-inside: avoid; margin-bottom: 9mm; border-color: #d8c298; }
+  .card::after { display: none; }
+  .hero-title { font-size: 64px; }
+  .count-ribbon { box-shadow: none; }
+  .print-head { display: block; text-align: center; font-size: 12px; color: var(--muted); margin-bottom: 6mm; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <img class="thoranam" src="/card/marigold-thoranam.webp" alt="" aria-hidden="true">
+  <img class="decor decor-lotus" src="/card/lotus-cluster.webp" alt="" aria-hidden="true">
+  <img class="decor decor-leaf" src="/card/banana-leaves-corner.webp" alt="" aria-hidden="true">
+
+  <noscript>
+    <p style="position:relative;z-index:5;text-align:center;padding:90px 20px">This private page needs JavaScript to open.</p>
+  </noscript>
+
+  <!-- ===================== ACCESS ===================== -->
+  <main class="access" id="access">
+    <section class="access-card" aria-labelledby="accessTitle">
+      <span class="kicker">Harika &amp; Prem</span>
+      <span class="names-te te" lang="te">హారిక &amp; ప్రేమ్</span>
+
+      <h1 class="access-title" id="accessTitle">Blessings</h1>
+      <div class="rule" aria-hidden="true"><span>✦</span></div>
+
+      <p class="lede">A private book of every wish sent your way.</p>
+      <p class="lede-te te" lang="te">మీకోసం వచ్చిన ప్రతి ఆశీస్సుల పుస్తకం.</p>
+
+      <label class="field-label" for="key">Your private key</label>
+      <input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="Enter your key">
+      <p class="hint-te te" lang="te">మీ రహస్య పదాన్ని నమోదు చేయండి</p>
+
+      <button class="primary" id="open" type="button">Open our blessings<span class="te" lang="te">తెరవండి</span></button>
+      <p class="message" id="accessMsg" role="alert" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <!-- ===================== BOOK ===================== -->
+  <main class="book" id="book" hidden>
+    <p class="print-head" id="printHead"></p>
+
+    <header class="hero">
+      <span class="kicker">Harika &amp; Prem</span>
+      <span class="hero-tel te foil" lang="te">శుభాశీస్సులు</span>
+      <h1 class="hero-title">Blessings</h1>
+      <div class="rule" aria-hidden="true"><span>✦</span></div>
+      <p class="hero-lede">Every wish and every word, kept close to your hearts.</p>
+      <p class="hero-lede-te te" lang="te">ప్రతి మాట, ప్రతి ఆశీస్సు — మీ హృదయంలో పదిలం.</p>
+
+      <div class="count-ribbon" aria-live="polite">
+        <span class="count-num" id="countNum">0</span>
+        <span class="count-label">blessings<span class="te" lang="te">ఆశీస్సులు</span></span>
+      </div>
+    </header>
+
+    <section class="toolbar" aria-label="Browse blessings">
+      <div class="search">
+        <input id="search" type="search" placeholder="Search names or words…" autocomplete="off" aria-label="Search blessings">
+      </div>
+      <div class="seg" role="group" aria-label="Sort order">
+        <button type="button" id="sortNew" aria-pressed="true">Newest</button>
+        <button type="button" id="sortOld" aria-pressed="false">Oldest</button>
+      </div>
+      <div class="actions">
+        <button class="ghost" id="refresh" type="button">Refresh</button>
+        <button class="ghost" id="csv" type="button">Download</button>
+        <button class="ghost" id="print" type="button">Print keepsake</button>
+        <button class="ghost" id="lock" type="button">Lock</button>
+      </div>
+    </section>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+
+    <section class="gallery" id="gallery" aria-label="Blessings"></section>
+
+    <div class="empty" id="empty" hidden>
+      <img src="/card/kolam-lotus-node.webp" alt="" aria-hidden="true">
+      <p id="emptyEn">Your first blessing is on its way…</p>
+      <p class="te" lang="te" id="emptyTe">మీ మొదటి ఆశీస్సు త్వరలో రాబోతోంది.</p>
+    </div>
+
+    <p class="footer">
+      Harika &amp; Prem · Private Book of Blessings
+      <span class="te foil" lang="te">ప్రేమతో, కృతజ్ఞతతో</span>
+    </p>
+  </main>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+
+  let token = '';            // lives in memory only: closing or reloading the tab locks the book
+  let all = [];
+  let newestFirst = true;
+  let io = null;
+
+  const MSG = {
+    401: 'That key doesn\u2019t look right. Please try again.',
+    429: 'Too many attempts. Please wait a little and try again.',
+    503: 'This book isn\u2019t unlocked on the server yet. Add the BLESSINGS_KEY setting in Vercel, then redeploy.'
+  };
+
+  async function request(path = '') {
+    let response;
+    try {
+      response = await fetch('/api/blessings' + path, {
+        method: 'GET',
+        headers: { Authorization: 'Bearer ' + token },
+        cache: 'no-store',
+        credentials: 'omit'
+      });
+    } catch (_) {
+      throw new Error('We couldn\u2019t reach the server. Please check your connection.');
+    }
+    if (!response.ok) throw new Error(MSG[response.status] || 'We couldn\u2019t open the book right now. Please try again.');
+    return response;
+  }
+
+  async function load() {
+    const data = await (await request()).json();
+    if (!data || data.ok !== true || !Array.isArray(data.blessings)) throw new Error('Something went wrong. Please try again.');
+    all = data.blessings;
+  }
+
+  /* ---------- formatting ---------- */
+  const dateFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const timeFmt = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+  function when(iso) {
+    const d = new Date(iso);
+    if (isNaN(d)) return '';
+    return dateFmt.format(d) + ' \u00B7 ' + timeFmt.format(d).replace(/\u202F/g, ' ');
+  }
+
+  /* ---------- rendering (textContent only: a guest's words are never treated as HTML) ---------- */
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+
+  function card(b, i) {
+    const c = el('article', 'card ' + ['t-a', 't-b', 't-a', 't-c'][i % 4]);
+    c.style.setProperty('--i', String(i % 8));
+
+    const cap = el('div', 'card-cap');
+    cap.append(el('span', 'orn', '\u2726'));
+    const tc = el('span', 'tc foil', '\u0C06\u0C36\u0C40\u0C38\u0C4D\u0C38\u0C41\u0C32\u0C24\u0C4B');   // ఆశీస్సులతో  ("with blessings")
+    tc.lang = 'te';
+    cap.append(tc, el('span', 'orn', '\u2726'));
+
+    const msg = el('blockquote', 'msg', b.message);
+
+    const div = el('div', 'divider'); div.append(el('span', '', '\u2766'));
+
+    const from = el('footer', 'from');
+    if (b.name) {
+      from.append(el('span', 'name', b.name));
+    } else {
+      from.append(el('span', 'name anon', 'A Well-Wisher'));
+      const nt = el('span', 'name-te', '\u0C36\u0C4D\u0C30\u0C47\u0C2F\u0C4B\u0C2D\u0C3F\u0C32\u0C3E\u0C37\u0C3F');   // శ్రేయోభిలాషి  ("well-wisher")
+      nt.lang = 'te';
+      from.append(nt);
+    }
+    const t = el('time', '', when(b.created_at));
+    t.dateTime = b.created_at;
+    from.append(t);
+
+    c.append(cap, msg, div, from);
+    return c;
+  }
+
+  function render() {
+    const q = $('search').value.trim().toLowerCase();
+    let list = all.filter(b => !q || (b.name || 'a well-wisher').toLowerCase().includes(q) || b.message.toLowerCase().includes(q));
+    list = list.slice().sort((a, b) => (newestFirst ? 1 : -1) * (new Date(b.created_at) - new Date(a.created_at)));
+
+    $('countNum').textContent = all.length;
+    const g = $('gallery');
+    g.replaceChildren(...list.map(card));
+
+    const none = list.length === 0;
+    $('empty').hidden = !none;
+    if (none) {
+      const searching = all.length > 0;
+      $('emptyEn').textContent = searching ? 'No blessings match that search.' : 'Your first blessing is on its way\u2026';
+      $('emptyTe').textContent = searching ? '\u0C06 \u0C2A\u0C26\u0C02\u0C24\u0C4B \u0C0F \u0C06\u0C36\u0C40\u0C38\u0C4D\u0C38\u0C41\u0C32\u0C42 \u0C15\u0C28\u0C3F\u0C2A\u0C3F\u0C02\u0C1A\u0C32\u0C47\u0C26\u0C41.' : '\u0C2E\u0C40 \u0C2E\u0C4A\u0C26\u0C1F\u0C3F \u0C06\u0C36\u0C40\u0C38\u0C4D\u0C38\u0C41 \u0C24\u0C4D\u0C35\u0C30\u0C32\u0C4B \u0C30\u0C3E\u0C2C\u0C4B\u0C24\u0C4B\u0C02\u0C26\u0C3F.';
+    }
+    $('status').textContent = q && all.length ? 'Showing ' + list.length + ' of ' + all.length : '';
+
+    // gentle staggered entrance as cards scroll into view
+    if (io) io.disconnect();
+    const cards = [...g.children];
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+      cards.forEach(c => io.observe(c));
+    } else {
+      cards.forEach(c => c.classList.add('in'));
+    }
+  }
+
+  /* ---------- screens ---------- */
+  function showBook() {
+    $('access').hidden = true;
+    $('book').hidden = false;
+    $('printHead').textContent = 'Harika & Prem \u00B7 Book of Blessings \u00B7 printed ' + dateFmt.format(new Date());
+    render();
+    window.scrollTo(0, 0);
+  }
+
+  function lock() {
+    token = ''; all = [];
+    $('gallery').replaceChildren();
+    $('search').value = '';
+    $('key').value = '';
+    $('accessMsg').textContent = '';
+    $('book').hidden = true;
+    $('access').hidden = false;
+    $('key').focus();
+  }
+
+  /* ---------- events ---------- */
+  async function open() {
+    const v = $('key').value.trim();
+    if (!v) { $('accessMsg').textContent = 'Please enter your key.'; $('key').focus(); return; }
+    token = v;
+    $('open').disabled = true;
+    $('accessMsg').textContent = '';
+    try {
+      await load();
+      $('key').value = '';
+      showBook();
+    } catch (e) {
+      token = '';
+      $('accessMsg').textContent = e.message;
+    } finally {
+      $('open').disabled = false;
+    }
+  }
+
+  $('open').addEventListener('click', open);
+  $('key').addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
+
+  $('search').addEventListener('input', render);
+  $('sortNew').addEventListener('click', () => { newestFirst = true; $('sortNew').setAttribute('aria-pressed', 'true'); $('sortOld').setAttribute('aria-pressed', 'false'); render(); });
+  $('sortOld').addEventListener('click', () => { newestFirst = false; $('sortNew').setAttribute('aria-pressed', 'false'); $('sortOld').setAttribute('aria-pressed', 'true'); render(); });
+
+  $('refresh').addEventListener('click', async () => {
+    $('status').textContent = 'Refreshing\u2026';
+    try { await load(); render(); $('status').textContent = 'Up to date.'; setTimeout(() => { if ($('status').textContent === 'Up to date.') $('status').textContent = ''; }, 2500); }
+    catch (e) { $('status').textContent = e.message; }
+  });
+
+  $('csv').addEventListener('click', async () => {
+    try {
+      const blob = await (await request('?format=csv')).blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'blessings.csv';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (e) { $('status').textContent = e.message; }
+  });
+
+  $('print').addEventListener('click', () => {
+    // make sure every card is visible for the printout
+    document.querySelectorAll('.card').forEach(c => c.classList.add('in'));
+    window.print();
+  });
+
+  $('lock').addEventListener('click', lock);
+
+  $('key').focus();
+})();
+</script>
+</body>
+</html>
