@@ -17,6 +17,7 @@
     >
 
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/cover.css">
     <link rel="stylesheet" href="css/opening.css">
     <link rel="stylesheet" href="css/hero.css">
     <link rel="stylesheet" href="css/couple.css">
@@ -25,7 +26,16 @@
 </head>
 
 
-<body class="intro-active">
+<body class="intro-active cover-active">
+
+    <!-- COVER: one tap starts the video and the song together -->
+    <section id="cover" class="cover" aria-label="Wedding invitation cover">
+        <p class="cover-eyebrow">To our dearest guests</p>
+        <button id="coverGate" class="cover-gate" type="button" aria-label="Tap the doors to open the gates">
+            <img src="assets/temple_gopuram.png" alt="" decoding="async" fetchpriority="high">
+        </button>
+        <p id="coverHint" class="cover-hint">Tap the doors to open the gates</p>
+    </section>
 
     <!-- OPENING VIDEO -->
 
@@ -34,7 +44,6 @@
         <video
             id="introVideo"
             class="intro-video"
-            autoplay
             muted
             playsinline
             webkit-playsinline
@@ -75,6 +84,7 @@
 
     <!-- JAVASCRIPT -->
 
+    <script src="js/cover.js"></script>
     <script src="js/opening.js"></script>
     <script src="js/hero.js"></script>
     <script src="js/date.js"></script>

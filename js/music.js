@@ -1,6 +1,7 @@
 /* music.js — background music for the invitation.
-   - Starts when the guest taps "Tap to receive blessings" on the Ganesha screen (card/js/intro.js
-     calls window.weddingMusic.begin() from inside that tap).
+   - Starts when the guest taps the cover (js/cover.js calls window.weddingMusic.begin() from inside
+     that tap) and then plays straight through the intro, Ganesha and the site. begin() is safe to
+     call again (the Ganesha tap still does), it never restarts the song.
    - Loops quietly, fades in, and never touches any existing element: the only thing it adds is one
      small fixed mute/unmute button (top-right) that sits above everything and takes no layout space.
    - Light on purpose: the file is not downloaded until the guest enters (preload "none"), it is

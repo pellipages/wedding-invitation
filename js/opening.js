@@ -101,8 +101,11 @@ function setupOpening() {
         );
 
 
+        // The cover (js/cover.js) starts the video on the guest's tap.
         const playPromise =
-            video.play();
+            document.body.classList.contains("cover-active")
+                ? null
+                : video.play();
 
 
         if (playPromise) {
