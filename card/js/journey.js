@@ -96,7 +96,7 @@ function openWorld(k,push){
  const t0=new Date(e.when),t1=new Date(t0.getTime()+(e.mins||120)*6e4),title=`${e.n} — Harika & Prem`;
  const gcal=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${enc(title)}&dates=${ics(t0)}/${ics(t1)}&details=${enc(e.desc||'')}&location=${enc(e.venue||'')}`;
  const head=`<div class="tel">${esc(e.t)}</div><h3>${esc(e.n)}</h3>`;
- const info=`<p class="dt">${esc(e.date)} · ${esc(e.time)}</p><p class="dsc">${esc(e.desc)}</p><p class="dsc">${pin}${esc(e.venue)}</p>
+ const info=`<p class="dt">${esc(e.date)} · ${esc(e.time)}</p><p class="dsc">${esc(e.desc)}</p><p class="dsc">${pin}${esc(e.venue)}</p>${e.dress?`<p class="dsc dress"><span>Dress code</span> ${esc(e.dress)}</p>`:''}
   <div class="cds" role="timer" aria-label="Countdown to ${esc(e.n)}"><div><b data-c="0">--</b>days</div><div><b data-c="1">--</b>hours</div><div><b data-c="2">--</b>minutes</div></div>
   <p class="acts"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${enc(e.venue||'')}">Google Maps</a><a class="btn alt" target="_blank" rel="noopener" href="${gcal}">Google Calendar</a><button class="btn alt" data-ics>Apple Calendar (.ics)</button></p>`;
  const hero=`<img class="hero" src="${esc(e.hero||e.art)}" alt="Illustration of the ${esc(e.n)}">`;

@@ -46,3 +46,7 @@
 .w-vindu .in{display:flex;flex-direction:column}.w-vindu .hd{order:1}.w-vindu .hero{order:2}.w-vindu .txt{order:3}
 .w-eng .txt{padding-bottom:40vw}.rs-c h2{max-width:56vw}
 @media(min-width:1100px){.w-vindu .in{display:grid}}
+
+/* Dress code line on an event page */
+.wr .dress{font-style:italic}
+.wr .dress span{font-style:normal;font-size:.78em;letter-spacing:.18em;text-transform:uppercase;opacity:.75;margin-right:.5em}
