@@ -37,7 +37,7 @@
   position:absolute;
   z-index:8;
   left:var(--px);
-  top:13vw;
+  top:calc(13vw + 10svh);   /* names block sits 10% of the screen lower */
   width:min(58vw,700px);
 }
 
@@ -110,7 +110,7 @@
 
 @media(min-width:700px) and (max-width:1099px){
   .cp-text{
-    top:10vw;
+    top:calc(10vw + 10svh);
     width:54vw;
   }
   .names{
@@ -142,7 +142,7 @@
   }
   .cp-text{
     left:9vw;
-    top:50%;
+    top:60%;   /* was 50%: 10% lower */
     width:45vw;
     transform:translateY(-50%);
   }
@@ -177,7 +177,7 @@
 
 @media(max-width:699px){
   .cp-text{
-    top:13svh;
+    top:23svh;   /* was 13svh: 10% lower */
     left:var(--px);
     width:78vw;
   }
