@@ -505,7 +505,7 @@
 /* =========================================================
    TAP TO RECEIVE BLESSINGS
    The tap that starts the music and the akshintalu + petal shower (see js/intro.js).
-   It fades in a few seconds after Ganesha appears (3.6s); the whole shrine is tappable, this is the visible cue.
+   It fades in together with Ganesha; the whole shrine is tappable, this is the visible cue.
    ========================================================= */
 .bless-tap {
   margin: clamp(14px, 2.6svh, 26px) 0 0;
@@ -525,7 +525,7 @@
 }
 
 #bless.on .bless-tap {
-  animation: blessTapIn 0.9s ease 3.6s forwards, blessTapPulse 2.4s ease-in-out 4.6s infinite;
+  animation: blessTapIn 0.8s ease 0.2s forwards, blessTapPulse 2.4s ease-in-out 1.2s infinite;
 }
 
 @keyframes blessTapIn {
@@ -560,5 +560,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #bless.on .bless-tap { animation: blessTapIn 0.01s linear 3s forwards; }
+  #bless.on .bless-tap { animation: blessTapIn 0.01s linear 0s forwards; }
 }
