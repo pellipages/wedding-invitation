@@ -28,8 +28,8 @@ edit("index.html", [
     ("R <span>&amp;</span> K", "H <span>&amp;</span> P"),
     ("రుక్మిణి &amp; కృష్ణ", "హారిక &amp; ప్రేమ్"),
     ("Rukmini<br>&amp; Krishna", "Harika<br>&amp; Prem"),
-    ("Rukmini, daughter of <i>[Parents]</i><br>", "<i>Harika Jillalla</i><br>"),
-    ("Krishna, son of <i>[Parents]</i>", "&amp; <i>Prem Sai Reddy Chandra</i>"),
+    ("Rukmini, daughter of <i>[Parents]</i><br>", "<i>Harika</i><br>"),
+    ("Krishna, son of <i>[Parents]</i>", "&amp; <i>Prem</i>"),
     ("<span>14 December</span>", "<span>18 November</span>"),
     ("R &amp; K · 2026", "H &amp; P · 2026"),
 ])
