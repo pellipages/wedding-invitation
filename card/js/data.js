@@ -14,7 +14,7 @@ const EVENTS=[
  side:'R',aw:'96vw',art:'sangeeth-photo.webp',node:'kolam-lotus-node.webp',extras:[],hero:'sangeeth-photo.webp'},
 {k:'pelli',t:'పెళ్లి',n:'The Pelli',cls:'w-pelli',fc:'#6A1E2B',sevenBefore:1,when:'2026-11-18T18:01:00-06:00',date:'18 November 2026',time:'6:01 PM',venue:V,desc:'Seven steps, one promise. Join us beneath the mandapam.',
  side:'L',aw:'112vw',art:'pelli-photo.webp',node:'sacred-knot.webp',hero:'pelli-photo.webp',
- extras:['wedding-celestial-header.webp|w:40vw;r:4vw;t:-16vw;z:1|w:26vw;t:-10vw|w:min(18vw,320px);r:6vw;t:-1vw;z:1']}
+ extras:[]}
 ];
 
 /* Environment per world: one idea each, and only where it frames the subject */

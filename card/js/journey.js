@@ -110,7 +110,12 @@ function openWorld(k,push){
  world.querySelector('[data-ics]').onclick=()=>{const s=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Harika & Prem//EN','BEGIN:VEVENT',`UID:${e.k}@harika-prem`,`DTSTAMP:${ics(new Date())}`,`DTSTART:${ics(t0)}`,`DTEND:${ics(t1)}`,`SUMMARY:${title}`,`DESCRIPTION:${(e.desc||'').replace(/\n/g,' ')}`,`LOCATION:${e.venue||''}`,'END:VEVENT','END:VCALENDAR'].join('\r\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'text/calendar'}));a.download=e.k+'.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)};
  if(push!==false)history.pushState({w:1},'','#/event/'+e.k);
  document.documentElement.style.overflow='hidden';world.scrollTop=0;
- requestAnimationFrame(()=>{world.classList.add('on');world.querySelector('[data-back]').focus({preventScroll:true})})}
+ requestAnimationFrame(()=>{world.classList.add('on');world.querySelector('[data-back]').focus({preventScroll:true})});
+ /* The Pelli is the ceremony itself: as its page opens, akshintalu (blessed rice) and petals shower down once, then stop.
+    Waits for the circular reveal to start, and skips if the guest has left again or prefers reduced motion. */
+ if(e.k=='pelli'&&!(matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)&&typeof rain=='function'){
+  setTimeout(()=>{if(wcur!==e)return;rain('akshintalu-particle.webp',90,14,4);rain('petal.webp',24,24,4.5)},500);
+  setTimeout(()=>{if(wcur!==e)return;rain('petal.webp',16,20,4)},1900)}}
 function closeWorld(pop){
  if(!wcur)return;const k=wcur.k;wcur=null;clearInterval(tick);world.classList.remove('on');
  document.documentElement.style.overflow='';scrollTo({top:jy,behavior:'instant'});   /* back to where the guest was walking */
