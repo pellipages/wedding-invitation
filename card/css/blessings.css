@@ -421,3 +421,16 @@
     display: none;
   }
 }
+
+/* Shown when a blessing could not be sent to the server */
+.bl-error {
+  margin: 0 auto 12px;
+  max-width: 420px;
+  text-align: center;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #8a2b2b;
+}
+.bl-error[hidden] { display: none; }
+.bl-leave-btn:disabled { opacity: .6; cursor: progress; }

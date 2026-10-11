@@ -251,7 +251,7 @@
             <div class="bl-salutation">Dear Harika &amp; Prem,</div>
 
             <div class="bl-ink-body">
-              <textarea id="bm" rows="4" placeholder="May your path ahead be filled with laughter, patience, and warmth…" aria-label="Write your blessing"></textarea>
+              <textarea id="bm" rows="4" maxlength="800" placeholder="May your path ahead be filled with laughter, patience, and warmth…" aria-label="Write your blessing"></textarea>
             </div>
 
             <div class="bl-signoff">
@@ -271,6 +271,8 @@
           </div>
         </div>
       </div>
+
+      <p class="bl-error" id="blErr" role="alert" hidden></p>
 
       <div class="bl-actions" id="blActionArea">
         <button id="bsend" class="bl-leave-btn" type="button">
