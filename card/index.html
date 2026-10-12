@@ -104,6 +104,16 @@
       <span class="inv-amp" aria-hidden="true">&amp;</span>
       <span class="inv-n2" aria-hidden="true">Prem</span>
     </h1>
+
+    <!-- Scroll cue: this slide is only the first of many. Appears once Ganesha has gone, hides as soon as the guest scrolls, tap = go to next slide. -->
+    <button type="button" class="inv-cue" id="invCue" aria-label="Scroll down to see the invitation">
+      <span class="inv-cue-text">
+        <span class="inv-cue-mouse">Scroll down</span><span class="inv-cue-touch">Swipe up</span>
+      </span>
+      <svg class="inv-cue-arrow" viewBox="0 0 24 16" width="28" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 2.5l8 5.5 8-5.5"/><path d="M4 8.5l8 5.5 8-5.5" opacity=".5"/>
+      </svg>
+    </button>
   </div>
 </section>
 <section class="sc snap reveal" id="reveal">
@@ -461,6 +471,7 @@
 <script src="js/data.js"></script>
 <script src="js/core.js"></script>
 <script src="js/intro.js"></script>
+<script src="js/cue.js"></script>
 <script src="js/journey.js"></script>
 <script src="js/moments.js"></script>
 <script src="js/blessings.js"></script>

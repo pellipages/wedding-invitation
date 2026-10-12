@@ -15,6 +15,7 @@ const startMusic = () => {
 
 // Let the guest into the site (what used to happen on its own 5 seconds after Ganesha appeared).
 const enterSite = () => {
+  document.documentElement.classList.add('site-entered');   // js/cue.js + scenes.css: scroll cue may appear now
   if (bless) {
     bless.classList.add('dismissed');
     bless.style.pointerEvents = 'none';

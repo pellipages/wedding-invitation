@@ -130,8 +130,39 @@
   .inv-amp{font-size:clamp(38px,calc(var(--u) * 17),180px);margin:0}
 }
 
+/* scroll cue: a parchment pill over the lotus, so it reads on every screen shape.
+   Hidden until js/cue.js sees the site open (.site-entered), gone again while the guest is scrolled (.is-away). */
+.inv-cue{
+  z-index:8;left:50%;translate:-50% 0;
+  bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 16px));
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  margin:0;padding:11px 30px 9px;
+  border:1.5px solid var(--turm);border-radius:999px;
+  background:var(--maroon);color:var(--ivory);
+  box-shadow:0 calc(var(--u) * 1) calc(var(--u) * 4) #4a101866, 0 0 0 5px #f8efdb99;   /* soft parchment halo keeps it clear of the lotus */
+  font:italic 600 clamp(20px,5.4vw,26px)/1.1 var(--serif);letter-spacing:.03em;white-space:nowrap;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  opacity:0;pointer-events:none;
+}
+.inv-cue-arrow{width:clamp(24px,6.5vw,30px);height:auto;color:var(--turm)}
+.site-entered .inv-cue{
+  opacity:1;pointer-events:auto;
+  transition:opacity .7s ease 2s;                    /* wait for the petal shower, then fade in */
+  animation:inv-cue-bob 2.2s ease-in-out 2.7s infinite;
+}
+.site-entered .inv-cue.is-settled{transition-delay:0s}   /* the 2s wait is for the first appearance only */
+.site-entered .inv-cue.is-away{opacity:0;pointer-events:none;transition-delay:0s;transition-duration:.35s}
+.inv-cue:focus-visible{outline:2px solid var(--maroon-ink);outline-offset:3px}
+.inv-cue-touch{display:none}
+@media (hover:none) and (pointer:coarse){
+  .inv-cue-touch{display:inline}
+  .inv-cue-mouse{display:none}
+}
+@keyframes inv-cue-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
 @media (prefers-reduced-motion:reduce){
   .inv-jas{animation:none}
+  .site-entered .inv-cue{animation:none}
 }
 
 
