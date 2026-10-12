@@ -1,0 +1,8 @@
+# Not part of the site: keep out of the public deployment
+couple_photos
+personalize_card.py
+schema.sql
+schema-blessings.sql
+migrations
+..env.swp
+card/memory-01.webp0
