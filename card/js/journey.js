@@ -87,7 +87,7 @@ stops.forEach(el=>{const im=el.querySelector('.st-art img'),set=()=>{el.querySel
 addEventListener('resize',sched);addEventListener('load',sched);document.fonts&&document.fonts.ready.then(sched);trail();measure();
 
 /* ---------- celebration chapters (same data, same worlds.css compositions) ---------- */
-/* Dress code pill: small woman + man icons act as bullets either side of the dress code, coloured to the event's vibe. */
+/* Dress code pill: small woman + man icons act as bullets either side of the dress code, colored to the event's vibe. */
 const DRESS={
  haldi:{w:['#F6C6D8','#BDE5D3','#FCE9A8'],m:['#FBD3BC','#FFF2DC','#CFE3F5'],t:'#E2A72E'},
  mehendi:{w:['#2E8B57','#1F6B43','#BFE3A5'],m:['#3C9A62','#F5EBD8','#E2A72E'],t:'#E2A72E'},
@@ -117,7 +117,7 @@ function openWorld(k,push){
   <p class="acts"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${enc(e.venue||'')}">Google Maps</a><a class="btn alt" target="_blank" rel="noopener" href="${gcal}">Google Calendar</a><button class="btn alt" data-ics>Apple Calendar (.ics)</button></p>`;
  const hero=`<img class="hero" src="${esc(e.hero||e.art)}" alt="Illustration of the ${esc(e.n)}">`;
  const inner=e.cls=='w-vindu'?`<div class="col"><div class="hd">${head}</div><div class="txt">${info}</div></div>${hero}`
-  :e.cls=='w-pelli'?`<div class="ctitle">${head}</div>${e.node?`<img class="knot" src="${esc(e.node)}" alt="" aria-hidden="true">`:''}${hero}<div class="txt ctr">${info}</div>`
+  :e.cls=='w-pelli'?`${hero}<div class="ctitle">${head}</div>${e.node?`<img class="knot" src="${esc(e.node)}" alt="" aria-hidden="true">`:''}<div class="txt ctr">${info}</div>`
   :`${hero}<div class="txt">${head}${info}</div>`;
  world.className=e.cls+' ev-'+e.k;
  world.innerHTML=`<div class="wr">${L(WORLD_ENV[e.k])}${L(e.extras)}<button class="back btn alt" data-back>← Continue the Wedding Journey</button><div class="in">${inner}</div></div>`;flush();

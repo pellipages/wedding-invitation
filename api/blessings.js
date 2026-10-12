@@ -50,7 +50,7 @@ export default async function handler(req, res) {
       return res.end(csv);
     }
 
-    return send(res, 200, { ok: true, total: items.length, blessings: items });
+    return send(res, 200, { ok: true, blessings: items });
   } catch (err) {
     logError('blessings', err);
     return send(res, 500, { ok: false });

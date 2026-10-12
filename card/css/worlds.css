@@ -24,12 +24,12 @@
 .w-eng .hero{width:100vw;margin-top:12vw}.w-eng .txt{padding:6vw var(--px) 24vw}
 /* Pasupu — abundant turmeric: tall art to the right, text to the left below */
 .w-pasupu .hero{width:82vw;margin:10vw 0 0 auto}.w-pasupu .txt{padding:4vw var(--px) 18vw}
-/* Pelli — ceremonial, centred: celestial crest, title, knot, wide mandapam art, details */
+/* Pelli — ceremonial, centred: wide mandapam art, title, knot, details */
 .w-pelli .in{display:flex;flex-direction:column;align-items:center}.w-pelli .crest{width:56vw;margin-top:12vw}
-.w-pelli .knot{width:16vw;margin:4vw 0;opacity:.9}.w-pelli .hero{width:104vw;margin:4vw 0 0}.w-pelli .txt{padding:4vw var(--px) 18vw}
+.w-pelli .knot{width:16vw;margin:4vw 0;opacity:.9}.w-pelli .hero{width:104vw;margin:8vw 0 0}.w-pelli .ctitle{margin-top:4vw}.w-pelli .txt{padding:4vw var(--px) 18vw}
 .w-pelli.on .hero{animation:unfold 1.8s ease both}@keyframes unfold{from{opacity:0;scale:.9;translate:0 4vw}}
-/* Vindu Bhojanam — warm: title, big tall banquet art to the right, details */
-.w-vindu .col{display:contents}.w-vindu .hd{padding:14vw var(--px) 0}.w-vindu .hero{width:76vw;margin:4vw 0 0 auto}.w-vindu .txt{padding:6vw var(--px) 18vw}
+/* Vindu Bhojanam — warm: big tall art to the right, title, details */
+.w-vindu .col{display:contents}.w-vindu .hd{padding:4vw var(--px) 0}.w-vindu .hero{width:76vw;margin:10vw 0 0 auto}.w-vindu .txt{padding:6vw var(--px) 18vw}
 @media(min-width:700px){
  .wr h3{font-size:clamp(72px,11vw,120px)}.wr .dsc{max-width:52vw}
  .w-eng .hero{width:70vw;margin:8vw auto 0 0}.w-eng .txt{padding-left:12vw}
@@ -43,7 +43,7 @@
  .w-vindu .in{grid-template-columns:1fr 1fr}.w-vindu .col{display:block;grid-column:1;grid-row:1;padding:0 3vw 0 9vw}.w-vindu .hd{padding:0}.w-vindu .txt{padding:0}
  .w-vindu .hero{grid-column:2;grid-row:1;width:min(32vw,calc(88svh*.562));margin:0 auto}
  .w-pelli .crest{width:min(22vw,380px);margin-top:6vw}.w-pelli .hero{width:min(60vw,980px)}.w-pelli .knot{width:min(7vw,110px)}}
-.w-vindu .in{display:flex;flex-direction:column}.w-vindu .hd{order:1}.w-vindu .hero{order:2}.w-vindu .txt{order:3}
+.w-vindu .in{display:flex;flex-direction:column}.w-vindu .hero{order:1}.w-vindu .hd{order:2}.w-vindu .txt{order:3}
 .w-eng .txt{padding-bottom:40vw}.rs-c h2{max-width:56vw}
 @media(min-width:1100px){.w-vindu .in{display:grid}}
 
@@ -52,7 +52,7 @@
 .w-eng .txt,.w-pasupu .txt,.w-vindu .txt,.w-vindu .col,.w-vindu .hd{padding-inline:6vw}
 .wr .dsc{margin-inline:auto}.wr .cds,.wr .acts{justify-content:center}.wr .acts{display:flex;flex-wrap:wrap;gap:10px}
 
-/* Dress code: a pill with a woman and a man icon as bullets, coloured per event so it pops on every page */
+/* Dress code: a pill with a woman and a man icon as bullets, colored per event so it pops on every page */
 .dc{--dbg:#F5EBD8;--dfg:#6A1E2B;--dtrim:#E2A72E;--dlab:#F5EBD8;display:flex;flex-direction:column;align-items:center;gap:12px;width:min(92vw,420px);margin:24px auto 12px;text-align:center}
 .dc-k{display:flex;align-items:center;gap:12px;font:600 13px/1 var(--serif);letter-spacing:.34em;text-transform:uppercase;color:var(--dlab)}
 .dc-k::before,.dc-k::after{content:"";width:34px;height:2px;border-radius:2px;background:var(--dtrim)}
@@ -71,6 +71,7 @@
 @media(prefers-reduced-motion:reduce){#world.on .dc-pill{animation:none}}
 
 /* Event backgrounds (a tier of the event's own artwork; the gradient behind each is the fallback) */
+.ev-haldi{background:url("../haldi-bg.webp") center/cover no-repeat,#EDB72A}
 .ev-mehendi{background:url("../mehendi-bg.webp") center/cover no-repeat,#153731;color:#F5EBD8}
 .ev-pellikuthuru{background:url("../pellikuthuru-bg.webp") center/cover no-repeat,#C8105F;color:#F5EBD8}
 .ev-sangeeth{background:url("../sangeeth-bg.webp") center/cover no-repeat,var(--ggrain),linear-gradient(170deg,#b45a3c,#7e3a26 55%,#5a3a25)}
