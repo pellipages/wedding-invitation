@@ -47,6 +47,31 @@
 .w-eng .txt{padding-bottom:40vw}.rs-c h2{max-width:56vw}
 @media(min-width:1100px){.w-vindu .in{display:grid}}
 
-/* Dress code line on an event page */
-.wr .dress{font-style:italic}
-.wr .dress span{font-style:normal;font-size:.78em;letter-spacing:.18em;text-transform:uppercase;opacity:.75;margin-right:.5em}
+/* Everything on an event page is centred */
+.wr .txt,.wr .col,.wr .hd,.wr .ctitle{text-align:center}
+.w-eng .txt,.w-pasupu .txt,.w-vindu .txt,.w-vindu .col,.w-vindu .hd{padding-inline:6vw}
+.wr .dsc{margin-inline:auto}.wr .cds,.wr .acts{justify-content:center}.wr .acts{display:flex;flex-wrap:wrap;gap:10px}
+
+/* Dress code: a pill with a woman and a man icon as bullets, coloured per event so it pops on every page */
+.dc{--dbg:#F5EBD8;--dfg:#6A1E2B;--dtrim:#E2A72E;--dlab:#F5EBD8;display:flex;flex-direction:column;align-items:center;gap:12px;width:min(92vw,420px);margin:24px auto 12px;text-align:center}
+.dc-k{display:flex;align-items:center;gap:12px;font:600 13px/1 var(--serif);letter-spacing:.34em;text-transform:uppercase;color:var(--dlab)}
+.dc-k::before,.dc-k::after{content:"";width:34px;height:2px;border-radius:2px;background:var(--dtrim)}
+.dc-pill{display:flex;align-items:center;justify-content:center;gap:12px;max-width:100%;padding:12px 24px;border-radius:999px;background:var(--dbg);color:var(--dfg);border:3px solid var(--dtrim);outline:2px solid var(--dtrim);outline-offset:5px;box-shadow:0 14px 30px #0008}
+.dc-ic{height:60px;width:auto;flex:none}
+.dc-v{font:400 clamp(30px,8.6vw,46px)/1.05 var(--script)}
+.dc-haldi{--dbg:#3B1F2E;--dfg:#FCE9A8;--dtrim:#F6C6D8;--dlab:#3a2404}
+.dc-mehendi{--dbg:linear-gradient(135deg,#E6F4CF,#BFE3A5);--dfg:#1F4D32;--dtrim:#E2A72E}
+.dc-sangeeth{--dbg:linear-gradient(135deg,#F7E9C4,#EBCF86);--dfg:#17120F;--dtrim:#D9A400}
+.dc-pellikuthuru{--dbg:linear-gradient(135deg,#FBE3A0,#F5C400);--dfg:#7A1208;--dtrim:#FFF1D6}
+.dc-pellikoduku{--dbg:linear-gradient(135deg,#E3EEFB,#B9D2F0);--dfg:#15305A;--dtrim:#E2A72E}
+.dc-pelli{--dbg:#4A1220;--dfg:#F5E3B0;--dtrim:#E2A72E}
+#world.on .dc-pill{animation:dcPop .9s cubic-bezier(.2,1.3,.4,1) 1.1s both,dcGlow 3.2s ease-in-out 2s infinite}
+@keyframes dcPop{from{opacity:0;transform:translateY(18px) scale(.9)}}
+@keyframes dcGlow{50%{box-shadow:0 14px 30px #0008,0 0 0 9px #ffffff30}}
+@media(prefers-reduced-motion:reduce){#world.on .dc-pill{animation:none}}
+
+/* Event backgrounds (a tier of the event's own artwork; the gradient behind each is the fallback) */
+.ev-mehendi{background:url("../mehendi-bg.webp") center/cover no-repeat,#153731;color:#F5EBD8}
+.ev-pellikuthuru{background:url("../pellikuthuru-bg.webp") center/cover no-repeat,#C8105F;color:#F5EBD8}
+.ev-sangeeth{background:url("../sangeeth-bg.webp") center/cover no-repeat,var(--ggrain),linear-gradient(170deg,#b45a3c,#7e3a26 55%,#5a3a25)}
+.ev-pellikoduku{background:url("../pellikoduku-bg.webp") center/cover no-repeat,var(--ggrain),linear-gradient(170deg,#c27b3a,#a4602c 45%,#6b4a24)}

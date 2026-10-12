@@ -31,12 +31,13 @@ const enterSite = () => {
   setTimeout(() => { if (env) env.style.display = 'none'; }, 1800);
 };
 
-// The blessing: one tap starts the music, showers akshintalu and petals over Ganesha, then opens the site.
+// The blessing: showers akshintalu and petals over Ganesha, then opens the site. It starts on its own once he has faded in;
+// a tap anywhere on the shrine just hurries it along.
 const receiveBlessing = () => {
   if (blessed || !bless || !bless.classList.contains('on')) return;
   blessed = 1;
   clearTimeout(blessTimer);
-  startMusic();                       // must stay first and synchronous: it is the tap that unlocks sound
+  startMusic();                       // music normally began at the cover gate; this only matters if it was blocked
   bless.classList.add('blessed');
   if (!calm && typeof rain === 'function') {
     // z-index 1000 so they fall in FRONT of the shrine (the shrine layer sits at 998/999)
@@ -74,15 +75,8 @@ envelope.onclick = () => {
     }
   }, 1800);
 
-  // Step 3: Ganesha now waits for the guest's tap (see receiveBlessing above).
-  // Safety net so nobody is stuck on this screen: after 25 s carry on without the tap.
-  // Sound is then still pending, and the next tap anywhere starts it (see music.js).
-  blessTimer = setTimeout(() => {
-    if (blessed) return;
-    blessed = 1;
-    startMusic();
-    enterSite();
-  }, 25000);
+  // Step 3: no button any more. Once Ganesha has fully faded in, the blessing begins on its own.
+  blessTimer = setTimeout(receiveBlessing, calm ? 2400 : 2800);
 };
 
 // Scratch to reveal card

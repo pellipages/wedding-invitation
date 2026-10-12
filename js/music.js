@@ -161,9 +161,9 @@
 
     /* ---------- when does it begin? ---------- */
 
-    // The music begins on the guest's tap on the Ganesha screen ("Tap to receive blessings").
-    // card/js/intro.js calls weddingMusic.begin() synchronously inside that tap, which is what lets
-    // the browser allow sound. If a browser still refuses, start() arms the tap-anywhere fallback.
+    // The music begins on the guest's tap on the cover gate (js/cover.js). card/js/intro.js also calls
+    // weddingMusic.begin() when the blessing starts, which is a no-op if music is already going.
+    // If a browser still refuses sound, start() arms the tap-anywhere fallback.
     function enter() {
         if (entered) { return; }
         entered = true;

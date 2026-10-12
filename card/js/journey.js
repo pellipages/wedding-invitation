@@ -87,6 +87,20 @@ stops.forEach(el=>{const im=el.querySelector('.st-art img'),set=()=>{el.querySel
 addEventListener('resize',sched);addEventListener('load',sched);document.fonts&&document.fonts.ready.then(sched);trail();measure();
 
 /* ---------- celebration chapters (same data, same worlds.css compositions) ---------- */
+/* Dress code pill: small woman + man icons act as bullets either side of the dress code, coloured to the event's vibe. */
+const DRESS={
+ haldi:{w:['#F6C6D8','#BDE5D3','#FCE9A8'],m:['#FBD3BC','#FFF2DC','#CFE3F5'],t:'#E2A72E'},
+ mehendi:{w:['#2E8B57','#1F6B43','#BFE3A5'],m:['#3C9A62','#F5EBD8','#E2A72E'],t:'#E2A72E'},
+ sangeeth:{w:['#17120F','#17120F','#2A2320'],m:['#17120F','#17120F','#2A2320'],t:'#D9A400'},
+ pellikuthuru:{w:['#C0392B','#E2A72E','#F28C28'],m:['#F5EBD8','#F5EBD8','#6A1E2B'],t:'#E2A72E'},
+ pellikoduku:{w:['#2F5D9B','#E2A72E','#F5EBD8'],m:['#F5EBD8','#F5EBD8','#C0392B'],t:'#E2A72E'},
+ pelli:{w:['#D1274B','#F5C400','#F28C28'],m:['#F5EBD8','#F5EBD8','#6A1E2B'],t:'#C99A1E'}
+},DRESS_DEFAULT={w:['#C0392B','#E2A72E','#F5C400'],m:['#F5EBD8','#F5EBD8','#6A1E2B'],t:'#E2A72E'};
+function dressIcons(k){
+ const d=DRESS[k]||DRESS_DEFAULT,[s,b,p]=d.w,[kr,pt,st]=d.m,t=d.t,sk='#C48A63',hr='#2B1B14';
+ const her=`<svg class="dc-ic" viewBox="28 8 84 170" aria-hidden="true" focusable="false"><path d="M52 80H88L110 162Q70 174 30 162Z" fill="${s}"/><path d="M30 162Q70 174 110 162" fill="none" stroke="${t}" stroke-width="4"/><rect x="66" y="38" width="8" height="12" fill="${sk}"/><path d="M54 48Q70 42 86 48L88 82H52Z" fill="${b}"/><path d="M52 80H88" stroke="${t}" stroke-width="3"/><path d="M56 50L46 96L54 98L62 62Z" fill="${sk}"/><path d="M58 46C92 54 100 92 94 128L102 130C110 90 100 50 66 38Z" fill="${p}"/><circle cx="70" cy="28" r="12" fill="${sk}"/><path d="M58 28Q58 12 70 12Q82 12 82 28Q76 19 70 19Q64 19 58 28Z" fill="${hr}"/><circle cx="70" cy="11" r="6" fill="${hr}"/></svg>`;
+ const him=`<svg class="dc-ic" viewBox="132 10 76 158" aria-hidden="true" focusable="false"><path d="M150 112H190L186 160H174L170 130L166 160H154Z" fill="${pt}"/><ellipse cx="160" cy="163" rx="9" ry="4" fill="${hr}"/><ellipse cx="180" cy="163" rx="9" ry="4" fill="${hr}"/><rect x="166" y="38" width="8" height="12" fill="${sk}"/><path d="M148 48Q170 40 192 48L198 116H142Z" fill="${kr}"/><path d="M142 116H198" stroke="${t}" stroke-width="3"/><path d="M148 48L134 104L144 108L156 66Z" fill="${kr}"/><path d="M192 48L206 104L196 108L184 66Z" fill="${kr}"/><circle cx="139" cy="108" r="5" fill="${sk}"/><circle cx="201" cy="108" r="5" fill="${sk}"/><path d="M170 44V90" stroke="${t}" stroke-width="2"/>${[58,70,82].map(y=>`<circle cx="170" cy="${y}" r="1.8" fill="${t}"/>`).join('')}<path d="M150 46Q170 58 190 46L188 56Q170 70 152 56Z" fill="${st}"/><path d="M160 60L156 112H164L168 62Z" fill="${st}"/><circle cx="170" cy="28" r="12" fill="${sk}"/><path d="M158 27Q158 13 170 13Q182 13 182 27Q176 19 170 19Q164 19 158 27Z" fill="${hr}"/></svg>`;
+ return [her,him]}
 let wcur=null,tick=null,jy=0;
 const enc=encodeURIComponent,ics=d=>d.toISOString().replace(/[-:]|\.\d{3}/g,'');
 const pin='<svg class="pin" viewBox="0 0 20 28" fill="currentColor" aria-hidden="true"><path d="M10 0C4.5 0 0 4.4 0 9.8 0 17 10 28 10 28s10-11 10-18.2C20 4.4 15.5 0 10 0zm0 13.5a3.7 3.7 0 110-7.4 3.7 3.7 0 010 7.4z"/></svg>';
@@ -96,14 +110,14 @@ function openWorld(k,push){
  const t0=new Date(e.when),t1=new Date(t0.getTime()+(e.mins||120)*6e4),title=`${e.n} — Harika & Prem`;
  const gcal=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${enc(title)}&dates=${ics(t0)}/${ics(t1)}&details=${enc(e.desc||'')}&location=${enc(e.venue||'')}`;
  const head=`<div class="tel">${esc(e.t)}</div><h3>${esc(e.n)}</h3>`;
- const info=`<p class="dt">${esc(e.date)} · ${esc(e.time)}</p><p class="dsc">${esc(e.desc)}</p><p class="dsc">${pin}${esc(e.venue)}</p>${e.dress?`<p class="dsc dress"><span>Dress code</span> ${esc(e.dress)}</p>`:''}
+ const info=`<p class="dt">${esc(e.date)} · ${esc(e.time)}</p><p class="dsc">${esc(e.desc)}</p><p class="dsc">${pin}${esc(e.venue)}</p>${e.dress?`<div class="dc dc-${esc(e.k)}" role="group" aria-label="Dress code: ${esc(e.dress)}"><span class="dc-k">Dress code</span><span class="dc-pill">${dressIcons(e.k)[0]}<b class="dc-v">${esc(e.dress)}</b>${dressIcons(e.k)[1]}</span></div>`:''}
   <div class="cds" role="timer" aria-label="Countdown to ${esc(e.n)}"><div><b data-c="0">--</b>days</div><div><b data-c="1">--</b>hours</div><div><b data-c="2">--</b>minutes</div></div>
   <p class="acts"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${enc(e.venue||'')}">Google Maps</a><a class="btn alt" target="_blank" rel="noopener" href="${gcal}">Google Calendar</a><button class="btn alt" data-ics>Apple Calendar (.ics)</button></p>`;
  const hero=`<img class="hero" src="${esc(e.hero||e.art)}" alt="Illustration of the ${esc(e.n)}">`;
  const inner=e.cls=='w-vindu'?`<div class="col"><div class="hd">${head}</div><div class="txt">${info}</div></div>${hero}`
   :e.cls=='w-pelli'?`<div class="ctitle">${head}</div>${e.node?`<img class="knot" src="${esc(e.node)}" alt="" aria-hidden="true">`:''}${hero}<div class="txt ctr">${info}</div>`
   :`${hero}<div class="txt">${head}${info}</div>`;
- world.className=e.cls;
+ world.className=e.cls+' ev-'+e.k;
  world.innerHTML=`<div class="wr">${L(WORLD_ENV[e.k])}${L(e.extras)}<button class="back btn alt" data-back>← Continue the Wedding Journey</button><div class="in">${inner}</div></div>`;flush();
  const cd=()=>{const v=left(t0);world.querySelectorAll('[data-c]').forEach(b=>b.textContent=+b.dataset.c?pad(v[b.dataset.c]):v[0])};cd();tick=setInterval(cd,1000);
  world.querySelector('[data-back]').onclick=()=>closeWorld();
