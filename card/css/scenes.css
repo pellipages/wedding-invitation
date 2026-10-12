@@ -708,17 +708,29 @@
 .ds { font-size: 17px; line-height: 1.4; margin-top: .6em; opacity: .85; }
 
 .go {
-  display: inline-block;
-  margin-top: .8em;
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  margin-top: 1em;
+  padding: .55em 1.2em;
   font-style: italic;
-  font-size: 16px;
-  color: var(--terra);
-  border-bottom: 1px solid currentColor;
-  transition: opacity .5s;
+  font-size: 18px;
+  letter-spacing: .04em;
+  color: #fff7e8;
+  background: var(--terra);
+  border: 1px solid var(--maroon);
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(120, 40, 20, .28);
+  animation: goPulse 2.4s ease-in-out infinite;
+  transition: transform .3s, box-shadow .3s, background .3s;
 }
 
-@media(hover: hover) { .go { opacity: 0; } }
-.stop:hover .go, .stop:focus-visible .go, .stop.cur .go { opacity: 1; }
+@keyframes goPulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(120, 40, 20, .28), 0 0 0 0 rgba(176, 80, 50, .45); }
+  50% { box-shadow: 0 4px 14px rgba(120, 40, 20, .28), 0 0 0 10px rgba(176, 80, 50, 0); }
+}
+
+.stop:hover .go, .stop:focus-visible .go, .stop.cur .go { background: var(--maroon); transform: translateX(4px); }
 .stop:hover .st-art, .stop:focus-visible .st-art { transform: translateY(-6px); }
 
 .st-txt .node { width: clamp(46px, 7vw, 84px); margin: 0 auto 1vh; }
@@ -809,6 +821,7 @@
 
 @media(prefers-reduced-motion: reduce) {
   .fp, .st-art, .st-txt, .go, .stop .d { transition: none !important; }
+  .go { animation: none !important; }
   .stop:hover .st-art { transform: none; }
 }
 
