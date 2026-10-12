@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/rsvp.css">
 <link rel="stylesheet" href="css/close.css">
 <link rel="stylesheet" href="css/intro.css">
+<link rel="stylesheet" href="css/nav.css">
 </head><body>
 <div id="env">
     <div class="envelope" id="envelope">
@@ -467,6 +468,17 @@
 </section>
 </main>
 
+<!-- Section nav: always-labelled ribbon so guests can see (and jump to) everything on the page. css/nav.css · js/nav.js -->
+<nav class="sn" id="secNav" aria-label="Invitation sections">
+  <ul>
+    <li><a href="#reveal" data-s="reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span class="sn-l"><span class="sn-short">Date</span><span class="sn-full">Save the Date</span></span></a></li>
+    <li><a href="#journey" data-s="journey"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h5a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h5"/></svg><span class="sn-l">Journey</span></a></li>
+    <li><a href="#moments" data-s="moments"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg><span class="sn-l">Moments</span></a></li>
+    <li><a href="#blessings" data-s="blessings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.3L21 12l-6.8 2.7L12 21l-2.2-6.3L3 12l6.8-2.7z"/></svg><span class="sn-l">Blessings</span></a></li>
+    <li><a href="#rsvp" data-s="rsvp"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 8l9 6 9-6"/></svg><span class="sn-l">RSVP</span></a></li>
+  </ul>
+</nav>
+
 <div id="world"></div>
 <script src="js/data.js"></script>
 <script src="js/core.js"></script>
@@ -478,4 +490,5 @@
 <script src="js/rsvp.js"></script>
 <script src="js/forms.js"></script>
 <script src="js/close.js"></script>
+<script src="js/nav.js"></script>
 </body></html>

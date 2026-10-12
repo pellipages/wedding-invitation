@@ -1,0 +1,78 @@
+/* Section nav — the guest's map of the invitation.
+   A parchment ribbon pinned to the bottom edge: Save the Date · Journey · Moments · Blessings · RSVP.
+   Always labelled (never icons alone), appears once the envelope is opened (html.site-entered),
+   steps aside for the event pages, photo viewer and the on-screen keyboard.
+   Mobile (<700): full-width bar, 5 equal columns, icon over label.
+   Tablet/desktop (≥700): floating pill, icon beside label. */
+:root{--nav-h:calc(66px + env(safe-area-inset-bottom,0px))}
+@media(min-width:700px){:root{--nav-h:88px}}
+
+.sn{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;
+  padding:0 max(6px,env(safe-area-inset-left,0px)) env(safe-area-inset-bottom,0px) max(6px,env(safe-area-inset-right,0px));
+  background:var(--grain),#fbf3df;
+  border-top:2px solid var(--turm);
+  box-shadow:0 -6px 22px #4a101833,0 -1px 0 #fff8e8 inset;
+  transform:translateY(115%);opacity:0;visibility:hidden;
+  transition:transform .7s cubic-bezier(.2,1.2,.4,1),opacity .4s,visibility 0s .7s;
+}
+.sn-on .sn{transform:none;opacity:1;visibility:visible;transition:transform .7s cubic-bezier(.2,1.2,.4,1),opacity .4s,visibility 0s}
+.sn-hide .sn,.sn-kb .sn{transform:translateY(115%);opacity:0;visibility:hidden;transition:transform .35s ease,opacity .25s,visibility 0s .35s}
+.sn ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);max-width:640px;margin-inline:auto}
+.sn li{margin:0;min-width:0}
+
+.sn a{
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  min-height:62px;padding:8px 2px 6px;
+  color:var(--maroon);text-decoration:none;text-align:center;
+  font:600 14px/1.1 var(--serif);letter-spacing:.02em;
+  -webkit-tap-highlight-color:transparent;
+  transition:color .25s,transform .2s;
+}
+.sn svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none;transition:transform .3s}
+.sn-l{white-space:nowrap}.sn-full{display:none}
+.sn a:active{transform:scale(.94)}
+.sn a:focus-visible{outline:2px solid var(--maroon);outline-offset:-3px;border-radius:10px}
+
+/* where you are: terracotta, a turmeric tab on the ribbon's edge, a lifted icon */
+.sn a::before{content:"";position:absolute;top:-2px;left:22%;right:22%;height:4px;border-radius:0 0 4px 4px;background:var(--terra);transform:scaleX(0);transition:transform .3s}
+.sn a.is-cur{color:var(--terra)}
+.sn a.is-cur::before{transform:scaleX(1)}
+.sn a.is-cur svg{transform:translateY(-1px) scale(1.12);stroke-width:2}
+
+/* "you haven't been here yet": a turmeric bead on the icon, gone once the section has been seen */
+.sn a::after{content:"";position:absolute;top:7px;left:calc(50% + 8px);width:9px;height:9px;border-radius:50%;background:var(--turm);box-shadow:0 0 0 2px #fbf3df;opacity:0;transform:scale(0);transition:opacity .3s,transform .3s}
+.sn a.is-new::after{opacity:1;transform:scale(1)}
+
+/* RSVP is the one thing we want from every guest: it is a filled maroon seal, not just a link */
+.sn li:last-child{padding:5px 3px}
+.sn li:last-child a{min-height:0;height:100%;border-radius:14px;background:var(--maroon);color:var(--ivory);box-shadow:0 2px 0 #4a1018,0 0 0 1.5px var(--turm) inset}
+.sn li:last-child a.is-cur{background:var(--terra);color:#fff7e8}
+.sn li:last-child a::before{display:none}
+.sn li:last-child a::after{display:none}
+
+/* one slow shimmer across the ribbon the first time it appears, so the eye finds it */
+.sn-on .sn::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 35%,#e2a72e66 50%,transparent 65%);background-size:250% 100%;background-position:130% 0;animation:snShine 1.6s ease-out .8s 1 both}
+@keyframes snShine{to{background-position:-30% 0}}
+
+/* the first slide's scroll cue sits just above the ribbon instead of underneath it */
+html.site-entered .inv-cue{bottom:calc(var(--nav-h) + 14px)}
+/* journey and closing slides have no bottom padding of their own */
+html.sn-on #journey,html.sn-on #close{padding-bottom:var(--nav-h)}
+
+@media(min-width:700px){
+  .sn{left:50%;right:auto;bottom:max(16px,env(safe-area-inset-bottom,0px));translate:-50% 0;width:min(760px,92vw);padding:6px 10px;border:2px solid var(--turm);border-radius:999px;box-shadow:0 10px 30px #4a101844,0 0 0 5px #f8efdb99}
+  .sn ul{max-width:none;gap:4px}
+  .sn a{flex-direction:row;gap:9px;min-height:54px;padding:6px 8px;border-radius:999px;font-size:18px}
+  .sn svg{width:22px;height:22px}
+  .sn-full{display:inline}.sn-short{display:none}
+  .sn a::before{top:auto;bottom:3px;left:26%;right:26%;height:3px;border-radius:3px}
+  .sn a::after{top:9px;left:auto;right:10px}
+  .sn a:hover{color:var(--terra)}
+  .sn li:last-child{padding:0}
+  .sn li:last-child a{border-radius:999px}
+  .sn li:last-child a:hover{background:var(--terra);color:#fff7e8}
+}
+@media(min-width:700px) and (max-width:860px){.sn a{font-size:16px;gap:6px}}
+@media(max-width:359px){.sn a{font-size:12.5px}.sn svg{width:20px;height:20px}}
+@media(prefers-reduced-motion:reduce){.sn,.sn-on .sn{transition:opacity .2s}.sn-on .sn::after{animation:none;display:none}.sn a,.sn svg{transition:none}}
