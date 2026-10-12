@@ -3,210 +3,135 @@
 .sc>*{position:relative;z-index:5}.snap{scroll-snap-align:start}
 
 /* =========================================================
-   A · COUPLE — Subject: Rukmini & Krishna
-   Support: hanging brass diya + lotus cluster
+   A · COUPLE — parchment invitation slide
+   Subject: the names, framed by the mandapam
+   Support: thoranam, kolam, lotus (all one composition)
+
+   --u is 1% of the composition width. The composition is 9:16, so
+   --u = min(1.1vw, 0.5625svh): width-bound on phones (the 1.1 trims a
+   little off the sides of tall phones), height-bound on wide screens,
+   where it becomes a centred card on the parchment.
    ========================================================= */
 
 .couple{
+  --u:min(1.1vw,.5625svh);
+  /* spare height on tall phones: the pillars and names take 60% of it, the thoranam keeps the rest */
+  --gap:max(0px,calc(100svh - var(--u) * 177.8));
+  --lift:calc(var(--gap) * .6);
+  --nk:1;                         /* names scale; grows on wide screens */
+  --maroon-ink:#6a1424;
   position:relative;
-  display:block;
   min-height:100svh;
   overflow:hidden;
   isolation:isolate;
+  background:#f1e6d0;
 }
 
-/* quiet warmth behind the couple */
-.couple:before{
-  content:"";
-  position:absolute;
-  inset:auto -20vw -10vw -20vw;
-  height:72%;
-  z-index:0;
+/* parchment fills whatever space there is */
+.inv-bg{
+  position:absolute;inset:0;z-index:0;
   background:
-    radial-gradient(
-      closest-side at 58% 52%,
-      #b45a3c20,
-      transparent 72%
-    );
-  pointer-events:none;
+    radial-gradient(120% 90% at 50% 46%,transparent 55%,#b48a4a22 100%),
+    url(../inv-parchment.webp) center/cover no-repeat,
+    #f1e6d0;
 }
 
-/* ---------- TYPOGRAPHY ---------- */
-
-.cp-text{
-  position:absolute;
-  z-index:8;
-  left:var(--px);
-  top:calc(13vw + 10svh);   /* names block sits 10% of the screen lower */
-  width:min(58vw,700px);
+/* red thoranam: hangs from the top edge, repeats across wide screens */
+.inv-thoranam{
+  position:absolute;left:0;right:0;z-index:4;pointer-events:none;
+  top:calc(var(--u) * -10.7);
+  height:calc(var(--u) * 54.4);
+  background:url(../inv-thoranam.webp) repeat-x;
+  background-size:calc(var(--u) * 110) auto;
+  background-position:calc(50% + var(--u) * 9.9) 0;
+  filter:drop-shadow(0 calc(var(--u) * .5) calc(var(--u) * .9) #4a101822);
 }
 
-.tnames{
-  font-family:var(--tel);
-  font-size:clamp(42px,7vw,78px);
-  line-height:1.05;
-  color:var(--terra);
+/* everything else lives in one layer that fills the slide */
+.inv-art{position:absolute;inset:0;z-index:1;overflow:hidden}
+.inv-art>*{position:absolute}
+
+/* kolam peeks out above the lotus */
+.inv-kolam{
+  z-index:1;height:auto;
+  width:calc(var(--u) * 45.5);
+  left:50%;margin-left:calc(var(--u) * -23.2);
+  bottom:calc(var(--u) * 4);
 }
 
-.names{
+/* mandapam pillars: one artwork, mirrored for the right side, pinned to the screen edges */
+.inv-side{
+  z-index:2;
+  bottom:var(--lift);
+  width:0;height:calc(var(--u) * 177.8);
+}
+.inv-side>*{position:absolute}
+.inv-side-l{left:0}
+.inv-side-r{right:0}
+.inv-pillar{
+  height:calc(var(--u) * 177.8);width:auto;
+  filter:drop-shadow(0 calc(var(--u) * .6) calc(var(--u) * 1.2) #5a2a0a26);
+}
+.inv-side-l .inv-pillar{left:calc(var(--u) * -3);bottom:calc(var(--u) * -13)}
+.inv-side-r .inv-pillar{right:calc(var(--u) * -8.5);bottom:calc(var(--u) * -6);transform:scaleX(-1)}
+
+/* jasmine strings tipped with lotus buds, hanging from the capitals */
+.inv-jas{z-index:3;transform-origin:50% 0;animation:inv-sway 7s ease-in-out infinite alternate}
+.inv-side-l .inv-jas{height:calc(var(--u) * 40);left:calc(var(--u) * 18.8);top:calc(var(--u) * 31)}
+.inv-side-r .inv-jas{height:calc(var(--u) * 53);right:calc(var(--u) * 10);top:calc(var(--u) * 56);animation-delay:-3s}
+@keyframes inv-sway{from{transform:rotate(-1.1deg)}to{transform:rotate(1.1deg)}}
+
+/* lotus along the foot, cropped by the bottom edge: a tiled strip plus two fuller clusters at the corners */
+.inv-lotus-strip{
+  z-index:5;left:0;right:0;
+  bottom:calc(var(--u) * -64.5);height:calc(var(--u) * 96.4);
+  background:url(../inv-lotus.webp) repeat-x;
+  background-size:calc(var(--u) * 84.9) auto;
+  background-position:calc(50% + var(--u) * 1.95) 0;
+  filter:drop-shadow(0 calc(var(--u) * -.4) calc(var(--u) * 1) #6a1e2b1c);
+}
+.inv-lotus{z-index:6;height:auto;filter:drop-shadow(0 calc(var(--u) * -.4) calc(var(--u) * 1) #6a1e2b1c)}
+.inv-lotus-l{width:calc(var(--u) * 62);left:calc(var(--u) * -20);bottom:calc(var(--u) * -48);z-index:4}
+.inv-lotus-r{width:calc(var(--u) * 50);right:calc(var(--u) * -14);bottom:calc(var(--u) * -34)}
+
+/* names */
+.inv-names{
+  z-index:7;
+  left:0;right:0;top:calc(var(--gap) * .4 + var(--u) * 47);
+  margin:0;display:flex;flex-direction:column;align-items:center;
+  font-weight:400;color:var(--maroon-ink);
+  text-shadow:0 0 calc(var(--u) * 2) #f6ecd8;
+}
+.inv-names span{display:block;white-space:nowrap}
+.inv-n1,.inv-n2{
   font-family:var(--script);
-  font-weight:400;
-  font-size:clamp(82px,13vw,180px);
-  line-height:.88;
-  color:var(--maroon);
+  font-size:clamp(46px,calc(var(--u) * 17.5 * var(--nk)),230px);
+  line-height:1.05;
+}
+.inv-n1{margin-left:calc(var(--u) * 2 * var(--nk))}
+.inv-n2{margin-left:calc(var(--u) * -1 * var(--nk))}
+.inv-amp{
+  font-family:'Cormorant Garamond',serif;font-weight:500;
+  font-size:clamp(40px,calc(var(--u) * 15 * var(--nk)),200px);
+  line-height:1;
+  margin:calc(var(--u) * 13.2) 0 calc(var(--u) * 8.9) calc(var(--u) * 2);
 }
 
-.fam{
-  font-family:var(--telb);
-  font-size:clamp(14px,2vw,19px);
-  line-height:1.7;
-  margin-top:18px;
-  max-width:32ch;
+/* tablets (portrait): the pillars stay at the edges, so the names grow a little */
+@media (min-aspect-ratio:7/10){ .couple{--nk:1.12} }
+
+/* landscape: three stacked lines would not fit the height, so the names sit on one line between the pillars */
+@media (min-aspect-ratio:11/10){
+  .inv-names{
+    flex-direction:row;align-items:baseline;justify-content:center;
+    top:calc(var(--u) * 72);gap:calc(var(--u) * 5);
+  }
+  .inv-n1,.inv-n2{font-size:clamp(46px,calc(var(--u) * 26),260px);margin:0}
+  .inv-amp{font-size:clamp(38px,calc(var(--u) * 17),180px);margin:0}
 }
 
-
-/* ---------- COUPLE ---------- */
-
-.cp-art{
-  position:absolute;
-  z-index:5;
-  width:min(56vw,720px);
-  height:auto;
-  right:2vw;
-  bottom:-2vw;
-  filter:
-    drop-shadow(0 2vw 3vw #6a1e2b33);
-}
-
-
-/* ---------- HANGING BRASS DIYA ---------- */
-
-.cp-diya{
-  position:absolute;
-  z-index:6;
-  width:clamp(150px,18vw,290px);
-  height:auto;
-  left:-2vw;
-  top:-8vw;
-  transform-origin:top center;
-  filter:drop-shadow(0 1vw 1.8vw #6a1e2b22);
-}
-
-
-/* ---------- LOTUS ---------- */
-
-.cp-lotus{
-  position:absolute;
-  z-index:4;
-  width:clamp(100px,14vw,210px);
-  height:auto;
-  right:-1vw;
-  bottom:-2vw;
-  filter:drop-shadow(0 1vw 2vw #6a1e2b22);
-}
-
-
-/* ---------- TABLET ---------- */
-
-@media(min-width:700px) and (max-width:1099px){
-  .cp-text{
-    top:calc(10vw + 10svh);
-    width:54vw;
-  }
-  .names{
-    font-size:clamp(90px,12vw,145px);
-  }
-  .cp-art{
-    width:min(57vw,620px);
-    right:1vw;
-    bottom:-2vw;
-  }
-  .cp-diya{
-    width:clamp(180px,20vw,250px);
-    left:-1vw;
-    top:-2vw;
-  }
-  .cp-lotus{
-    width:clamp(90px,24vw,145px);
-    right:-2vw;
-    bottom:4vw;
-  }
-}
-
-
-/* ---------- DESKTOP ---------- */
-
-@media(min-width:1100px){
-  .couple{
-    min-height:100svh;
-  }
-  .cp-text{
-    left:9vw;
-    top:60%;   /* was 50%: 10% lower */
-    width:45vw;
-    transform:translateY(-50%);
-  }
-  .tnames{
-    font-size:clamp(44px,3.4vw,70px);
-  }
-  .names{
-    font-size:clamp(100px,8.6vw,180px);
-  }
-  .fam{
-    font-size:19px;
-  }
-  .cp-art{
-    width:min(52vw,780px);
-    right:3vw;
-    bottom:0;
-  }
-  .cp-diya{
-    width:clamp(190px,17vw,290px);
-    left:-1vw;
-    top:-7vw;
-  }
-  .cp-lotus{
-    width:clamp(120px,12vw,200px);
-    right:-1vw;
-    bottom:-2vw;
-  }
-}
-
-
-/* ---------- SMALL MOBILE ---------- */
-
-@media(max-width:699px){
-  .cp-text{
-    top:23svh;   /* was 13svh: 10% lower */
-    left:var(--px);
-    width:78vw;
-  }
-  .tnames{
-    font-size:clamp(36px,10vw,52px);
-  }
-  .names{
-    font-size:clamp(76px,19vw,108px);
-  }
-  .fam{
-    font-size:14px;
-    max-width:28ch;
-    margin-top:12px;
-  }
-  .cp-art{
-    width:min(88vw,480px);
-    right:-8vw;
-    bottom:-1vw;
-  }
-  .cp-diya{
-    width:clamp(120px,27vw,170px);
-    left:-5vw;
-    top:-6vw;
-  }
-  .cp-lotus{
-    width:clamp(85px,22vw,135px);
-    right:-3vw;
-    bottom:-1vw;
-  }
+@media (prefers-reduced-motion:reduce){
+  .inv-jas{animation:none}
 }
 
 

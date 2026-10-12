@@ -29,7 +29,7 @@ const WORLD_ENV={
 
 /* Scenes: one supporting element each */
 const SCENES={
- couple:['lotus-cluster.webp|w:44vw;l:-16vw;b:-4vw;z:2|w:30vw;l:-8vw|w:min(16vw,300px);l:-2vw;b:-4vw;z:2'],
+ couple:[],
 //  reveal:['hanging-diya.webp|w:24vw;r:9vw;t:-3vw;z:6|w:15vw;r:14vw|w:min(9vw,160px);r:23vw;t:-2vw;z:6'],
  moments:['banana-leaves-corner.webp|w:46vw;r:-22vw;t:4vw;z:1;o:.8|w:26vw;r:-8vw|w:min(15vw,270px);r:-3vw;t:-3vw;z:1;o:.8'],
  blessings:['lotus-1.webp|w:36vw;r:-6vw;b:-6vw;z:1|w:30vw;l:-2vw;r:auto;b:-4vw|w:min(24vw,420px);l:6vw;b:-4vw;z:1'],
