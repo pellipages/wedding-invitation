@@ -23,3 +23,6 @@ export const listRsvps = () =>
 
 export const listBlessings = () =>
   call('blessings?select=id,name,message,created_at&order=created_at.desc&limit=5000', { method: 'GET' });
+
+// One-row read, used only by api/keepalive.js to generate real database activity.
+export const pingRead = () => call('rsvps?select=id&limit=1', { method: 'GET' });
