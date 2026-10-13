@@ -112,15 +112,31 @@
 
   buildEventPicker();
 
-  // One idempotency key per invitation visit.
-  // If a request succeeds but the response is lost, retrying won't create
-  // a duplicate RSVP in the database.
-  const submissionKey =
+  // One stable key per guest (per browser), not per page visit.
+  // The server treats a repeated key as "update my RSVP", so changing your mind or
+  // re-submitting after a reload edits the same row instead of creating a duplicate.
+  // If storage is unavailable (e.g. private mode) we fall back to a key held in memory.
+  const KEY_STORE = 'rsvpSubmissionKey';
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const makeKey = () =>
     typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
       ? crypto.randomUUID()
       : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
           (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
         );
+  let memoryKey = null;
+
+  function getSubmissionKey() {
+    try {
+      const saved = localStorage.getItem(KEY_STORE);
+      if (saved && UUID_RE.test(saved)) return saved;
+      const fresh = makeKey();
+      localStorage.setItem(KEY_STORE, fresh);
+      return fresh;
+    } catch (_) {
+      return memoryKey || (memoryKey = makeKey());
+    }
+  }
 
   async function postRsvp(payload) {
     const controller = new AbortController();
@@ -136,7 +152,7 @@
         cache: 'no-store',
         signal: controller.signal,
         body: JSON.stringify({
-          key: submissionKey,
+          key: getSubmissionKey(),
           ...payload
         })
       });
