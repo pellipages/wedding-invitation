@@ -48,19 +48,45 @@
     transition: transform 1.3s cubic-bezier(0.6, 0, 0.3, 1);
 }
 
+/* The call to action: a real pill (not small faint text) with a ring that pulses outward.
+   Only transform/opacity are animated, so it stays cheap on low-end phones. */
 .cover-hint {
+    position: relative;
+    display: inline-block;
     margin-top: 22px;
-    font-size: 13px;
-    letter-spacing: 0.26em;
+    padding: 13px 26px;
+    border: 1.5px solid #c9a24a;
+    border-radius: 999px;
+    background: rgba(201, 162, 74, 0.14);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #5c7767;
+    color: #1f4a36;
     cursor: pointer;
-    animation: coverPulse 2.4s ease-in-out infinite;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    animation: coverBob 2.4s ease-in-out infinite;
 }
 
-@keyframes coverPulse {
-    0%, 100% { opacity: 0.55; }
-    50%      { opacity: 1; }
+.cover-hint::after {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    border: 1.5px solid #c9a24a;
+    border-radius: inherit;
+    pointer-events: none;
+    animation: coverRing 2.4s ease-out infinite;
+}
+
+@keyframes coverBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-4px); }
+}
+
+@keyframes coverRing {
+    0%       { transform: scale(1);          opacity: 0.8; }
+    70%, 100% { transform: scale(1.18, 1.45); opacity: 0; }
 }
 
 /* leaving: zoom into the gate, fade the words, then dissolve the cover */
@@ -74,10 +100,20 @@
 }
 
 .cover.is-leaving .cover-eyebrow,
-.cover.is-leaving .cover-names,
+.cover.is-leaving .cover-hint {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
 .cover.is-leaving .cover-hint,
-.cover.is-leaving @media (prefers-reduced-motion: reduce) {
-    .cover-hint { animation: none; }
+.cover.is-leaving .cover-hint::after {
+    animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cover-hint,
+    .cover-hint::after { animation: none; }
+    .cover-hint::after { display: none; }   /* the pill itself stays as a static highlight */
     .cover.is-leaving .cover-gate img { transform: none; }
     .cover { transition-delay: 0s; }
 }
