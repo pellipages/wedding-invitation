@@ -350,8 +350,12 @@
   }
 
   // 4. CHOICE 2: "I'll be with you in spirit"
+  //    Tapping reveals the name field; nothing is saved until the guest presses "Send Your Blessings".
+  const spiritName = document.getElementById('rsSpiritName');
+  const blessingBridge = document.getElementById('rsBlessingBridge');
+
   if (choiceSpirit) {
-    choiceSpirit.addEventListener('click', async () => {
+    choiceSpirit.addEventListener('click', () => {
       clearError();
       invokeCeremonyPresence();
 
@@ -359,19 +363,54 @@
         rain('petal.webp', 14, 20, 4);
       }
 
-      if (choiceSpirit) {
-        choiceSpirit.disabled = true;
+      if (choicesStage) {
+        choicesStage.style.opacity = '0';
+
+        setTimeout(() => {
+          choicesStage.style.display = 'none';
+
+          if (spiritMsg) {
+            spiritMsg.style.display = 'block';
+          }
+
+          if (spiritName) {
+            spiritName.focus();
+          }
+        }, 500);
       }
+    });
+  }
+
+  // "Send Your Blessings": save the name as an in-spirit RSVP, then continue to the blessings card.
+  let spiritBusy = false;
+
+  if (blessingBridge) {
+    blessingBridge.addEventListener('click', async (event) => {
+      event.preventDefault();
+      if (spiritBusy) return;
+      clearError();
+
+      const name = spiritName ? spiritName.value.trim() : '';
+
+      if (!name || [...name].length > 100) {
+        showError('Please enter your name.');
+        if (spiritName) spiritName.focus();
+        return;
+      }
+
+      spiritBusy = true;
+      blessingBridge.setAttribute('aria-disabled', 'true');
 
       try {
         await postRsvp({
           status: 'in_spirit',
+          name,
           website: honeypot ? honeypot.value : ''
         });
 
         if (typeof store !== 'undefined') {
           store.rsvp = {
-            name: 'In spirit',
+            name,
             guests: '0',
             r: 'in spirit',
             time: Date.now()
@@ -382,20 +421,20 @@
           }
         }
 
-        if (choicesStage) {
-          choicesStage.style.opacity = '0';
+        if (legacyRt) {
+          legacyRt.textContent = 'Sending love from afar.';
+        }
 
-          setTimeout(() => {
-            choicesStage.style.display = 'none';
+        // Carry the name into the blessing letter so they are not asked twice.
+        const blessingName = document.getElementById('bn');
+        if (blessingName && !blessingName.value.trim()) {
+          blessingName.value = name;
+        }
 
-            if (spiritMsg) {
-              spiritMsg.style.display = 'block';
-            }
-
-            if (legacyRt) {
-              legacyRt.textContent = 'Sending love from afar.';
-            }
-          }, 500);
+        const blessings = document.getElementById('blessings');
+        if (blessings) {
+          const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+          blessings.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
         }
       } catch (error) {
         console.error('In-spirit RSVP submission failed:', error);
@@ -405,10 +444,9 @@
             ? 'The RSVP is taking too long to respond. Please try again.'
             : error.message || 'We could not save your response. Please try again.'
         );
-
-        if (choiceSpirit) {
-          choiceSpirit.disabled = false;
-        }
+      } finally {
+        spiritBusy = false;
+        blessingBridge.removeAttribute('aria-disabled');
       }
     });
   }

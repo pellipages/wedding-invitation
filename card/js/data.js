@@ -6,7 +6,7 @@ const EVENTS=[
  side:'R',aw:'78vw',art:'pellikuthuru-photo.webp',node:'kolam-lotus-node.webp',extras:[],hero:'pellikuthuru-photo.webp'},
 {k:'pellikoduku',t:'పెళ్లికొడుకు',n:'Pellikoduku',cls:'w-vindu',fc:'#8A3B2A',when:'2026-11-16T10:00:00-06:00',date:'16 November 2026',time:'10:00 AM',venue:V,desc:'Blessings and turmeric for the groom as his wedding days begin.',dress:'Ethnic wear',
  side:'L',aw:'78vw',art:'pellikoduku-photo.webp',node:'kolam-lotus-node.webp',extras:[],hero:'pellikoduku-photo.webp'},
-{k:'haldi',t:'పసుపు',n:'Haldi',cls:'w-pasupu',fc:'#C98A16',when:'2026-11-16T16:00:00-06:00',date:'16 November 2026',time:'4:00 PM',venue:V,desc:'Turmeric, flowers and laughter to bless the bride and groom.',dress:'Hues of pastels',
+{k:'haldi',t:'పసుపు',n:'Haldi',cls:'w-pasupu',fc:'#C98A16',when:'2026-11-16T15:00:00-06:00',date:'16 November 2026',time:'3:00 PM',venue:V,desc:'Turmeric, flowers and laughter to bless the bride and groom.',dress:'Hues of pastels',
  side:'L',aw:'92vw',art:'haldi-art.webp',node:'kolam-lotus-node.webp',extras:[],hero:'haldi-art.webp'},
 {k:'mehendi',t:'మెహందీ',n:'Mehendi',cls:'w-pasupu',fc:'#4B5E3A',when:'2026-11-17T10:00:00-06:00',date:'17 November 2026',time:'10:00 AM',venue:V,desc:'Henna, music and laughter as the celebrations color our hands and hearts.',dress:'Green ethnics',
  side:'L',aw:'92vw',art:'mehendi-photo.webp',node:'kolam-lotus-node.webp',extras:[],hero:'mehendi-photo.webp'},

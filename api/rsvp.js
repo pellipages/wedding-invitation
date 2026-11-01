@@ -32,7 +32,14 @@ function validate(b) {
 
   if (b.status === 'in_spirit') {
     if (b.events !== undefined) return null; // nothing to attend, so nothing to select
-    return { key: b.key.toLowerCase(), name: '', guests: 0, note: '', status: 'in_spirit', events: [] };
+    // The name is optional here so cached pages from before the name field existed keep working.
+    let name = '';
+    if (b.name !== undefined) {
+      if (typeof b.name !== 'string') return null;
+      name = clean(b.name);
+      if (len(name) > 100) return null;
+    }
+    return { key: b.key.toLowerCase(), name, guests: 0, note: '', status: 'in_spirit', events: [] };
   }
 
   if (typeof b.name !== 'string') return null;
