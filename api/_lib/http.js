@@ -17,6 +17,13 @@ export function originAllowed(req) {
   const origin = req.headers.origin;
   if (!origin) return true; // non-browser clients; protected by validation + rate limits instead
   const allowed = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+  // Preview deployments only: Vercel gives every deploy a new address, so a preview may call its own API.
+  // Production ignores this and keeps using ALLOWED_ORIGINS alone.
+  if (process.env.VERCEL_ENV === 'preview') {
+    for (const host of [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL]) {
+      if (host) allowed.push(`https://${host}`);
+    }
+  }
   return allowed.includes(origin);
 }
 
