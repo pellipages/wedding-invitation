@@ -366,7 +366,7 @@ function setupDateSection() {
 
     const weddingDate =
         new Date(
-            "2026-11-18T18:01:00"
+            "2026-11-18T17:00:00"
         );
 
 
